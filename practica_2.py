@@ -203,6 +203,7 @@ print(resultado)
 
 #--------ESCRIBIR EL CÓDIGO-----------PRECIO=12
 cantidad=int(input("Ingrese la cantidad de productos"))
+PRECIO=12
 if cantidad>=10:
     descuento=0.15
 elif cantidad>=5 and cantidad<=9:
