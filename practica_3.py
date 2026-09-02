@@ -42,3 +42,6 @@ while True:
     print ("Inválida, intenta de nuevo")
 print(f"Edad válida: {edad}")
 
+#================================================
+# 5) Genera un número secreto entre 1 y 100. El usuario intenta adivinar. En cada intento le dices si es «mayor» o «menor». Cuenta cuántos intentos usó.
+#================================================
