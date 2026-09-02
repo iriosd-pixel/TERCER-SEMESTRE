@@ -19,7 +19,7 @@ else:
 print(f"En la cifra hay {contador} numeros")
 
 #================================================
-# 2) Lee N números y muestra la suma de los pares y la suma de los impares por separado.
+# 3) Lee N números y muestra la suma de los pares y la suma de los impares por separado.
 #================================================
 cantidad=int(input("Ingrese la cantidad de numeros: "))
 suma_par=0
@@ -31,3 +31,14 @@ for i in range(cantidad):
     else:
         suma_impar=suma_impar+valor
 print(f"La suma par es: {suma_par} y la suma impar es: {suma_impar}")
+
+#================================================
+# 4) Pide una edad y valida que esté entre 0 y 120. Si el usuario ingresa algo inválido, vuelve a pedirla.
+#================================================
+while True:
+    edad = int(input("Ingrese una edad"))
+    if edad >= 0 and edad <= 120:
+        break
+    print ("Inválida, intenta de nuevo")
+print(f"Edad válida: {edad}")
+
