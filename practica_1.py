@@ -1,3 +1,68 @@
+#================================================
+# EJEMPLOS PUESTOS POR LA IA MAS CAMBIOS
+#================================================
+
+#================================================
+# 1) Leer el nombre del usuario y saludarlo por su nombre.
+#================================================
+nombre = input("¿Cómo te llamas? ")
+print(f"Hola, {nombre}. Bienvenida al curso.")
+#CAMBIO
+#Amplíalo para que además pida la edad y muestre «tienes X años».
+nombre = input("¿Cómo te llamas? ")
+edad= int(input("Ingrese su edad: "))
+print(f"Hola, {nombre}. Bienvenida al curso. Tienes {edad} anos")
+
+#================================================
+# 2) Leer tres notas de un estudiante y mostrar su promedio.
+#================================================
+n1 = float(input("Nota 1: "))
+n2 = float(input("Nota 2: "))
+n3 = float(input("Nota 3: "))
+
+promedio = (n1 + n2 + n3) / 3      # PROCESO en una línea
+
+print(f"Promedio: {promedio:.1f}")  # :.1f muestra un decimal
+#CAMBIO
+#Modifícalo para que muestre «Aprueba» si el promedio es ≥ 7 y «Reprueba» si no. (Necesitas el if del módulo 3).
+n1 = float(input("Nota 1: "))
+n2 = float(input("Nota 2: "))
+n3 = float(input("Nota 3: "))
+
+promedio = (n1 + n2 + n3) / 3
+print(f"Promedio: {promedio:.1f}")
+if promedio >= 7:
+    print("Aprovado")
+else:
+    print("Reprovado")
+
+#================================================
+# 3) Leer la base y la altura de un rectángulo y mostrar su área y su perímetro.
+# Recuerda: área = base × altura, perímetro = 2 × (base + altura).
+#================================================
+base = float(input("Base: "))
+altura = float(input("Altura: "))
+
+area = base * altura                # PROCESO 1
+perimetro = 2 * (base + altura)     # PROCESO 2
+
+print(f"Área: {area:.2f}")
+print(f"Perímetro: {perimetro:.2f}")
+#CAMBIO
+#Ampliar para leer el radio de un círculo y mostrar área (π·r²) y perímetro (2·π·r).
+# Usa import math y math.pi.
+radio = float(input("Ingrese radio: "))
+P=3.1416
+area =  PI*(radio**2)
+perimetro = 2 * PI*radio
+print(f"El area del circulo: {area:.2f}")
+print(f"El perimetro del circulo: {perimetro:.2f}")
+
+#================================================
+#                     TAREA
+#================================================
+
+
 #________1) Pide una temperatura en grados Celsius y muéstrala en Fahrenheit. Fórmula: F = C × 9/5 + 32.
 
 #--------ENTENDER EL PROBLEMA--------
