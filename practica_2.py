@@ -1,3 +1,197 @@
+#================================================
+#EJEMPLOS PUESTOS POR LA IA MAS CAMBIOS
+#================================================
+
+#================================================
+# 1) Leer el precio de un producto sin IVA y mostrar el IVA y el precio final.
+# El IVA en Ecuador es 15%.
+#================================================
+IVA = 0.15                              # constante en MAYÚSCULA
+
+precio = float(input("Precio sin IVA: $"))
+iva = precio * IVA
+total = precio + iva
+
+print(f"IVA:   ${iva:.2f}")
+print(f"Total: ${total:.2f}")
+#CAMBIO
+#Añadir un descuento del 10% que se aplique antes del IVA.
+# Muestra los tres valores: descuento, IVA, total.
+IVA = 0.15                              # constante en MAYÚSCULA
+DESCUENTO= 0.10
+precio = float(input("Precio sin IVA: $"))
+
+precio_des = precio * DESCUENTO
+precio = precio - precio_des
+
+iva = precio * IVA
+total = precio + iva
+
+print(f"Descuento: ${precio_des:.2f}")
+print(f"IVA:       ${iva:.2f}")
+print(f"Total:     ${total:.2f}")
+
+#================================================
+# 2) Leer un número entero y determinar si es par o impar.
+#================================================
+num = int(input("Ingresa un número: "))
+
+# Ternario: expresión que devuelve un valor u otro según la condición
+resultado = "par" if num % 2 == 0 else "impar"
+
+print(f"{num} es {resultado}")
+#CAMBIO
+#Modifícalo para que además diga si es múltiplo de 3, de 5, o de ambos.
+num = int(input("Ingresa un número: "))
+
+# Ternario: expresión que devuelve un valor u otro según la condición
+resultado = "par" if num % 2 == 0 else "impar"
+
+if num % 3 == 0 and num % 5 == 0:
+    print(f"{num} es multiplo de ambos")
+elif num % 3 == 0:
+    print(f"{num} es multiplo de 3")
+elif num % 5 == 0:
+    print(f"{num} es multiplo de 5")
+else:
+    print(f"{num} no es multiplo de 3 ni de 5")
+
+print(f"{num} es {resultado}")
+
+#================================================
+# 3) Leer una cantidad total de segundos y mostrarla como hh:mm:ss.
+# Ejemplo: 3725 segundos → 01:02:05.
+#================================================
+total = int(input("Segundos totales: "))
+
+horas = total // 3600
+resto = total % 3600
+minutos = resto // 60
+segundos = resto % 60
+
+print(f"{horas:02d}:{minutos:02d}:{segundos:02d}")
+# CAMBIO
+#Al revés: leer hh:mm:ss y convertir a segundos totales. Tendrás que usar split(":").
+# 1. Leemos el tiempo como texto
+tiempo = input("Ingresa el tiempo (hh:mm:ss): ")
+
+# 2. Cortamos el texto usando ":" y lo guardamos en tres variables
+h, m, s = tiempo.split(":")
+
+# 3. Convertimos esos textos a números enteros (int) para poder calcular
+horas = int(h)
+minutos = int(m)
+segundos = int(s)
+
+# 4. Calculamos el total de segundos
+# - Cada hora tiene 3600 segundos (60 * 60)
+# - Cada minuto tiene 60 segundos
+total_segundos = (horas * 3600) + (minutos * 60) + segundos
+
+# 5. Mostramos el resultado
+print(f"El total es: {total_segundos} segundos")
+
+#================================================
+# 4) Un cajero solo tiene billetes de $20, $10, $5 y $1. Dado un monto,
+# mostrar cuántos billetes de cada uno se necesitan (usando la mínima cantidad).
+#================================================
+monto = int(input("Monto: $"))
+resto = monto
+
+b20 = resto // 20; resto = resto % 20
+b10 = resto // 10; resto = resto % 10
+b5  = resto // 5;  resto = resto % 5
+b1  = resto // 1;  resto = resto % 1
+
+print(f"$20 × {b20}")
+print(f"$10 × {b10}")
+print(f"$5  × {b5}")
+print(f"$1  × {b1}")
+#CAMBIO
+#Añadir billete de $50 al inicio. Después probar con monedas de
+# $0.25, $0.10, $0.05 y $0.01 (necesitas trabajar con centavos).
+# 1. Ahora leemos el monto como un número con decimales (float)
+monto = float(input("Monto: $"))
+
+# 2. Convertimos TODO a centavos (multiplicamos por 100) y lo hacemos entero
+# Usamos round() para asegurar que no haya problemas de redondeo
+resto = int(round(monto * 100))
+
+# 3. Billetes (convertidos a centavos, ej: $50 = 5000 centavos)
+b50 = resto // 5000; resto = resto % 5000
+b20 = resto // 2000; resto = resto % 2000
+b10 = resto // 1000; resto = resto % 1000
+b5  = resto // 500;  resto = resto % 500
+b1  = resto // 100;  resto = resto % 100
+
+# 4. Monedas (ya son centavos)
+m25 = resto // 25; resto = resto % 25
+m10 = resto // 10; resto = resto % 10
+m5  = resto // 5;  resto = resto % 5
+m1  = resto // 1;  resto = resto % 1
+
+# 5. Imprimimos los resultados
+print("--- Billetes ---")
+print(f"$50   × {b50}")
+print(f"$20   × {b20}")
+print(f"$10   × {b10}")
+print(f"$5    × {b5}")
+print(f"$1    × {b1}")
+
+print("--- Monedas ---")
+print(f"$0.25 × {m25}")
+print(f"$0.10 × {m10}")
+print(f"$0.05 × {m5}")
+print(f"$0.01 × {m1}")
+
+
+
+
+
+
+
+
+
+
+
+
+#================================================
+#
+#================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#================================================
+#
+#================================================
+
+
+
+
+
+
+
+
+
+
+
 #_______1) Lee un número de 3 cifras y muestra la suma de sus dígitos. Ejemplo: 435 → 4+3+5 = 12.
 #--------ENTENDER EL PROBLEMA--------
 #----Entrada:
