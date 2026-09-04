@@ -113,7 +113,7 @@ print(f"$1  × {b1}")
 # 1. Ahora leemos el monto como un número con decimales (float)
 monto = float(input("Monto: $"))
 
-# 2. Convertimos TODO a centavos (multiplicamos por 100) y lo hacemos entero
+# 2. Convertimos a centavos
 # Usamos round() para asegurar que no haya problemas de redondeo
 resto = int(round(monto * 100))
 
