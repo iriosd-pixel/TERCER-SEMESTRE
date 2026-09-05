@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b90d1420-db5c-444f-9a9e-e4adb96af168" name="Changes" comment="commit 7">
+    <list default="true" id="b90d1420-db5c-444f-9a9e-e4adb96af168" name="Changes" comment="commit 8">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/practica_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/practica_2.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/practica_3.py" beforeDir="false" afterPath="$PROJECT_DIR$/practica_3.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -38,61 +37,61 @@
 }</component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0" />
-      <entry key="S2" value="1.0000100322171037" />
-      <entry key="S5" value="1.01001343482633" />
-      <entry key="S10" value="1.1015400694131359" />
-      <entry key="S30" value="1.7566259276888323" />
-      <entry key="S60" value="2.8423697594976822" />
-      <entry key="M2" value="4.6194290542665915" />
-      <entry key="M5" value="10.860328612501387" />
-      <entry key="M10" value="23.395374704270395" />
-      <entry key="M15" value="37.20461820975602" />
-      <entry key="M30" value="80.06819321146357" />
-      <entry key="H1" value="155.98511014804572" />
-      <entry key="H2" value="265.77772506155037" />
-      <entry key="H4" value="407.5820488141459" />
-      <entry key="D1" value="717.131781130454" />
-      <entry key="W1" value="812.2374128794554" />
+      <entry key="MS100" value="9.536743174264982E-7" />
+      <entry key="MS500" value="0.0635108754516692" />
+      <entry key="S2" value="0.804806346888729" />
+      <entry key="S5" value="2.272102960391124" />
+      <entry key="S10" value="3.8965037711512265" />
+      <entry key="S30" value="8.224961056725357" />
+      <entry key="S60" value="12.241472059644261" />
+      <entry key="M2" value="18.65307645146164" />
+      <entry key="M5" value="35.82460482244389" />
+      <entry key="M10" value="55.76467901409343" />
+      <entry key="M15" value="71.65691600478793" />
+      <entry key="M30" value="115.41180317666239" />
+      <entry key="H1" value="193.64563217140656" />
+      <entry key="H2" value="310.2988873429758" />
+      <entry key="H4" value="461.27528421499954" />
+      <entry key="D1" value="792.2244982827838" />
+      <entry key="W1" value="894.7948977144548" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="2.3143156054803794E-270" />
-      <entry key="MS500" value="1.1890136705042867E-54" />
-      <entry key="S2" value="4.302423963289326E-14" />
-      <entry key="S5" value="7.501141414033634E-6" />
-      <entry key="S10" value="0.004587623373077912" />
-      <entry key="S30" value="0.34283075556915416" />
-      <entry key="S60" value="1.0130826912704132" />
-      <entry key="M2" value="1.7428881342546299" />
-      <entry key="M5" value="2.429589465494206" />
-      <entry key="M10" value="2.997415652155617" />
-      <entry key="M15" value="3.6687839012233288" />
-      <entry key="M30" value="5.714111850426789" />
-      <entry key="H1" value="9.173043079684655" />
-      <entry key="H2" value="13.947433672934903" />
-      <entry key="H4" value="18.659212879227383" />
-      <entry key="D1" value="25.216619838401634" />
-      <entry key="W1" value="26.732629050308365" />
+      <entry key="MS100" value="1.0000000000007754" />
+      <entry key="MS500" value="1.0037836648016665" />
+      <entry key="S2" value="1.248015123283062" />
+      <entry key="S5" value="1.57252079476571" />
+      <entry key="S10" value="1.7566510389811238" />
+      <entry key="S30" value="1.911494898592653" />
+      <entry key="S60" value="1.9718361847719554" />
+      <entry key="M2" value="2.182706030512687" />
+      <entry key="M5" value="3.5362560038630715" />
+      <entry key="M10" value="5.6620766642966345" />
+      <entry key="M15" value="7.232343861970817" />
+      <entry key="M30" value="10.536396225457477" />
+      <entry key="H1" value="14.975438269545334" />
+      <entry key="H2" value="20.6065496595256" />
+      <entry key="H4" value="26.12199067535935" />
+      <entry key="D1" value="33.874683546936886" />
+      <entry key="W1" value="35.680935344145375" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.9265880618903709" />
-      <entry key="MS500" value="0.9848664428955506" />
-      <entry key="S2" value="0.9962049352521378" />
-      <entry key="S5" value="1.0084779465077254" />
-      <entry key="S10" value="1.104864561489347" />
-      <entry key="S30" value="2.0875354695864146" />
-      <entry key="S60" value="3.8373625464439822" />
-      <entry key="M2" value="6.344336915627864" />
-      <entry key="M5" value="13.272249697963966" />
-      <entry key="M10" value="26.374844596642262" />
-      <entry key="M15" value="40.85436204125882" />
-      <entry key="M30" value="85.76040107159893" />
-      <entry key="H1" value="165.13490021749826" />
-      <entry key="H2" value="279.7048214849487" />
-      <entry key="H4" value="426.22659973777695" />
-      <entry key="D1" value="742.3447796138045" />
-      <entry key="W1" value="838.9694814315665" />
+      <entry key="MS100" value="0.008032144612665753" />
+      <entry key="MS500" value="0.4052697374480217" />
+      <entry key="S2" value="1.6251529426353855" />
+      <entry key="S5" value="3.5343431378267205" />
+      <entry key="S10" value="5.417912093584938" />
+      <entry key="S30" value="9.96205338135276" />
+      <entry key="S60" value="14.081700614130003" />
+      <entry key="M2" value="20.74170078639149" />
+      <entry key="M5" value="39.292775748917215" />
+      <entry key="M10" value="61.37394261703672" />
+      <entry key="M15" value="78.84448664786103" />
+      <entry key="M30" value="125.91283695131871" />
+      <entry key="H1" value="208.59099646457048" />
+      <entry key="H2" value="330.8811976667692" />
+      <entry key="H4" value="487.38023403800725" />
+      <entry key="D1" value="826.0950252444601" />
+      <entry key="W1" value="930.4751905753701" />
     </decayedShown>
   </component>
   <component name="ProblemsViewState">
@@ -107,39 +106,40 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;Python.practica 1.executor&quot;: &quot;Run&quot;,
-    &quot;Python.practica 2.executor&quot;: &quot;Run&quot;,
-    &quot;Python.practica1.executor&quot;: &quot;Run&quot;,
-    &quot;Python.practica2.executor&quot;: &quot;Run&quot;,
-    &quot;Python.practica_1 (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python.practica_1.executor&quot;: &quot;Run&quot;,
-    &quot;Python.practica_2.executor&quot;: &quot;Run&quot;,
-    &quot;Python.practica_3.executor&quot;: &quot;Run&quot;,
-    &quot;Python.practicas.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/ESTRUCTURA DE DATOS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.jshint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.jshint&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python.practica 1.executor": "Run",
+    "Python.practica 2.executor": "Run",
+    "Python.practica1.executor": "Run",
+    "Python.practica2.executor": "Run",
+    "Python.practica_1 (1).executor": "Run",
+    "Python.practica_1.executor": "Run",
+    "Python.practica_2.executor": "Run",
+    "Python.practica_3.executor": "Run",
+    "Python.practicas.executor": "Run",
+    "Python.prueba.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "C:/ESTRUCTURA DE DATOS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.jshint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.jshint": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
+    "to.speed.mode.migration.done": "true"
   }
-}</component>
-  <component name="RunManager" selected="Python.practica_1">
+}]]></component>
+  <component name="RunManager">
     <configuration name="practica_1" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="ESTRUCTURA_DE_DATOS" />
       <option name="ENV_FILES" value="" />
@@ -247,7 +247,9 @@
       <workItem from="1788311811702" duration="5744000" />
       <workItem from="1788359599397" duration="2300000" />
       <workItem from="1788478225111" duration="4385000" />
-      <workItem from="1788527658634" duration="1903000" />
+      <workItem from="1788527658634" duration="1925000" />
+      <workItem from="1788566673875" duration="747000" />
+      <workItem from="1788622258914" duration="1313000" />
     </task>
     <task id="LOCAL-00001" summary="primer commit">
       <option name="closed" value="true" />
@@ -305,7 +307,15 @@
       <option name="project" value="LOCAL" />
       <updated>1788486977936</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="commit 8">
+      <option name="closed" value="true" />
+      <created>1788529659703</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1788529659704</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -315,10 +325,12 @@
     <MESSAGE value="primer commit" />
     <MESSAGE value="commit 6" />
     <MESSAGE value="commit 7" />
-    <option name="LAST_COMMIT_MESSAGE" value="commit 7" />
+    <MESSAGE value="commit 8" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit 8" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/ESTRUCTURA_DE_DATOS$practica_2.coverage" NAME="practica_2 Coverage Results" MODIFIED="1788314342145" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/ESTRUCTURA_DE_DATOS$prueba.coverage" NAME="prueba Coverage Results" MODIFIED="1788623335232" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/ESTRUCTURA_DE_DATOS$practica_3.coverage" NAME="practica_3 Coverage Results" MODIFIED="1788361658936" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/ESTRUCTURA_DE_DATOS$practica_1.coverage" NAME="practica_1 Coverage Results" MODIFIED="1788360859850" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/ESTRUCTURA_DE_DATOS$practica1.coverage" NAME="practica1 Coverage Results" MODIFIED="1787968040779" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
