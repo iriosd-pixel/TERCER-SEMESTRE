@@ -44,12 +44,12 @@ for k in range(2, 31):
 
 #CAMBIO
 #Escribe una función contar_primos(a, b) que cuente cuántos primos hay entre a y b.
-def contar_primos(n):
+def contar_primos(a,b):
     contador = 0
     for i in range(a, b+1):
         if es_primo(i):
             contador+=1
-        return contador
+    return contador
 #----------Programa principal--------------
 a=int(input("Ingrese desde donde empieza"))
 b=int(input("Ingrese hasta donde termina"))
@@ -57,26 +57,46 @@ b=int(input("Ingrese hasta donde termina"))
 cantidad=contar_primos(a,b)
 print(f"Hay {cantidad} números primos entre {a} y {b}.")
 
+#================================================
+# 3) Escribir una función suma_digitos(n) que retorne la suma de los dígitos de un número.
+#================================================
+def suma_digitos(n):
+    n = abs(n)                     # por si es negativo
+    suma = 0
+    while n > 0:
+        suma += n % 10             # último dígito
+        n = n // 10                # quita el último dígito
+    return suma
 
+# Uso
+num = int(input("Número: "))
+print(f"Suma: {suma_digitos(num)}")
+
+# También sirve para varios
+for x in [123, 4783, 999]:
+    print(f"{x} → {suma_digitos(x)}")
 #CAMBIO
 #Escribe es_narcisista(n): retorna True si el número es igual a la suma de sus
 # dígitos elevados al número de dígitos. Ej.: 153 = 1³+5³+3³.
-def es_narcisita(n):
-    numero=abs(n)
-    exponente= len(str(numero))
-    suma_numeros=0
-    temp= numero
-    while temp > 0:
-        digito=temp%10          # último dígito
-        suma_numeros += digito ** exponente
-        temp = temp // 10                # quita el último dígito
-    if numero == 0:
-        return True
-    return suma_numeros==numero
 
+def es_narcisista(n):
+    numero = abs(n)
+    exponente = len(str(numero))
+    suma_numeros = 0
+    temp = numero
+
+    while temp > 0:
+        digito = temp % 10
+        suma_numeros += digito ** exponente
+        temp = temp // 10
+
+    return suma_numeros == numero
+
+
+# ---------- Programa principal --------------
 num = int(input("Ingrese una cifra numérica: "))
-if es_narcisita(num):
-    print(f"El numero {num} es narcicista")
+
+if es_narcisista(num):
+    print(f"El número {num} es narcisista.")
 else:
-    print(f"El numero {num} no es narcicista")
-n=int(input("Ingrese una cifra numerica"))
+    print(f"El número {num} NO es narcisista.")
