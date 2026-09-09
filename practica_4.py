@@ -92,7 +92,6 @@ def es_narcisista(n):
 
     return suma_numeros == numero
 
-
 # ---------- Programa principal --------------
 num = int(input("Ingrese una cifra numérica: "))
 
@@ -100,3 +99,138 @@ if es_narcisista(num):
     print(f"El número {num} es narcisista.")
 else:
     print(f"El número {num} NO es narcisista.")
+
+#================================================
+# 4) Rediseñar el menú de saludar/despedir del módulo 3, pero esta vez con cada opción como función separada.
+#================================================
+def saludar():
+    nombre = input("Nombre: ")
+    print(f"¡Hola, {nombre}!")
+
+def despedir():
+    nombre = input("Nombre: ")
+    print(f"¡Adiós, {nombre}!")
+
+def mostrar_menu():
+    print("\n--- MENÚ ---")
+    print("1. Saludar")
+    print("2. Despedir")
+    print("3. Salir")
+
+# Programa principal
+while True:
+    mostrar_menu()
+    opcion = input("Opción: ")
+    if opcion == "1":
+        saludar()
+    elif opcion == "2":
+        despedir()
+    elif opcion == "3":
+        print("Adiós")
+        break
+    else:
+        print("Opción inválida")
+#CAMBIO
+#Añade una función calcular() que pida dos números y muestre suma, resta, multiplicación y división.
+# Nueva opción del menú.
+def saludar():
+    nombre = input("Nombre: ")
+    print(f"¡Hola, {nombre}!")
+
+def despedir():
+    nombre = input("Nombre: ")
+    print(f"¡Adiós, {nombre}!")
+
+def calcular():
+    a= int(input("Ingrese el primer numero: "))
+    b= int(input("Ingrese el segundo numero: "))
+
+    suma=a+b
+    print(f"Suma: {suma}")
+    resta=a-b
+    print(f"Resta: {resta}")
+    multiplicacion=a*b
+    print(f"Multiplicacion: {multiplicacion}")
+    division=a/b
+    print(f"Division: {division}")
+    print("---CALCULO TERMINADO---")
+
+def mostrar_menu():
+    print("\n--- MENÚ ---")
+    print("1. Saludar")
+    print("2. Despedir")
+    print("3. Calcular")
+    print("4. Salir")
+
+# Programa principal
+while True:
+    mostrar_menu()
+    opcion = input("Opción: ")
+    if opcion == "1":
+        saludar()
+    elif opcion == "2":
+        despedir()
+    elif opcion == "3":
+        calcular()
+    elif opcion == "4":
+        print("Adiós")
+        break
+    else:
+        print("Opción inválida")
+
+#================================================
+#                TAREA
+#================================================
+#================================================
+# 1) Función area_rectangulo(base, altura) que retorne el área.
+#================================================
+def area_rectangulo(base, altura):
+    return base * altura
+
+# Uso
+print(area_rectangulo(5, 3))    # 15
+print(area_rectangulo(4.5, 2))  # 9.0
+
+#================================================
+# 2) Función maximo(a, b, c) que retorne el mayor de tres números.
+#================================================
+def maximo(a, b, c):
+    return max(a, b, c)
+print(maximo(5, 7, 44))
+
+#mximo
+def maximo_manual(a, b, c):
+    mayor = a
+    if b > mayor: mayor = b
+    if c > mayor: mayor = c
+    return mayor
+
+print(maximo(5, 9, 3))          # 9
+print(maximo_manual(5, 9, 3))   # 9
+
+#================================================
+# 3) Un año es bisiesto si es divisible entre 4 y no entre 100, O si es divisible entre 400.
+#================================================
+def año_bisiesto(año):
+    bisiesto = False
+    if año % 400 == 0:
+        return True
+    if año % 4 == 0 and año % 100 != 0:
+        return True
+    else:
+        return False
+
+año = int(input("Ingrese un año"))
+
+if año_bisiesto(año):
+    print("El año es bisiesto")
+else:
+    print("El año no es bisiesto")
+
+# Pruebas
+for y in [2024, 2023, 2000, 1900]:
+    print(f"{y}: {año_bisiesto(y)}")
+
+#================================================
+# 4) Función factorial(n) y luego combinatoria(n, k) = n! / (k! · (n-k)!).
+#================================================
