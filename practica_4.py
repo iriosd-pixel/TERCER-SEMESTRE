@@ -1,6 +1,8 @@
 #================================================
 #EJEMPLOS PUESTOS POR LA IA MAS CAMBIOS
 #================================================
+from enum import nonmember
+
 
 #================================================
 # 1)Escribir una función calcular_iva(precio) que
@@ -234,3 +236,64 @@ for y in [2024, 2023, 2000, 1900]:
 #================================================
 # 4) Función factorial(n) y luego combinatoria(n, k) = n! / (k! · (n-k)!).
 #================================================
+def factorial(n):
+    fact = 1
+    for i in range(1, n + 1):
+        fact = fact * i
+    return fact
+
+def combinatoria(n, k):
+    arriba = factorial(n)
+    abajo = factorial(k) * factorial(n - k)
+    return arriba // abajo
+
+# Uso
+print(factorial(5))
+print(combinatoria(5, 2))
+
+#================================================
+# 5) Programa que use funciones separadas para cada operación
+# (sumar, restar, multiplicar, dividir) y un menú que llame a la correcta.
+#================================================
+def sumar(a, b): return a + b
+def restar(a, b): return a - b
+def multiplicar(a, b): return a * b
+def dividir(a, b):
+    if b == 0:
+        return None
+    return a / b
+
+while True:
+    print("\n--Mostrar menu--")
+    print("1: Sumar")
+    print("2: Restar")
+    print("3: Multiplicar")
+    print("4: Dividir")
+    print("5: Salir")
+
+    opcion = int(input("Elija una opcion: "))
+
+    if opcion == 5:
+        print("Saliendo del programa")
+        break
+
+    if opcion < 1 or opcion > 5:
+        print("Opción inválida")
+        continue
+
+    a = int(input("Ingrese el primer numero: "))
+    b = int(input("Ingrese el segundo numero: "))
+
+    if opcion == 1:
+        r = sumar(a, b)
+    elif opcion == 2:
+        r = restar(a, b)
+    elif opcion == 3:
+        r = multiplicar(a, b)
+    elif opcion == 4:
+        r = dividir(a, b)
+        if r is None:
+            print("No se puede dividir entre 0")
+            continue
+
+    print(f"La respuesta es: {r}")
