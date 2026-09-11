@@ -59,140 +59,230 @@ print(f"El area del circulo: {area:.2f}")
 print(f"El perimetro del circulo: {perimetro:.2f}")
 
 #================================================
-#                     TAREA
+#                 TAREA
 #================================================
 
-
-#________1) Pide una temperatura en grados Celsius y muéstrala en Fahrenheit. Fórmula: F = C × 9/5 + 32.
-
+#================================================
+# 1) Función area_rectangulo(base, altura) que retorne el área.
+#================================================
 #--------ENTENDER EL PROBLEMA--------
-#----Entrada:
-#temperatura (input)
-#----Proceso:
-#grados_fahrenheit= (temperatura*9/5)+32
-#----Salida:
-#temperatura en grados fahrenheit
+#----Entrada: base, altura (parámetros)
+#----Proceso: area = base * altura
+#----Salida: área calculada del rectángulo
 
 #-------- BOSQUEJO A MANO------------
-#temperatura: 30
-#grados farenheit= (30*9/5)+32
+# base: 5
+# altura: 3
+# area = 5 * 3 = 15
 
 #--------DESCUBRIR EL PATRON-----------
-#En este caso no hay patron asi que, solo toca pedir la temperatura y esos datos se reemplazan en la formula
+# Para calcular el área de cualquier rectángulo multiplicamos la base por la altura.
 
 #--------ESCRIBIR EL CODIGO-----------
-temperatura= float(input("Ingrese la temperatura:"))
-grados_fahrenheit= (temperatura*9/5)+32
-print(f"La temperatura en grados fahrenheit es: {grados_fahrenheit}")
+def area_rectangulo(base, altura):
+    return base * altura
 
-#--------PRUBA DE ESCRITORIO---------
-#linea         temperatura              pantalla
-#input:          30
-#print           30                         86.0
-
-
-#_________2) Pide un total de segundos y muéstralos como hh:mm:ss. Ej.: 3725 segundos → 1:02:05.
-#--------ENTENDER EL PROBLEMA--------
-#----Entrada:
-#segundos (input)
-#----Proceso:
-#horas= segundos//3600
-#resto= segundos%3600
-#minutos= resto//60
-#segundos=resto%60
-#----Salida:
-#3725 segundos → 1:02:05
-
-#-------- BOSQUEJO A MANO------------
-#segundo: 6000
-#horas= 6000//3600
-#resto= 6000%3600
-#minutos= resto//60
-#segundos=resto%60
-
-#--------DESCUBRIR EL PATRON-----------
-#el patron en este caso es que los segundos deben de dividirse para 3600, que es el total de segundos de una hora, de eso debe de sacarse el resto, osea los segundos que sobren y ese resto debe de dividirse para 60 para sacar los minutosy y luego sacar el mod de 60 para calcular el total de segundos
-
-#--------ESCRIBIR EL CODIGO-----------
-segundos= int(input("Ingrese la segundos:"))
-horas= segundos//3600
-resto= segundos%3600
-minutos= resto//60
-segundos=resto%60
-print(f"{horas:02d}:{minutos:02d}:{segundos:02d}")
+# Uso
+print(area_rectangulo(5, 3))    # 15
+print(area_rectangulo(4.5, 2))  # 9.0
 
 #--------PRUEBA DE ESCRITORIO--------
-# Línea                    | segundos | horas | resto | minutos | Pantalla
-# ------------------------ | -------: | ----: | ----: | ------: | --------
-# `input`                  |     6000 |     — |     — |       — | 6000
-# `resto = segundos%3600`  |     6000 |     1 |  2400 |       — | —
-# `minutos = resto//60`    |     6000 |     1 |  2400 |      40 | —
-# `segundos = resto%60`    |        0 |     1 |  2400 |      40 | —
-# `print`                  |        0 |     1 |  2400 |      40 | 01:40:00
+# Línea                   | base | altura | Pantalla
+# ----------------------- | ---: | -----: | --------
+# `area_rectangulo(5, 3)` |    5 |      3 | 15
+# `area_rectangulo(4.5,2)`|  4.5 |      2 | 9.0
 
-#________3) Lee dos números y muéstralos intercambiados. Python permite hacerlo en una sola línea, muy diferente a JS
+
+#================================================
+# 2) Función maximo(a, b, c) que retorne el mayor de tres números.
+#================================================
 #--------ENTENDER EL PROBLEMA--------
-#----Entrada:
-#dos numeross (input)
-#----Proceso:
-#a, b = b, a
-#----Salida:
-#a = {a}, b = {b}
+#----Entrada: tres números a, b, c (parámetros)
+#----Proceso: comparar los valores para encontrar el número mayor
+#----Salida: el número de mayor valor
 
 #-------- BOSQUEJO A MANO------------
-#a:5
-#b:8
-#5,8=8,5
-#a=8: b=5
+# a: 5, b: 9, c: 3
+# mayor = 5
+# ¿9 > 5? Sí -> mayor = 9
+# ¿3 > 9? No -> mayor = 9
 
 #--------DESCUBRIR EL PATRON-----------
-#En este caso usamos el intercambio pythonico que consiste que python intercambia las variables en una sola linea de manera automatica
+# Asumimos que el primer número es el mayor y luego lo comparamos con los demás; si encontramos uno más grande, actualizamos la variable mayor.
 
 #--------ESCRIBIR EL CODIGO-----------
-a= int(input("a: "))
-b= int(input("b: "))
-a,b= b,a
-print(f"a:{a}, b:{b}")
+def maximo(a, b, c):
+    return max(a, b, c)
+print(maximo(5, 7, 44))
 
-#----PRUEBA DE ESCRITORIO--------
-# Línea        |  a |  b | Pantalla |
-# ------------ | -: | -: | -------- |
-# `input` de a |  5 |  — | 5        |
-# `input` de b |  5 |  8 | 8        |
-# `a,b = b,a`  |  8 |  5 | —        |
-# `print`      |  8 |  5 | a:8, b:5 |
+#mximo
+def maximo_manual(a, b, c):
+    mayor = a
+    if b > mayor: mayor = b
+    if c > mayor: mayor = c
+    return mayor
+
+print(maximo(5, 9, 3))          # 9
+print(maximo_manual(5, 9, 3))   # 9
+
+#--------PRUEBA DE ESCRITORIO--------
+# Línea                     |  a |  b |  c | mayor | Pantalla
+# ------------------------- | -: | -: | -: | ----: | --------
+# `maximo(5, 7, 44)`        |  5 |  7 | 44 |     — | 44
+# `maximo_manual(5, 9, 3)`  |  5 |  9 |  3 |     9 | 9
 
 
-#_______4) Lee el precio de un producto sin IVA y muestra el IVA (15%) y el total.
+#================================================
+# 3) Un año es bisiesto si es divisible entre 4 y no entre 100, O si es divisible entre 400.
+#================================================
 #--------ENTENDER EL PROBLEMA--------
-#----Entrada:
-#subtotal a pagar(input)
-#----Proceso:
-#iva=subtotal*0.15
-#total=subtotal+iva
-#----Salida:
-#total a pagar
+#----Entrada: año (input)
+#----Proceso: verificar si el año es divisible por 400 O (divisible por 4 Y NO por 100)
+#----Salida: "El año es bisiesto" o "El año no es bisiesto"
 
 #-------- BOSQUEJO A MANO------------
-#precio = 80
-#iva = 80 × 0.15 = 12
-#total = 80 + 12 = 92l
+# año: 2024
+# ¿2024 % 400 == 0? No
+# ¿2024 % 4 == 0 y 2024 % 100 != 0? Sí -> Es bisiesto
 
 #--------DESCUBRIR EL PATRON-----------
-#aqui lo que debemos de hacer es multiplicar el valor del producto por 0.15 que es el IVA en Ecuador y eso lo presentamos, luego debemos de sumar ese iva mas el subtotal de la compra
+# Si el año se divide exactamente para 400 es bisiesto. Si no, debe ser divisible para 4 pero no para 100.
 
 #--------ESCRIBIR EL CODIGO-----------
-precio=float(input("Ingrese el precio:"))
-IVA=0.15
-subtotal=precio*IVA
-total=precio+subtotal
-print(f"el IVA de la compra es: {subtotal}")
-print(f"el total de la compra es: {total:.2f}")
-#-------PRUEBA DE ESCRITORIO---------
-# Línea                   | precio |  IVA | subtotal | total | Pantalla     |
-# ----------------------- | -----: | ---: | -------: | ----: | ------------ |
-# `input`                 |     80 | 0.15 |        — |     — | 80           |
-# `subtotal=precio*IVA`   |     80 | 0.15 |     12.0 |     — | —            |
-# `total=precio+subtotal` |     80 | 0.15 |     12.0 |  92.0 | —            |
-# `print`                 |     80 | 0.15 |     12.0 |  92.0 | IVA: 12.0    |
-# `print`                 |     80 | 0.15 |     12.0 |  92.0 | Total: 92.00 |
+def año_bisiesto(año):
+    bisiesto = False
+    if año % 400 == 0:
+        return True
+    if año % 4 == 0 and año % 100 != 0:
+        return True
+    else:
+        return False
+
+año = int(input("Ingrese un año"))
+
+if año_bisiesto(año):
+    print("El año es bisiesto")
+else:
+    print("El año no es bisiesto")
+
+# Pruebas
+for y in [2024, 2023, 2000, 1900]:
+    print(f"{y}: {año_bisiesto(y)}")
+
+#--------PRUEBA DE ESCRITORIO--------
+# Línea                |  año | año % 400 == 0 | año % 4 == 0 and año % 100 != 0 | Pantalla
+# -------------------- | ---: | ------------: | ------------------------------: | ---------------------
+# `input`              | 2024 |          —    |                            —    | 2024
+# `año_bisiesto(2024)` | 2024 |        False  |                         True    | El año es bisiesto
+
+
+#================================================
+# 4) Función factorial(n) y luego combinatoria(n, k) = n! / (k! · (n-k)!).
+#================================================
+#--------ENTENDER EL PROBLEMA--------
+#----Entrada: n (para factorial), n y k (para combinatoria)
+#----Proceso:
+# 1) factorial(n) = 1 * 2 * ... * n
+# 2) combinatoria(n, k) = factorial(n) // (factorial(k) * factorial(n - k))
+#----Salida: resultado del factorial y número total de combinaciones
+
+#-------- BOSQUEJO A MANO------------
+# n = 5, k = 2
+# factorial(5) = 1 * 2 * 3 * 4 * 5 = 120
+# arriba = 120
+# abajo = factorial(2) * factorial(3) = 2 * 6 = 12
+# resultado = 120 // 12 = 10
+
+#--------DESCUBRIR EL PATRON-----------
+# Para el factorial acumulamos multiplicaciones desde 1 hasta n. Para la combinatoria reutilizamos la función factorial para resolver la fórmula dividiendo arriba entre abajo.
+
+#--------ESCRIBIR EL CODIGO-----------
+def factorial(n):
+    fact = 1
+    for i in range(1, n + 1):
+        fact = fact * i
+    return fact
+
+def combinatoria(n, k):
+    arriba = factorial(n)
+    abajo = factorial(k) * factorial(n - k)
+    return arriba // abajo
+
+# Uso
+print(factorial(5))
+print(combinatoria(5, 2))
+
+#--------PRUEBA DE ESCRITORIO--------
+# Línea                 |  n |  k | arriba | abajo | Pantalla
+# --------------------- | -: | -: | -----: | ----: | --------
+# `factorial(5)`        |  5 |  — |      — |     — | 120
+# `combinatoria(5, 2)`  |  5 |  2 |    120 |    12 | 10
+
+
+#================================================
+# 5) Programa que use funciones separadas para cada operación
+# (sumar, restar, multiplicar, dividir) y un menú que llame a la correcta.
+#================================================
+#--------ENTENDER EL PROBLEMA--------
+#----Entrada: opción elegida (1-5), números a y b
+#----Proceso: según la opción, llamar a la función correspondiente y calcular el resultado
+#----Salida: resultado de la operación elegida
+
+#-------- BOSQUEJO A MANO------------
+# opción: 1 (sumar)
+# a = 5, b = 3
+# r = sumar(5, 3) = 8
+
+#--------DESCUBRIR EL PATRON-----------
+# Usamos un bucle while para mantener el menú activo. Validamos que la opción esté entre 1 y 4 antes de pedir los números e invocamos la función requerida.
+
+#--------ESCRIBIR EL CODIGO-----------
+def sumar(a, b): return a + b
+def restar(a, b): return a - b
+def multiplicar(a, b): return a * b
+def dividir(a, b):
+    if b == 0:
+        return None
+    return a / b
+
+while True:
+    print("\n--Mostrar menu--")
+    print("1: Sumar")
+    print("2: Restar")
+    print("3: Multiplicar")
+    print("4: Dividir")
+    print("5: Salir")
+
+    opcion = int(input("Elija una opcion: "))
+
+    if opcion == 5:
+        print("Saliendo del programa...")
+        break
+
+    if opcion < 1 or opcion > 5:
+        print("Opción inválida")
+        continue
+
+    a = int(input("Ingrese el primer numero: "))
+    b = int(input("Ingrese el segundo numero: "))
+
+    if opcion == 1:
+        r = sumar(a, b)
+    elif opcion == 2:
+        r = restar(a, b)
+    elif opcion == 3:
+        r = multiplicar(a, b)
+    elif opcion == 4:
+        r = dividir(a, b)
+        if r is None:
+            print("No se puede dividir entre 0")
+            continue
+
+    print(f"La respuesta es: {r}")
+
+#--------PRUEBA DE ESCRITORIO--------
+# Línea           | opción |  a |  b |    r | Pantalla
+# --------------- | -----: | -: | -: | ---: | ---------------------
+# `input` opción  |      1 |  — |  — |    — | 1
+# `input` a y b   |      1 |  5 |  3 |    — | a: 5, b: 3
+# `sumar(5, 3)`   |      1 |  5 |  3 |    8 | La respuesta es: 8

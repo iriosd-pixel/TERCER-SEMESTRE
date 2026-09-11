@@ -1,8 +1,6 @@
 #================================================
 #EJEMPLOS PUESTOS POR LA IA MAS CAMBIOS
 #================================================
-from enum import nonmember
-
 
 #================================================
 # 1)Escribir una función calcular_iva(precio) que
@@ -28,8 +26,8 @@ def es_primo(n):
         return False
     for i in range(2, int(n ** 0.5) + 1):
         if n % i == 0:
-            return False           # sale inmediatamente
-    return True                    # llegó al final sin encontrar divisor
+            return False
+    return True
 
 # --- Uso 1: verificar uno ---
 num = int(input("Número: "))
@@ -274,7 +272,7 @@ while True:
     opcion = int(input("Elija una opcion: "))
 
     if opcion == 5:
-        print("Saliendo del programa")
+        print("Saliendo del programa...")
         break
 
     if opcion < 1 or opcion > 5:
