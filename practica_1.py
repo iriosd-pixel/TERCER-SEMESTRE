@@ -52,7 +52,7 @@ print(f"Perímetro: {perimetro:.2f}")
 #Ampliar para leer el radio de un círculo y mostrar área (π·r²) y perímetro (2·π·r).
 # Usa import math y math.pi.
 radio = float(input("Ingrese radio: "))
-P=3.1416
+PI=3.1416
 area =  PI*(radio**2)
 perimetro = 2 * PI*radio
 print(f"El area del circulo: {area:.2f}")
