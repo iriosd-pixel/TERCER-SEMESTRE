@@ -1,0 +1,7 @@
+# Archivos temporales generados por Python
+__pycache__/
+*.py[cod]
+
+# Material de práctica local
+practica_1_docente/
+prueba.py

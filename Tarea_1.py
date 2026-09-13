@@ -66,11 +66,6 @@ print("Las palbras total son: ", analizar.contar_palabras())
 ======================================
 3) Gestor de compras con totales
 ======================================
-Clase CarroCompras que: 
-(1) tenga método agregar_articulo(nombre, precio) que guarde en un diccionario {nombre: precio}; 
-(2) tenga método total_carrito() que retorne la suma de todos los_artlista_articulos; 
-(3) tenga método articulos_por_rango(precio_min, precio_max) que retorne una lista con artículos dentro del rango.
-
 '''
 class Carro_Compras:
     def __init__(self):
@@ -104,18 +99,13 @@ print(carro.articulos_por_rango(1, 1.50))
 ======================================
 4) Inversor de secuencias
 ======================================
-Clase InversorSecuencia que: 
-(1) tenga método invertir_lista(lista) que retorne la lista invertida sin usar reversed() (usa manual con bucles); 
-(2) tenga método invertir_multiples(*listas) que reutilice el anterior para invertir varias listas 
-y retorne un diccionario {lista_original: lista_invertida}.
-
 '''
 class InversorSecuencia:
     def invertir_lista(self, lista):
         lista_invertida = []
 
-        for indice in range(len(lista) - 1, -1, -1):
-            lista_invertida.append(lista[indice])
+        for indice in lista:
+            lista_invertida= [indice]+lista_invertida
 
         return lista_invertida
 
@@ -123,14 +113,42 @@ class InversorSecuencia:
         resultados = {}
 
         for lista in listas:
-            resultados[tuple(lista)] = self.invertir_lista(lista)
+            llave=tuple(lista)
+            valor=self.invertir_lista(lista)
+            resultados[llave]=valor
 
         return resultados
-
-
 inversor = InversorSecuencia()
 
 print(inversor.invertir_lista([1, 2, 3, 4]))
 print(inversor.invertir_multiples([1, 2, 3], ["a", "b", "c"]))
 
+'''
+======================================
+5) Detector de números pares e impares
+======================================
+Clase AnalizadorNumeros que: (1) tenga método es_par(numero) que retorne True/False; 
+(2) tenga método separar(*numeros) que retorne un diccionario {'pares': [...], 'impares': [...]} reutilizando es_par; 
+(3) tenga método cantidad_pares_impares() que retorne una tupla (cant_pares, cant_impares).
+
+'''
+class AnalizadorNumeros():
+    def es_par(self, numero):
+        if numero%2==0:
+            return True
+        else:
+            return False
+    
+    def separar(self, *numeros):
+        numeros_pares_impares={'Pares':[], 'Impares':[]}
+        for numero in numeros:
+            if self.es_par(numero):
+                numeros_pares_impares['Pares'].append(numero)
+            else:
+                numeros_pares_impares['Impares'].append(numero)
+        return numeros_pares_impares
+    
+todos= AnalizadorNumeros()
+
+todos.separar(4,5,6,7,8,9,10,11,12)
 
