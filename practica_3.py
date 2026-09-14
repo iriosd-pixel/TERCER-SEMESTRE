@@ -138,6 +138,10 @@ for n in range(2, 101):  # Evaluamos automáticamente del 2 al 100
 print("Números primos entre 2 y 100:")
 print(primos)
 
+
+
+
+
 #================================================
 #                TAREA
 #================================================

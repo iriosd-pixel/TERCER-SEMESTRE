@@ -6,7 +6,7 @@
 # 1) Leer el precio de un producto sin IVA y mostrar el IVA y el precio final.
 # El IVA en Ecuador es 15%.
 #================================================
-IVA = 0.15                              # constante en MAYÚSCULA
+IVA = 0.15                            
 
 precio = float(input("Precio sin IVA: $"))
 iva = precio * IVA
@@ -17,7 +17,7 @@ print(f"Total: ${total:.2f}")
 #CAMBIO
 #Añadir un descuento del 10% que se aplique antes del IVA.
 # Muestra los tres valores: descuento, IVA, total.
-IVA = 0.15                              # constante en MAYÚSCULA
+IVA = 0.15                            
 DESCUENTO= 0.10
 precio = float(input("Precio sin IVA: $"))
 
@@ -36,7 +36,6 @@ print(f"Total:     ${total:.2f}")
 #================================================
 num = int(input("Ingresa un número: "))
 
-# Ternario: expresión que devuelve un valor u otro según la condición
 resultado = "par" if num % 2 == 0 else "impar"
 
 print(f"{num} es {resultado}")
@@ -44,7 +43,7 @@ print(f"{num} es {resultado}")
 #Modifícalo para que además diga si es múltiplo de 3, de 5, o de ambos.
 num = int(input("Ingresa un número: "))
 
-# Ternario: expresión que devuelve un valor u otro según la condición
+
 resultado = "par" if num % 2 == 0 else "impar"
 
 if num % 3 == 0 and num % 5 == 0:
@@ -72,13 +71,12 @@ segundos = resto % 60
 print(f"{horas:02d}:{minutos:02d}:{segundos:02d}")
 # CAMBIO
 #Al revés: leer hh:mm:ss y convertir a segundos totales. Tendrás que usar split(":").
-# 1. Leemos el tiempo como texto
+
 tiempo = input("Ingresa el tiempo (hh:mm:ss): ")
 
-# 2. Cortamos el texto usando ":" y lo guardamos en tres variables
+
 h, m, s = tiempo.split(":")
 
-# 3. Convertimos esos textos a números enteros (int) para poder calcular
 horas = int(h)
 minutos = int(m)
 segundos = int(s)
@@ -114,23 +112,22 @@ print(f"$1  × {b1}")
 monto = float(input("Monto: $"))
 
 # 2. Convertimos a centavos
-# Usamos round() para asegurar que no haya problemas de redondeo
+
 resto = int(round(monto * 100))
 
-# 3. Billetes (convertidos a centavos, ej: $50 = 5000 centavos)
+
 b50 = resto // 5000; resto = resto % 5000
 b20 = resto // 2000; resto = resto % 2000
 b10 = resto // 1000; resto = resto % 1000
 b5  = resto // 500;  resto = resto % 500
 b1  = resto // 100;  resto = resto % 100
 
-# 4. Monedas (ya son centavos)
+
 m25 = resto // 25; resto = resto % 25
 m10 = resto // 10; resto = resto % 10
 m5  = resto // 5;  resto = resto % 5
 m1  = resto // 1;  resto = resto % 1
 
-# 5. Imprimimos los resultados
 print("--- Billetes ---")
 print(f"$50   × {b50}")
 print(f"$20   × {b20}")

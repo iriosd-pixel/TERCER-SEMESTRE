@@ -226,6 +226,33 @@ Gp.agregar_persona("Rosa", 75)
 print("La edad minima es 18: ", Gp.personas_mayores(18))
 print("El promedio de edades es: ", Gp.edad_promedio())
 
+'''
+======================================
+8) Asignador de equipos
+======================================
+Clase Equipos que: 
+(1) tenga método crear_equipo(nombre_equipo) que inicie un equipo como una lista vacía en un diccionario; 
+(2) tenga método agregar_jugador(equipo, jugador) que añada el jugador al equipo; 
+(3) tenga método equipo_mayor_integrantes() que retorne el nombre del equipo con más jugadores.
+'''
+class Equipos():
+    def __init__(self):
+        self.dic_equipos={}
+        
+    def crear_equipo(self, nombre_equipo):
+        self.dic_equipos[nombre_equipo]
+        return self.dic_equipos
+    
+    def agregar_jugador(self, equipo, jugador):
+        pass
+    
+    def equipo_mayor_integrantes(self):
+        pass
+
+
+eq=Equipos()
+
+print(eq.crear_equipo("Emelec"))
 
 
 
@@ -241,7 +268,6 @@ Clase AnalizadorString que: (1) tenga método solo_vocales(letra) que retorne Tr
 (2) tenga método contar_por_tipo(texto) que retorne un diccionario {'vocales': cant, 'consonantes': cant, 'digitos': cant} reutilizando métodos; 
 (3) tenga atributo que guarde el texto más largo analizado.
 '''
-
 class AnalizadorString():
     def __init__(self):
         self.texto_mas_largo=""
