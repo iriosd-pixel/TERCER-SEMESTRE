@@ -130,7 +130,6 @@ print(inversor.invertir_multiples([1, 2, 3], ["a", "b", "c"]))
 Clase AnalizadorNumeros que: (1) tenga método es_par(numero) que retorne True/False; 
 (2) tenga método separar(*numeros) que retorne un diccionario {'pares': [...], 'impares': [...]} reutilizando es_par; 
 (3) tenga método cantidad_pares_impares() que retorne una tupla (cant_pares, cant_impares).
-
 '''
 class AnalizadorNumeros():
     def es_par(self, numero):
@@ -152,3 +151,124 @@ todos= AnalizadorNumeros()
 
 todos.separar(4,5,6,7,8,9,10,11,12)
 
+'''
+======================================
+6) Estadísticas de temperatura
+======================================
+Clase GestorTemperatura que: (1) tenga método registrar_temperatura(temp) que guarde en una lista; 
+(2) tenga método minima()`, `maxima()`, `promedio() que calculen estadísticas; 
+(3) tenga método registrar_multiples(*temps) que reutilice el registro para varias temperaturas.
+'''
+class GestorTemperatura():
+    def __init__(self):
+        self.lista_temperaturas=[]
+    
+    def registrar_temperatura(self, temp):
+        self.lista_temperaturas.append(temp)
+        
+    def  minima(self):
+        return min(self.lista_temperaturas)
+    
+    def maxima(self):
+        return max(self.lista_temperaturas)
+    
+    def promedio(self):
+        return sum(self.lista_temperaturas)/len(self.lista_temperaturas)
+    
+    def registrar_multiples(self, *temps):
+        for temp in temps:
+            self.registrar_temperatura(temp)
+            
+gt=GestorTemperatura()
+
+gt.registrar_temperatura(25)
+gt.registrar_multiples(15,16,15,14,30)
+print("La temperatura maxima es: ", gt.minima())
+print("La temperatura minima es: ", gt.maxima())
+print("El promedio es: ", gt.promedio())
+
+
+'''
+======================================
+7) Mapeador de edades
+======================================
+Clase GestorPersonas que: (1) tenga método agregar_persona(nombre, edad) que guarde en un diccionario; 
+(2) tenga método personas_mayores(edad_minima) que retorne una lista de nombres cuya edad sea ≥; 
+(3) tenga método edad_promedio() que retorne el promedio de edades.
+
+'''
+class GestorPersonas():
+    def __init__(self):
+        self.persona={}
+    
+    def agregar_persona(self, nombre, edad):
+        self.persona[nombre]=edad
+    
+    def personas_mayores(self, edad_minima):
+        self.lista_nombres=[]
+        for nombre, edad in self.persona.items():
+            if edad>=edad_minima:
+                self.lista_nombres.append(nombre)
+        return self.lista_nombres
+    
+    def edad_promedio(self):
+        total_edades=sum(self.persona.values())
+        cantidad_personas=len(self.persona)
+        return total_edades/cantidad_personas
+    
+Gp= GestorPersonas()
+
+Gp.agregar_persona("Ismael", 19)
+Gp.agregar_persona("Ana", 25)
+Gp.agregar_persona("Carlos", 15)
+Gp.agregar_persona("Rosa", 75)
+
+print("La edad minima es 18: ", Gp.personas_mayores(18))
+print("El promedio de edades es: ", Gp.edad_promedio())
+
+
+
+
+
+
+
+
+'''
+======================================
+9) Validador de caracteres
+======================================
+Clase AnalizadorString que: (1) tenga método solo_vocales(letra) que retorne True si es vocal; 
+(2) tenga método contar_por_tipo(texto) que retorne un diccionario {'vocales': cant, 'consonantes': cant, 'digitos': cant} reutilizando métodos; 
+(3) tenga atributo que guarde el texto más largo analizado.
+'''
+
+class AnalizadorString():
+    def __init__(self):
+        self.texto_mas_largo=""
+    
+    def solo_vocales(self, letras):
+            if letras.lower() in "aeiou":
+                return True
+            else:
+                return False
+    
+    def contar_por_tipo(self, texto):
+        contadores={'vocales': 0, 'consonantes':0, 'digitos':0}
+        for letra in texto:
+            letra_minuscula= letra.lower()
+            if self.solo_vocales(letra):
+                contadores['vocales']+=1
+            elif (letra_minuscula >="a" and letra_minuscula <="z") or letra_minuscula=="ñ":
+                contadores['consonantes']+=1
+            elif letra>= '0' and letra<= '9':
+                contadores['digitos']+=1
+        if len(texto)>len(self.texto_mas_largo):
+            self.texto_mas_largo=texto
+        return contadores
+
+As=AnalizadorString()
+
+print("Analisis 1",As.contar_por_tipo("hola como estas Ismael? tienes 19 años me gusta el numero 11"))
+print("Analisis 2",As.contar_por_tipo("hola mundo, 123"))
+
+print("EL texto mas largo es: ", As.texto_mas_largo)
