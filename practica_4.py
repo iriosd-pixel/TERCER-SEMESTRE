@@ -363,7 +363,6 @@ def dividir(a, b):
         return None
     return a / b
 
-# Comentado para que no se quede esperando datos si corres todo el script junto
 
 while True:
     print("\n--Mostrar menu--")
