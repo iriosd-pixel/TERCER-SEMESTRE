@@ -240,24 +240,38 @@ class Equipos():
         self.dic_equipos={}
         
     def crear_equipo(self, nombre_equipo):
-        self.dic_equipos[nombre_equipo]
+        self.dic_equipos[nombre_equipo]=[]
         return self.dic_equipos
     
     def agregar_jugador(self, equipo, jugador):
-        pass
+        if equipo in self.dic_equipos:
+            self.dic_equipos[equipo].append(jugador)
+            
     
     def equipo_mayor_integrantes(self):
-        pass
-
+        max_juagores=-1
+        equipo_lider=" "
+        for equipo, jugadores in self.dic_equipos.items():
+            if len(jugadores)> max_juagores:
+                max_juagores=len(jugadores)
+                equipo_lider=equipo
+        return equipo_lider
 
 eq=Equipos()
 
-print(eq.crear_equipo("Emelec"))
+eq.crear_equipo("Emelec")
+eq.crear_equipo("Barcelona")
 
 
+eq.agregar_jugador("Emelec", "Axel")
+eq.agregar_jugador("Emelec", "Linda")
+eq.agregar_jugador("Emelec", "Carlos")
+eq.agregar_jugador("Emelec", "Ismael")
+eq.agregar_jugador("Barcelona", "Carlos")
+eq.agregar_jugador("Barcelona", "Luis")
 
-
-
+print(eq.dic_equipos)
+print(eq.equipo_mayor_integrantes())
 
 
 '''
@@ -298,3 +312,4 @@ print("Analisis 1",As.contar_por_tipo("hola como estas Ismael? tienes 19 años m
 print("Analisis 2",As.contar_por_tipo("hola mundo, 123"))
 
 print("EL texto mas largo es: ", As.texto_mas_largo)
+
