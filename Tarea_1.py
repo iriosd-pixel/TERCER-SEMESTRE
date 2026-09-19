@@ -489,11 +489,266 @@ Clase RegistroNotas que:
 (3) tenga método mejor_estudiante() que retorne nombre y nota del que tiene mayor calificación.
 '''
 class RegistroNotas():
-    def registrar(estudiante, nota):
-        pass
+    def __init__(self):
+        self.dic_notas={}
     
-    def estudiantes_aprobados(nota_minima):
-        pass
+    def registrar(self, estudiante, nota):
+        self.dic_notas[estudiante]=nota
     
-    def mejor_estudiante():
-        pass
+    def estudiantes_aprobados(self, nota_minima):
+        estudiantes_pasados=[]
+        for estudiante, nota in self.dic_notas.items():
+            if nota >= nota_minima:
+                estudiantes_pasados.append(estudiante)
+        return estudiantes_pasados
+    
+    def mejor_estudiante(self):
+        if not self.dic_notas:
+            return None
+        
+        mejor_estudiante=-1
+        nombre_estudiante=""
+        for estudiante, nota in self.dic_notas.items():
+            if nota > mejor_estudiante:
+                mejor_estudiante=nota
+                nombre_estudiante=estudiante
+        return nombre_estudiante
+    
+rn= RegistroNotas()
+
+rn.registrar("soria", 6)
+rn.registrar("axel", 5)
+rn.registrar("carlos", 2)
+rn.registrar("Ismael", 10)
+
+print(rn.estudiantes_aprobados(5))
+print(rn.mejor_estudiante())
+
+''''
+======================================
+15: DIVISORES DE UN NÚMERO
+======================================
+Clase DivisorFinder que: 
+(1) tenga método encontrar_divisores(numero) que retorne una tupla con todos los divisores; 
+(2) tenga método es_perfecto(numero) que retorne True si la suma de sus divisores (excepto él mismo) es igual a él; 
+(3) tenga método encontrar_multiples_divisores(*numeros) que retorne un diccionario {número: tupla_divisores}.
+'''
+class DivisorFinder():
+    def encontrar_divisores(self, numero):
+        divisores=[]
+        for i in range(1, numero+1):
+            if numero %i==0:
+                divisores.append(i)
+        return tuple(divisores)
+    
+    def es_perfecto(self, numero):
+        divisores= self.encontrar_divisores(numero)
+        divisores_propio= divisores[:-1]
+        return sum(divisores_propio)==numero
+    
+    def encontrar_multiples_divisores(self, *numeros):
+        resultados={}
+        for num in numeros:
+            resultados[num]=self.encontrar_divisores(num)
+        return resultados
+    
+df=DivisorFinder()
+print(df.encontrar_divisores(10))
+print(df.es_perfecto(6))
+print(df.encontrar_multiples_divisores(8,9,10,20))
+
+''''
+======================================
+16: Codificador/Decodificador
+======================================
+
+Clase CodificadorCesar que: 
+(1) tenga método codificar_letra(letra, desplazamiento) que retorne la letra desplazada en el alfabeto (usar operador %); 
+(2) tenga método codificar_palabra(palabra, desplazamiento) que reutilice para toda la palabra; 
+(3) tenga un diccionario como atributo para historial de codificaciones.
+'''
+class CodificadorCesar:
+
+    def __init__(self):
+        self.historial = {}
+
+    def codificar_letra(self, letra, desplazamiento):
+        if "a" <= letra <= "z":
+            posicion_original = ord(letra) - ord("a")
+            nueva_posicion = (posicion_original + desplazamiento) % 26
+            return chr(nueva_posicion + ord("a"))
+        elif "A" <= letra <= "Z":
+            posicion_original = ord(letra) - ord("A")
+            nueva_posicion = (posicion_original + desplazamiento) % 26
+            return chr(nueva_posicion + ord("A"))
+        else:
+            return letra
+
+    def codificar_palabra(self, palabra, desplazamiento):
+        palabra_codificada = ""
+
+        for caracter in palabra:
+            palabra_codificada += self.codificar_letra(caracter, desplazamiento)
+        self.historial[palabra] = palabra_codificada
+
+        return palabra_codificada
+
+codificador = CodificadorCesar()
+
+print("--- PRUEBA 1: Letras individuales ---")
+print("Letra 'a' con desplazamiento 3  ->", codificador.codificar_letra("a", 3))  
+print("Letra 'z' con desplazamiento 1  ->", codificador.codificar_letra("z", 1)) 
+print("Letra 'Z' con desplazamiento 3  ->", codificador.codificar_letra("Z", 3))
+
+print("\n--- PRUEBA 2: Palabras completas ---")
+resultado1 = codificador.codificar_palabra("python", 3)
+print("Palabra 'python' (k=3) ->", resultado1)
+
+resultado2 = codificador.codificar_palabra("Hola Mundo", 5)
+print("Palabra 'Hola Mundo' (k=5) ->", resultado2)
+
+print("\n--- PRUEBA 3: Historial de codificaciones ---")
+print("Historial registrado:", codificador.historial)
+
+''''
+======================================
+17: Grupo de edades
+======================================
+Clase AgrupadorEdades que: 
+(1) tenga método clasificar_edad(edad) que retorne la categoría ("niño", "adolescente", "adulto", "mayor"); 
+(2) tenga método agrupar_por_categoria(*edades) que retorne un diccionario con {categoría: [edades]}; 
+(3) tenga método edad_promedio_categoria(categoria).
+'''
+class AgrupadorEdades():
+    def __init__(self):
+        self.categoria={}
+         
+    def clasificar_edad(self, edad):
+        if edad>=65:
+            return "mayor"
+        elif edad <65 and edad>=18:
+            return "bebe"
+        elif edad<18 and edad >=12:
+            return "adolescente"
+        elif edad <12 and edad>=0:
+            return "niño"
+        else:
+            return "la edad ingresada no es valida"
+    
+    def agrupar_por_categoria(self, *edades):
+        self.categoria={}
+        for edad in edades:
+            categoria_edad= self.clasificar_edad(edad)
+            if categoria_edad not in self.categoria:
+                self.categoria[categoria_edad]=[]
+            self.categoria[categoria_edad].append(edad)
+        return self.categoria
+    
+    def edad_promedio_categoria(self, categoria):
+        if categoria in self.categoria:
+            lista_edades= self.categoria[categoria]
+            return sum(lista_edades)/len(lista_edades)
+        return f"No hay datos registrados para la categoría '{categoria}'"
+
+ae=AgrupadorEdades()
+
+print( ae.agrupar_por_categoria(19))
+print(ae.agrupar_por_categoria(5,10,18,50,14))
+print(ae.edad_promedio_categoria("adolescente"))
+
+''''
+======================================
+18: Matriz de distancias
+======================================
+Clase CalculadorDistancia que: 
+(1) tenga método distancia_euclidiana(p1, p2) que reciba dos tuplas (x,y) y calcule la distancia; 
+(2) tenga método punto_mas_cercano(referencia, *puntos) que retorne el punto más cercano a referencia; 
+(3) tenga un atributo lista para guardar todas las distancias calculadas.
+'''
+class CalculadorDistancia:
+    def __init__(self):
+        self.lista_distancias = []
+
+    def distancia_euclidiana(self, p1, p2):
+        x1 = p1[0]
+        y1 = p1[1]
+
+        x2 = p2[0]
+        y2 = p2[1]
+        
+        diferencia_x = (x2 - x1) ** 2
+        diferencia_y = (y2 - y1) ** 2
+        distancia = (diferencia_x + diferencia_y) ** 0.5
+        self.lista_distancias.append(distancia)
+        return distancia
+
+    def punto_mas_cercano(self, referencia, *puntos):
+        punto_cercano = None
+        distancia_minima = 999999.0
+
+        for punto in puntos:
+            dist = self.distancia_euclidiana(referencia, punto)
+
+            if dist < distancia_minima:
+                distancia_minima = dist
+                punto_cercano = punto
+
+        return punto_cercano
+
+
+cd = CalculadorDistancia()
+
+print(
+    "Ej 18 - Distancia entre (0,0) y (3,4):",
+    cd.distancia_euclidiana((0, 0), (3, 4)),
+)
+print(
+    "Ej 18 - Punto más cercano a (0,0):",
+    cd.punto_mas_cercano((0, 0), (5, 5), (1, 2), (8, 8)),
+)
+print("Ej 18 - Lista de distancias calculadas:", cd.lista_distancias)
+
+''''
+======================================
+19: Inventario de productos
+======================================
+Clase Inventario que: 
+(1) tenga método agregar_stock(producto, cantidad) que guarde en un diccionario; 
+(2) tenga método restar_stock(producto, cantidad) que disminuya y retorne True si hay suficiente; 
+(3) tenga método productos_bajo_stock(minimo) que retorne una lista de productos con cantidad < minimo.
+'''
+class Inventario():
+    def __init__(self):
+        self.dic_productos={}
+    
+    def agregar_stock(self, producto, cantidad):
+        if producto  in self.dic_productos:
+            self.dic_productos[producto]= self.dic_productos[producto]+cantidad
+        else:
+            self.dic_productos[producto]=cantidad
+    
+    def restar_stock(self, producto, cantidad):
+        if producto in self.dic_productos:
+            cantidad_actual= self.dic_productos[producto]
+            if cantidad_actual>= cantidad:
+                self.dic_productos[producto]-=cantidad
+                return True
+            else:
+                return False
+        else:
+            return False
+    
+    def productos_bajo_stock(self, minimo):
+        lista_bajos=[]
+        for producto, cantidad in self.dic_productos.items():
+            if cantidad < minimo:
+                lista_bajos.append(producto)
+        return lista_bajos
+    
+inv= Inventario()
+
+inv.agregar_stock("aceite", 10)
+inv.agregar_stock("pan", 50)
+
+print(inv.restar_stock("pan", 20))
+print(inv.productos_bajo_stock(11))
