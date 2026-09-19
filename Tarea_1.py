@@ -132,6 +132,9 @@ Clase AnalizadorNumeros que: (1) tenga método es_par(numero) que retorne True/F
 (3) tenga método cantidad_pares_impares() que retorne una tupla (cant_pares, cant_impares).
 '''
 class AnalizadorNumeros():
+    def __init__(self):
+        self.numeros_pares_impares={'Pares':[], 'Impares':[]}
+
     def es_par(self, numero):
         if numero%2==0:
             return True
@@ -139,17 +142,23 @@ class AnalizadorNumeros():
             return False
     
     def separar(self, *numeros):
-        numeros_pares_impares={'Pares':[], 'Impares':[]}
+        self.numeros_pares_impares={'Pares':[], 'Impares':[]}
         for numero in numeros:
             if self.es_par(numero):
-                numeros_pares_impares['Pares'].append(numero)
+                self.numeros_pares_impares['Pares'].append(numero)
             else:
-                numeros_pares_impares['Impares'].append(numero)
-        return numeros_pares_impares
+                self.numeros_pares_impares['Impares'].append(numero)
+        return self.numeros_pares_impares
+
+    def cantidad_pares_impares(self):
+        cantidad_pares=len(self.numeros_pares_impares['Pares'])
+        cantidad_impares=len(self.numeros_pares_impares['Impares'])
+        return cantidad_pares, cantidad_impares
     
 todos= AnalizadorNumeros()
 
-todos.separar(4,5,6,7,8,9,10,11,12)
+print(todos.separar(4,5,6,7,8,9,10,11,12))
+print(todos.cantidad_pares_impares())
 
 '''
 ======================================
@@ -183,8 +192,8 @@ gt=GestorTemperatura()
 
 gt.registrar_temperatura(25)
 gt.registrar_multiples(15,16,15,14,30)
-print("La temperatura maxima es: ", gt.minima())
-print("La temperatura minima es: ", gt.maxima())
+print("La temperatura minima es: ", gt.minima())
+print("La temperatura maxima es: ", gt.maxima())
 print("El promedio es: ", gt.promedio())
 
 
@@ -399,3 +408,92 @@ cf.agregar_elemento("mercurio")
 
 print("el elemnto mas frecuente es: ", cf.elemento_mas_frecuente())
 print("Se reite:", cf.frecuencia_elemento("mercurio"), " veces")
+
+''''
+======================================
+12) SELECTOR DE RANGO CON TUPLAS
+======================================
+Clase SelectorRango que: 
+(1) tenga método crear_rango(inicio, fin) que retorne una tupla con números en ese rango; 
+(2) tenga método elementos_en_multiples_rangos(*rangos) que reciba múltiples tuplas (inicio,fin) y retorne una lista combinada 
+sin duplicados usando un conjunto.
+'''
+class SelectorRango():
+    def crear_rango(self, inicio, fin):
+        return tuple(range(inicio, fin+1))
+    
+    def elementos_en_multiples_rangos(self, *rangos):
+        conjunto=set()
+        for inicio, fin in rangos:
+            for num in range(inicio, fin+1):
+                conjunto.add(num)
+        return list(conjunto)
+    
+
+sr=SelectorRango()
+
+print(sr.crear_rango(1, 10))
+print(sr.elementos_en_multiples_rangos((1, 5), (4, 8),(3, 20)))
+
+''''
+======================================
+13) Combinador de listas
+======================================
+Clase CombinadorListas que: 
+(1) tenga método intercalar(lista1, lista2) que retorne una lista alternando elementos de ambas; 
+(2) tenga método intercalar_multiples(*listas) que reutilice para varias listas.
+'''
+class CombinadorListas():
+    def intercalar(self, lista1, lista2):
+        resultado=[]
+        largo1=len(lista1)
+        largo2=len(lista2)
+        lar_maximo=largo1
+        
+        if largo2>lar_maximo:
+            lar_maximo=largo2
+        
+        for i in range(lar_maximo):
+            if i<len(lista1):
+                resultado.append(lista1[i])
+            if i <len(lista2):
+                resultado.append(lista2[i])
+        return resultado
+    
+    def intercalar_multiples(self, *listas):
+        lar_maximo=0
+        resultados=[]
+        
+        for lista in listas:
+            if len(lista)>lar_maximo:
+                lar_maximo=len(lista)
+
+        for i in range(lar_maximo):
+            for lista in listas:
+                if i < len(lista):
+                    resultados.append(lista[i])
+        return resultados
+    
+cl=CombinadorListas()
+
+print(cl.intercalar([1,3,5,7,9], [2,4,6,8,10]))
+print(cl.intercalar_multiples([1,3,5,7,9], [2,4,6,8,10], [11,13,15,17,19], [12,14,16,18,20]))
+
+''''
+======================================
+14) Mapeo de estudiantes a notas
+======================================
+Clase RegistroNotas que: 
+(1) tenga método registrar(estudiante, nota) que guarde en un diccionario; 
+(2) tenga método estudiantes_aprobados(nota_minima) que retorne lista de estudiantes; 
+(3) tenga método mejor_estudiante() que retorne nombre y nota del que tiene mayor calificación.
+'''
+class RegistroNotas():
+    def registrar(estudiante, nota):
+        pass
+    
+    def estudiantes_aprobados(nota_minima):
+        pass
+    
+    def mejor_estudiante():
+        pass
