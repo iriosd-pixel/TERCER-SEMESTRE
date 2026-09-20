@@ -3,6 +3,11 @@
 ======================================
 1) Validador de notas con promedio
 ======================================
+Clase Calificador que: 
+(1) tenga método validar_nota(nota) que retorne True si 0 ≤ nota ≤ 100, False en caso contrario; 
+(2) tenga método cargar_notas(*args) que reciba múltiples notas, las valide, agregue solo las válidas a una lista interna, y retorne esa lista; 
+(3) tenga método promedio() que retorne el promedio de notas almacenadas.
+
 '''
 #-------- ENTENDER EL PROBLEMA --------
 #----Entrada: una o varias notas numericas.
@@ -35,6 +40,8 @@ class Calificador():
         return  self.notas
     
     def promedio(self):
+        if not self.notas:
+            return 0
         return sum(self.notas)/len(self.notas)
     
 
@@ -48,10 +55,33 @@ print(calificador_notas.cargar_notas(85, 92, 110, 78, -5, 88))
 print(calificador_notas.promedio())
 
 '''
+EJERCICIO PARECIDO 1: Control de asistencia
+Clase ControlAsistencia que:
+(1) tenga registrar_asistencia(estado) para guardar "presente" o "falta";
+(2) tenga contar_presentes() para retornar la cantidad de presentes;
+(3) tenga porcentaje_asistencia() para retornar el porcentaje de presentes.
+'''
+class ControlAsistencia:
+    def __init__(self):
+        pass
+
+    def registrar_asistencia(self, estado):
+        pass
+
+    def contar_presentes(self):
+        pass
+
+    def porcentaje_asistencia(self):
+        pass
+
+'''
 ======================================
 2) Contador de palabras únicas
 ======================================
-
+Clase AnalizadorTexto que: 
+(1) tenga método agregar_palabra(palabra) que agregue la palabra a un conjunto (para evitar duplicados) y a una lista (para el orden); 
+(2) tenga método contar_palabras() que retorne cuántas palabras únicas hay; 
+(3) tenga método agregar_multiples(*args) que reutilice agregar_palabra para varios.
 '''
 #-------- ENTENDER EL PROBLEMA --------
 #----Entrada: una o varias palabras.
@@ -104,9 +134,33 @@ print( "EL conjutno  palabras es: ", analizar.conjunto)
 print("Las palbras total son: ", analizar.contar_palabras())
 
 '''
+EJERCICIO PARECIDO 2: Catalogo de peliculas
+Clase CatalogoPeliculas que:
+(1) tenga agregar_pelicula(titulo) para guardar titulos sin repetir;
+(2) tenga contar_peliculas() para retornar la cantidad de titulos;
+(3) tenga agregar_varias(*titulos) para registrar varias peliculas.
+'''
+class CatalogoPeliculas:
+    def __init__(self):
+        pass
+
+    def agregar_pelicula(self, titulo):
+        pass
+
+    def contar_peliculas(self):
+        pass
+
+    def agregar_varias(self, *titulos):
+        pass
+
+'''
 ======================================
 3) Gestor de compras con totales
 ======================================
+Clase CarroCompras que: 
+(1) tenga método agregar_articulo(nombre, precio) que guarde en un diccionario {nombre: precio}; 
+(2) tenga método total_carrito() que retorne la suma de todos los precios; 
+(3) tenga método articulos_por_rango(precio_min, precio_max) que retorne una lista con artículos dentro del rango.
 '''
 #-------- ENTENDER EL PROBLEMA --------
 #----Entrada: nombre y precio de productos.
@@ -157,9 +211,32 @@ print("EL total del carrito es: ", carro.total_carrito())
 print(carro.articulos_por_rango(1, 1.50))
 
 '''
+EJERCICIO PARECIDO 3: Registro de ventas
+Clase RegistroVentas que:
+(1) tenga registrar_venta(producto, valor) para guardar ventas;
+(2) tenga total_ventas() para retornar la suma de valores;
+(3) tenga ventas_mayores(minimo) para retornar productos con valor mayor o igual al minimo.
+'''
+class RegistroVentas:
+    def __init__(self):
+        pass
+
+    def registrar_venta(self, producto, valor):
+        pass
+
+    def total_ventas(self):
+        pass
+
+    def ventas_mayores(self, minimo):
+        pass
+
+'''
 ======================================
 4) Inversor de secuencias
 ======================================
+Clase InversorSecuencia que:
+(1) tenga método invertir_lista(lista) que retorne la lista invertida sin usar reversed() (usa manual con bucles); 
+(2) tenga método invertir_multiples(*listas) que reutilice el anterior para invertir varias listas y retorne un diccionario {lista_original: lista_invertida}.
 '''
 #-------- ENTENDER EL PROBLEMA --------
 #----Entrada: una o varias listas.
@@ -206,6 +283,26 @@ print(inversor.invertir_lista([1, 2, 3, 4]))
 print(inversor.invertir_multiples([1, 2, 3], ["a", "b", "c"]))
 
 '''
+EJERCICIO PARECIDO 4: Reversor de palabras
+Clase ReversorPalabras que:
+(1) tenga invertir_palabra(palabra) para retornar una palabra al reves;
+(2) tenga invertir_frase(frase) para invertir cada palabra de una frase;
+(3) tenga invertir_varias(*palabras) para trabajar con varias palabras.
+'''
+class ReversorPalabras:
+    def __init__(self):
+        pass
+
+    def invertir_palabra(self, palabra):
+        pass
+
+    def invertir_frase(self, frase):
+        pass
+
+    def invertir_varias(self, *palabras):
+        pass
+
+'''
 ======================================
 5) Detector de números pares e impares
 ======================================
@@ -228,7 +325,7 @@ Clase AnalizadorNumeros que: (1) tenga método es_par(numero) que retorne True/F
 #-------- ESCRIBIR EL CODIGO --------
 class AnalizadorNumeros():
     def __init__(self):
-        self.numeros_pares_impares={'Pares':[], 'Impares':[]}
+        self.numeros_pares_impares={'pares':[], 'impares':[]}
 
     def es_par(self, numero):
         if numero%2==0:
@@ -237,17 +334,17 @@ class AnalizadorNumeros():
             return False
     
     def separar(self, *numeros):
-        self.numeros_pares_impares={'Pares':[], 'Impares':[]}
+        self.numeros_pares_impares={'pares':[], 'impares':[]}
         for numero in numeros:
             if self.es_par(numero):
-                self.numeros_pares_impares['Pares'].append(numero)
+                self.numeros_pares_impares['pares'].append(numero)
             else:
-                self.numeros_pares_impares['Impares'].append(numero)
+                self.numeros_pares_impares['impares'].append(numero)
         return self.numeros_pares_impares
 
     def cantidad_pares_impares(self):
-        cantidad_pares=len(self.numeros_pares_impares['Pares'])
-        cantidad_impares=len(self.numeros_pares_impares['Impares'])
+        cantidad_pares=len(self.numeros_pares_impares['pares'])
+        cantidad_impares=len(self.numeros_pares_impares['impares'])
         return cantidad_pares, cantidad_impares
     
 
@@ -260,6 +357,26 @@ todos= AnalizadorNumeros()
 
 print(todos.separar(4,5,6,7,8,9,10,11,12))
 print(todos.cantidad_pares_impares())
+
+'''
+EJERCICIO PARECIDO 5: Clasificador de numeros positivos y negativos
+Clase ClasificadorNumeros que:
+(1) tenga es_positivo(numero) que retorne True o False;
+(2) tenga separar(*numeros) que retorne positivos y negativos;
+(3) tenga cantidad_por_tipo() que retorne las cantidades de cada grupo.
+'''
+class ClasificadorNumeros:
+    def __init__(self):
+        pass
+
+    def es_positivo(self, numero):
+        pass
+
+    def separar(self, *numeros):
+        pass
+
+    def cantidad_por_tipo(self):
+        pass
 
 '''
 ======================================
@@ -315,6 +432,32 @@ gt.registrar_multiples(15,16,15,14,30)
 print("La temperatura minima es: ", gt.minima())
 print("La temperatura maxima es: ", gt.maxima())
 print("El promedio es: ", gt.promedio())
+
+'''
+EJERCICIO PARECIDO 6: Registro de lluvias
+Clase RegistroLluvias que:
+(1) tenga registrar_lluvia(cantidad) para guardar datos;
+(2) tenga minima(), maxima() y promedio() para obtener estadisticas;
+(3) tenga registrar_multiples(*cantidades) para registrar varios datos.
+'''
+class RegistroLluvias:
+    def __init__(self):
+        pass
+
+    def registrar_lluvia(self, cantidad):
+        pass
+
+    def minima(self):
+        pass
+
+    def maxima(self):
+        pass
+
+    def promedio(self):
+        pass
+
+    def registrar_multiples(self, *cantidades):
+        pass
 
 
 '''
@@ -373,6 +516,26 @@ Gp.agregar_persona("Rosa", 75)
 
 print("La edad minima es 18: ", Gp.personas_mayores(18))
 print("El promedio de edades es: ", Gp.edad_promedio())
+
+'''
+EJERCICIO PARECIDO 7: Directorio de empleados
+Clase DirectorioEmpleados que:
+(1) tenga agregar_empleado(nombre, salario) para guardar datos;
+(2) tenga empleados_con_salario(minimo) para retornar nombres;
+(3) tenga salario_promedio() para retornar el promedio.
+'''
+class DirectorioEmpleados:
+    def __init__(self):
+        pass
+
+    def agregar_empleado(self, nombre, salario):
+        pass
+
+    def empleados_con_salario(self, minimo):
+        pass
+
+    def salario_promedio(self):
+        pass
 
 '''
 ======================================
@@ -441,6 +604,26 @@ eq.agregar_jugador("Barcelona", "Luis")
 print(eq.dic_equipos)
 print(eq.equipo_mayor_integrantes())
 
+'''
+EJERCICIO PARECIDO 8: Organizador de cursos
+Clase OrganizadorCursos que:
+(1) tenga crear_curso(nombre) para iniciar un curso vacio;
+(2) tenga inscribir_estudiante(curso, estudiante) para agregar estudiantes;
+(3) tenga curso_con_mas_estudiantes() para retornar el nombre del curso mayor.
+'''
+class OrganizadorCursos:
+    def __init__(self):
+        pass
+
+    def crear_curso(self, nombre):
+        pass
+
+    def inscribir_estudiante(self, curso, estudiante):
+        pass
+
+    def curso_con_mas_estudiantes(self):
+        pass
+
 
 '''
 ======================================
@@ -503,6 +686,26 @@ print("Analisis 2",As.contar_por_tipo("hola mundo, 123"))
 print("EL texto mas largo es: ", As.texto_mas_largo)
 
 '''
+EJERCICIO PARECIDO 9: Analizador de contrasenas
+Clase AnalizadorContrasena que:
+(1) tenga es_mayuscula(caracter) que retorne True o False;
+(2) tenga contar_por_tipo(clave) para contar mayusculas, minusculas y digitos;
+(3) tenga clave_mas_larga() para retornar la clave mas extensa analizada.
+'''
+class AnalizadorContrasena:
+    def __init__(self):
+        pass
+
+    def es_mayuscula(self, caracter):
+        pass
+
+    def contar_por_tipo(self, clave):
+        pass
+
+    def clave_mas_larga(self):
+        pass
+
+'''
 ======================================
 10) Gestor de tareas con prioridad
 ======================================
@@ -555,12 +758,32 @@ class tareas():
 # tareas_prioritarias()         | muestra las tareas altas
 ta= tareas()
 
-ta.agregar_tarea("pasar materia de proramacion", "alta")
-ta.agregar_tarea("termianr ecuaciones", "media")
-ta.agregar_tarea("estudiar ecuacones", "alta")
+ta.agregar_tarea("pasar materia de programacion", "alta")
+ta.agregar_tarea("terminar ecuaciones", "media")
+ta.agregar_tarea("estudiar ecuaciones", "alta")
 
 print(ta.tareas_prioritarias())
-print(ta.eliminar_completada("termianr ecuaciones"))
+print(ta.eliminar_completada("terminar ecuaciones"))
+
+'''
+EJERCICIO PARECIDO 10: Lista de compras con urgencia
+Clase ListaCompras que:
+(1) tenga agregar_producto(nombre, urgencia) para guardar productos;
+(2) tenga productos_urgentes() para retornar los de urgencia "alta";
+(3) tenga eliminar_producto(nombre) para eliminar un producto.
+'''
+class ListaCompras:
+    def __init__(self):
+        pass
+
+    def agregar_producto(self, nombre, urgencia):
+        pass
+
+    def productos_urgentes(self):
+        pass
+
+    def eliminar_producto(self, nombre):
+        pass
 
 ''''
 ======================================
@@ -628,6 +851,26 @@ cf.agregar_elemento("mercurio")
 print("el elemnto mas frecuente es: ", cf.elemento_mas_frecuente())
 print("Se reite:", cf.frecuencia_elemento("mercurio"), " veces")
 
+'''
+EJERCICIO PARECIDO 11: Contador de votos
+Clase ContadorVotos que:
+(1) tenga registrar_voto(candidato) para contar votos;
+(2) tenga candidato_ganador() para retornar quien tiene mas votos;
+(3) tenga votos_de(candidato) para retornar sus votos.
+'''
+class ContadorVotos:
+    def __init__(self):
+        pass
+
+    def registrar_voto(self, candidato):
+        pass
+
+    def candidato_ganador(self):
+        pass
+
+    def votos_de(self, candidato):
+        pass
+
 ''''
 ======================================
 12) SELECTOR DE RANGO CON TUPLAS
@@ -672,6 +915,26 @@ sr=SelectorRango()
 
 print(sr.crear_rango(1, 10))
 print(sr.elementos_en_multiples_rangos((1, 5), (4, 8),(3, 20)))
+
+'''
+EJERCICIO PARECIDO 12: Generador de secuencias
+Clase GeneradorSecuencias que:
+(1) tenga crear_secuencia(inicio, fin) para retornar una tupla de numeros;
+(2) tenga unir_secuencias(*secuencias) para combinar secuencias sin repetidos;
+(3) tenga cantidad_elementos() para retornar cuantos elementos hay.
+'''
+class GeneradorSecuencias:
+    def __init__(self):
+        pass
+
+    def crear_secuencia(self, inicio, fin):
+        pass
+
+    def unir_secuencias(self, *secuencias):
+        pass
+
+    def cantidad_elementos(self):
+        pass
 
 ''''
 ======================================
@@ -737,6 +1000,26 @@ cl=CombinadorListas()
 print(cl.intercalar([1,3,5,7,9], [2,4,6,8,10]))
 print(cl.intercalar_multiples([1,3,5,7,9], [2,4,6,8,10], [11,13,15,17,19], [12,14,16,18,20]))
 
+'''
+EJERCICIO PARECIDO 13: Fusionador de turnos
+Clase FusionadorTurnos que:
+(1) tenga combinar(turno1, turno2) para alternar personas de dos turnos;
+(2) tenga combinar_varios(*turnos) para alternar varios turnos;
+(3) tenga total_personas() para retornar la cantidad combinada.
+'''
+class FusionadorTurnos:
+    def __init__(self):
+        pass
+
+    def combinar(self, turno1, turno2):
+        pass
+
+    def combinar_varios(self, *turnos):
+        pass
+
+    def total_personas(self):
+        pass
+
 ''''
 ======================================
 14) Mapeo de estudiantes a notas
@@ -783,7 +1066,7 @@ class RegistroNotas():
             if nota > mejor_estudiante:
                 mejor_estudiante=nota
                 nombre_estudiante=estudiante
-        return nombre_estudiante
+        return nombre_estudiante, mejor_estudiante
     
 
 #-------- PRUEBA DE ESCRITORIO --------
@@ -800,6 +1083,26 @@ rn.registrar("Ismael", 10)
 
 print(rn.estudiantes_aprobados(5))
 print(rn.mejor_estudiante())
+
+'''
+EJERCICIO PARECIDO 14: Registro de deportistas
+Clase RegistroDeportistas que:
+(1) tenga registrar(nombre, puntos) para guardar datos;
+(2) tenga deportistas_destacados(puntos_minimos) para retornar nombres;
+(3) tenga mejor_deportista() para retornar nombre y puntos mayores.
+'''
+class RegistroDeportistas:
+    def __init__(self):
+        pass
+
+    def registrar(self, nombre, puntos):
+        pass
+
+    def deportistas_destacados(self, puntos_minimos):
+        pass
+
+    def mejor_deportista(self):
+        pass
 
 ''''
 ======================================
@@ -853,6 +1156,26 @@ df=DivisorFinder()
 print(df.encontrar_divisores(10))
 print(df.es_perfecto(6))
 print(df.encontrar_multiples_divisores(8,9,10,20))
+
+'''
+EJERCICIO PARECIDO 15: Buscador de multiplos
+Clase BuscadorMultiplos que:
+(1) tenga encontrar_multiplos(numero, limite) para retornar los multiplos;
+(2) tenga es_multiplo(numero, posible_multiplo) que retorne True o False;
+(3) tenga encontrar_varios(*numeros) para retornar un diccionario de resultados.
+'''
+class BuscadorMultiplos:
+    def __init__(self):
+        pass
+
+    def encontrar_multiplos(self, numero, limite):
+        pass
+
+    def es_multiplo(self, numero, posible_multiplo):
+        pass
+
+    def encontrar_varios(self, *numeros):
+        pass
 
 ''''
 ======================================
@@ -926,6 +1249,23 @@ print("Palabra 'Hola Mundo' (k=5) ->", resultado2)
 print("\n--- PRUEBA 3: Historial de codificaciones ---")
 print("Historial registrado:", codificador.historial)
 
+'''
+EJERCICIO PARECIDO 16: Transformador de texto
+Clase TransformadorTexto que:
+(1) tenga transformar_caracter(caracter) para cambiar un caracter segun una regla;
+(2) tenga transformar_texto(texto) para reutilizar el metodo en todo el texto;
+(3) tenga un atributo historial de transformaciones.
+'''
+class TransformadorTexto:
+    def __init__(self):
+        pass
+
+    def transformar_caracter(self, caracter):
+        pass
+
+    def transformar_texto(self, texto):
+        pass
+
 ''''
 ======================================
 17: Grupo de edades
@@ -957,7 +1297,7 @@ class AgrupadorEdades():
         if edad>=65:
             return "mayor"
         elif edad <65 and edad>=18:
-            return "bebe"
+            return "adulto"
         elif edad<18 and edad >=12:
             return "adolescente"
         elif edad <12 and edad>=0:
@@ -991,6 +1331,26 @@ ae=AgrupadorEdades()
 print( ae.agrupar_por_categoria(19))
 print(ae.agrupar_por_categoria(5,10,18,50,14))
 print(ae.edad_promedio_categoria("adolescente"))
+
+'''
+EJERCICIO PARECIDO 17: Clasificador de estaturas
+Clase ClasificadorEstaturas que:
+(1) tenga clasificar_estatura(estatura) para retornar una categoria;
+(2) tenga agrupar_por_categoria(*estaturas) para retornar un diccionario;
+(3) tenga promedio_categoria(categoria) para retornar el promedio del grupo.
+'''
+class ClasificadorEstaturas:
+    def __init__(self):
+        pass
+
+    def clasificar_estatura(self, estatura):
+        pass
+
+    def agrupar_por_categoria(self, *estaturas):
+        pass
+
+    def promedio_categoria(self, categoria):
+        pass
 
 ''''
 ======================================
@@ -1063,6 +1423,23 @@ print(
 )
 print("Ej 18 - Lista de distancias calculadas:", cd.lista_distancias)
 
+'''
+EJERCICIO PARECIDO 18: Calculador de areas
+Clase CalculadorAreas que:
+(1) tenga area_rectangulo(base, altura) para calcular un area;
+(2) tenga rectangulo_mayor(*rectangulos) para retornar el de mayor area;
+(3) tenga un atributo lista para guardar las areas calculadas.
+'''
+class CalculadorAreas:
+    def __init__(self):
+        pass
+
+    def area_rectangulo(self, base, altura):
+        pass
+
+    def rectangulo_mayor(self, *rectangulos):
+        pass
+
 ''''
 ======================================
 19: Inventario de productos
@@ -1125,6 +1502,26 @@ inv.agregar_stock("aceite", 10)
 inv.agregar_stock("pan", 50)
 print(inv.restar_stock("pan", 20))
 print(inv.productos_bajo_stock(11))
+
+'''
+EJERCICIO PARECIDO 19: Biblioteca de libros
+Clase Biblioteca que:
+(1) tenga agregar_ejemplares(libro, cantidad) para guardar existencias;
+(2) tenga prestar_libro(libro, cantidad) que disminuya y retorne True o False;
+(3) tenga libros_pocos_ejemplares(minimo) para retornar una lista.
+'''
+class Biblioteca:
+    def __init__(self):
+        pass
+
+    def agregar_ejemplares(self, libro, cantidad):
+        pass
+
+    def prestar_libro(self, libro, cantidad):
+        pass
+
+    def libros_pocos_ejemplares(self, minimo):
+        pass
 
 ''''
 ======================================
@@ -1192,3 +1589,23 @@ print("\n--- PRUEBA 2: Agrupar palabras por longitud ---")
 print(analizador.agrupar_por_longitud("hola sol luna"))
 print("\n--- PRUEBA 3: Palabras únicas ---")
 print(analizador.palabras_unicas(texto_ejemplo))
+
+'''
+EJERCICIO PARECIDO 20: Buscador de frases
+Clase BuscadorFrases que:
+(1) tenga buscar_fragmento(texto, fragmento) para retornar palabras que contengan el fragmento;
+(2) tenga agrupar_por_tamano(texto) para retornar palabras agrupadas por longitud;
+(3) tenga terminos_unicos(texto) para retornar palabras sin repetir.
+'''
+class BuscadorFrases:
+    def __init__(self):
+        pass
+
+    def buscar_fragmento(self, texto, fragmento):
+        pass
+
+    def agrupar_por_tamano(self, texto):
+        pass
+
+    def terminos_unicos(self, texto):
+        pass
