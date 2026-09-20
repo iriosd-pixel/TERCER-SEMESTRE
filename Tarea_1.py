@@ -4,6 +4,21 @@
 1) Validador de notas con promedio
 ======================================
 '''
+#-------- ENTENDER EL PROBLEMA --------
+#----Entrada: una o varias notas numericas.
+#----Proceso: validar que cada nota este entre 0 y 100, guardar las validas y calcular su promedio.
+#----Salida: lista de notas validas y promedio.
+
+#-------- BOSQUEJO A MANO --------
+# notas: 85, 92, 110, 78, -5, 88
+# 85 y 92 son validas; 110 y -5 no se guardan.
+# notas finales: [85, 92, 78, 88]
+# promedio: 343 / 4 = 85.75
+
+#-------- DESCUBRIR EL PATRON --------
+# validar_nota revisa cada valor antes de que cargar_notas lo agregue a la lista.
+
+#-------- ESCRIBIR EL CODIGO --------
 class Calificador():
     def __init__(self):
         self.notas=[]
@@ -22,10 +37,15 @@ class Calificador():
     def promedio(self):
         return sum(self.notas)/len(self.notas)
     
+
+#-------- PRUEBA DE ESCRITORIO --------
+# Linea                         | Resultado
+# ----------------------------- | ----------------------
+# cargar_notas(85, 92, 110...)  | [85, 92, 78, 88]
+# promedio()                    | 85.75
 calificador_notas= Calificador()
 print(calificador_notas.cargar_notas(85, 92, 110, 78, -5, 88))
 print(calificador_notas.promedio())
-
 
 '''
 ======================================
@@ -33,6 +53,20 @@ print(calificador_notas.promedio())
 ======================================
 
 '''
+#-------- ENTENDER EL PROBLEMA --------
+#----Entrada: una o varias palabras.
+#----Proceso: guardar una palabra solo si no se repite.
+#----Salida: lista y cantidad de palabras unicas.
+
+#-------- BOSQUEJO A MANO --------
+# "hola" -> se guarda.
+# "hola" -> ya existe, no se guarda otra vez.
+# "mundo" -> se guarda.
+
+#-------- DESCUBRIR EL PATRON --------
+# El conjunto revisa si la palabra existe y la lista conserva el orden.
+
+#-------- ESCRIBIR EL CODIGO --------
 class Analizador_Texto():
     def __init__(self):
         self.lista_palabras=[]
@@ -50,6 +84,13 @@ class Analizador_Texto():
         for palabra in args:
             self.agregar_palabra(palabra)
             
+
+#-------- PRUEBA DE ESCRITORIO --------
+# Linea                         | Resultado
+# ----------------------------- | ----------------------
+# agregar_palabra("Hola")       | se agrega a la lista
+# agregar_palabra("Hola")       | no se repite
+# contar_palabras()              | cantidad de palabras unicas
 analizar=Analizador_Texto()
 
 analizar.agregar_palabra("python")
@@ -67,6 +108,20 @@ print("Las palbras total son: ", analizar.contar_palabras())
 3) Gestor de compras con totales
 ======================================
 '''
+#-------- ENTENDER EL PROBLEMA --------
+#----Entrada: nombre y precio de productos.
+#----Proceso: guardar productos, sumar precios y filtrar por rango.
+#----Salida: total del carrito y lista de productos.
+
+#-------- BOSQUEJO A MANO --------
+# pan = 1.25 -> se guarda.
+# aceite = 1.00 -> se guarda.
+# total: 1.25 + 1.00 = 2.25.
+
+#-------- DESCUBRIR EL PATRON --------
+# El diccionario guarda el nombre del producto junto con su precio.
+
+#-------- ESCRIBIR EL CODIGO --------
 class Carro_Compras:
     def __init__(self):
         self.lista_productos={}
@@ -85,6 +140,12 @@ class Carro_Compras:
                 
         return lista_articulos
     
+
+#-------- PRUEBA DE ESCRITORIO --------
+# Linea                         | Resultado
+# ----------------------------- | ----------------------
+# agregar_articulo("pan", 1.25) | pan queda guardado
+# total_carrito()                | suma los precios
 carro=Carro_Compras()
 
 carro.agregar_articulo("pan", 1.25)
@@ -100,6 +161,21 @@ print(carro.articulos_por_rango(1, 1.50))
 4) Inversor de secuencias
 ======================================
 '''
+#-------- ENTENDER EL PROBLEMA --------
+#----Entrada: una o varias listas.
+#----Proceso: recorrer cada lista y colocar sus elementos al reves.
+#----Salida: lista invertida o diccionario de listas invertidas.
+
+#-------- BOSQUEJO A MANO --------
+# lista: [1, 2, 3]
+# 1 -> [1]
+# 2 -> [2, 1]
+# 3 -> [3, 2, 1]
+
+#-------- DESCUBRIR EL PATRON --------
+# Cada elemento se coloca al inicio de una nueva lista.
+
+#-------- ESCRIBIR EL CODIGO --------
 class InversorSecuencia:
     def invertir_lista(self, lista):
         lista_invertida = []
@@ -118,6 +194,12 @@ class InversorSecuencia:
             resultados[llave]=valor
 
         return resultados
+
+#-------- PRUEBA DE ESCRITORIO --------
+# Linea                         | Resultado
+# ----------------------------- | ----------------------
+# invertir_lista([1, 2, 3])     | [3, 2, 1]
+# invertir_multiples(...)        | invierte cada lista
 inversor = InversorSecuencia()
 
 print(inversor.invertir_lista([1, 2, 3, 4]))
@@ -131,6 +213,19 @@ Clase AnalizadorNumeros que: (1) tenga método es_par(numero) que retorne True/F
 (2) tenga método separar(*numeros) que retorne un diccionario {'pares': [...], 'impares': [...]} reutilizando es_par; 
 (3) tenga método cantidad_pares_impares() que retorne una tupla (cant_pares, cant_impares).
 '''
+#-------- ENTENDER EL PROBLEMA --------
+#----Entrada: varios numeros.
+#----Proceso: revisar si cada numero es par o impar.
+#----Salida: diccionario y cantidades de pares e impares.
+
+#-------- BOSQUEJO A MANO --------
+# 4 % 2 = 0 -> es par.
+# 5 % 2 = 1 -> es impar.
+
+#-------- DESCUBRIR EL PATRON --------
+# El residuo de dividir entre 2 permite saber si un numero es par.
+
+#-------- ESCRIBIR EL CODIGO --------
 class AnalizadorNumeros():
     def __init__(self):
         self.numeros_pares_impares={'Pares':[], 'Impares':[]}
@@ -155,6 +250,12 @@ class AnalizadorNumeros():
         cantidad_impares=len(self.numeros_pares_impares['Impares'])
         return cantidad_pares, cantidad_impares
     
+
+#-------- PRUEBA DE ESCRITORIO --------
+# Linea                         | Resultado
+# ----------------------------- | ----------------------
+# separar(4, 5, 6)              | pares [4, 6], impares [5]
+# cantidad_pares_impares()      | (2, 1)
 todos= AnalizadorNumeros()
 
 print(todos.separar(4,5,6,7,8,9,10,11,12))
@@ -168,6 +269,19 @@ Clase GestorTemperatura que: (1) tenga método registrar_temperatura(temp) que g
 (2) tenga método minima()`, `maxima()`, `promedio() que calculen estadísticas; 
 (3) tenga método registrar_multiples(*temps) que reutilice el registro para varias temperaturas.
 '''
+#-------- ENTENDER EL PROBLEMA --------
+#----Entrada: una o varias temperaturas.
+#----Proceso: guardar temperaturas y calcular minima, maxima y promedio.
+#----Salida: las tres estadisticas.
+
+#-------- BOSQUEJO A MANO --------
+# temperaturas: [25, 15, 30]
+# minima: 15; maxima: 30; promedio: 70 / 3.
+
+#-------- DESCUBRIR EL PATRON --------
+# Una lista permite usar min(), max(), sum() y len().
+
+#-------- ESCRIBIR EL CODIGO --------
 class GestorTemperatura():
     def __init__(self):
         self.lista_temperaturas=[]
@@ -188,6 +302,12 @@ class GestorTemperatura():
         for temp in temps:
             self.registrar_temperatura(temp)
             
+
+#-------- PRUEBA DE ESCRITORIO --------
+# Linea                         | Resultado
+# ----------------------------- | ----------------------
+# registrar_multiples(25,15,30) | guarda tres temperaturas
+# promedio()                    | 23.33
 gt=GestorTemperatura()
 
 gt.registrar_temperatura(25)
@@ -206,6 +326,19 @@ Clase GestorPersonas que: (1) tenga método agregar_persona(nombre, edad) que gu
 (3) tenga método edad_promedio() que retorne el promedio de edades.
 
 '''
+#-------- ENTENDER EL PROBLEMA --------
+#----Entrada: nombre y edad de personas.
+#----Proceso: guardar datos, buscar mayores y calcular promedio.
+#----Salida: nombres de mayores y promedio de edades.
+
+#-------- BOSQUEJO A MANO --------
+# Ana = 25 -> cumple edad minima de 18.
+# Carlos = 15 -> no cumple edad minima de 18.
+
+#-------- DESCUBRIR EL PATRON --------
+# El diccionario relaciona cada nombre con su edad.
+
+#-------- ESCRIBIR EL CODIGO --------
 class GestorPersonas():
     def __init__(self):
         self.persona={}
@@ -225,6 +358,12 @@ class GestorPersonas():
         cantidad_personas=len(self.persona)
         return total_edades/cantidad_personas
     
+
+#-------- PRUEBA DE ESCRITORIO --------
+# Linea                         | Resultado
+# ----------------------------- | ----------------------
+# personas_mayores(18)          | lista de nombres mayores
+# edad_promedio()               | promedio de todas las edades
 Gp= GestorPersonas()
 
 Gp.agregar_persona("Ismael", 19)
@@ -244,6 +383,20 @@ Clase Equipos que:
 (2) tenga método agregar_jugador(equipo, jugador) que añada el jugador al equipo; 
 (3) tenga método equipo_mayor_integrantes() que retorne el nombre del equipo con más jugadores.
 '''
+#-------- ENTENDER EL PROBLEMA --------
+#----Entrada: equipos y nombres de jugadores.
+#----Proceso: crear equipos, agregar jugadores y comparar cantidades.
+#----Salida: nombre del equipo con mas integrantes.
+
+#-------- BOSQUEJO A MANO --------
+# Emelec: [Ana, Luis, Sol]
+# Barcelona: [Carlos, Rosa]
+# Emelec tiene mas jugadores.
+
+#-------- DESCUBRIR EL PATRON --------
+# El diccionario guarda cada equipo con una lista de jugadores.
+
+#-------- ESCRIBIR EL CODIGO --------
 class Equipos():
     def __init__(self):
         self.dic_equipos={}
@@ -266,6 +419,12 @@ class Equipos():
                 equipo_lider=equipo
         return equipo_lider
 
+
+#-------- PRUEBA DE ESCRITORIO --------
+# Linea                         | Resultado
+# ----------------------------- | ----------------------
+# crear_equipo("Emelec")        | crea una lista vacia
+# equipo_mayor_integrantes()    | equipo con mas jugadores
 eq=Equipos()
 
 eq.crear_equipo("Emelec")
@@ -291,6 +450,21 @@ Clase AnalizadorString que: (1) tenga método solo_vocales(letra) que retorne Tr
 (2) tenga método contar_por_tipo(texto) que retorne un diccionario {'vocales': cant, 'consonantes': cant, 'digitos': cant} reutilizando métodos; 
 (3) tenga atributo que guarde el texto más largo analizado.
 '''
+#-------- ENTENDER EL PROBLEMA --------
+#----Entrada: un texto.
+#----Proceso: contar vocales, consonantes y digitos.
+#----Salida: diccionario de cantidades y texto mas largo.
+
+#-------- BOSQUEJO A MANO --------
+# "hola 1"
+# vocales: o, a -> 2
+# consonantes: h, l -> 2
+# digitos: 1 -> 1
+
+#-------- DESCUBRIR EL PATRON --------
+# Se revisa cada caracter y se usa solo_vocales para las vocales.
+
+#-------- ESCRIBIR EL CODIGO --------
 class AnalizadorString():
     def __init__(self):
         self.texto_mas_largo=""
@@ -315,6 +489,12 @@ class AnalizadorString():
             self.texto_mas_largo=texto
         return contadores
 
+
+#-------- PRUEBA DE ESCRITORIO --------
+# Linea                         | Resultado
+# ----------------------------- | ----------------------
+# contar_por_tipo("hola 1")     | vocales 2, consonantes 2, digitos 1
+# texto_mas_largo               | guarda el texto mas extenso
 As=AnalizadorString()
 
 print("Analisis 1",As.contar_por_tipo("hola como estas Ismael? tienes 19 años me gusta el numero 11"))
@@ -331,6 +511,19 @@ print("EL texto mas largo es: ", As.texto_mas_largo)
 2. Tenga un método `tareas_prioritarias()` que retorne únicamente las tareas cuya prioridad sea **alta**.
 3. Tenga un método `eliminar_completada(descripcion)` que elimine de la lista una tarea según su descripción.
 '''
+#-------- ENTENDER EL PROBLEMA --------
+#----Entrada: descripcion y prioridad de tareas.
+#----Proceso: guardar tareas, buscar las altas y eliminar una.
+#----Salida: lista de tareas prioritarias o actualizada.
+
+#-------- BOSQUEJO A MANO --------
+# ("estudiar", "alta") -> se guarda.
+# La prioridad "alta" aparece en tareas_prioritarias().
+
+#-------- DESCUBRIR EL PATRON --------
+# Cada tarea se guarda como una tupla dentro de una lista.
+
+#-------- ESCRIBIR EL CODIGO --------
 class tareas():
     def __init__(self):
         self.lista_tareas=[]
@@ -354,6 +547,12 @@ class tareas():
                 break
         return self.lista_tareas
 
+
+#-------- PRUEBA DE ESCRITORIO --------
+# Linea                         | Resultado
+# ----------------------------- | ----------------------
+# agregar_tarea("estudiar","alta") | se guarda la tarea
+# tareas_prioritarias()         | muestra las tareas altas
 ta= tareas()
 
 ta.agregar_tarea("pasar materia de proramacion", "alta")
@@ -372,6 +571,20 @@ Crear una clase `ContadorFrecuencia` que:
 2. Tenga un método `elemento_mas_frecuente()` que retorne el elemento que tenga la mayor frecuencia.
 3. Tenga un método `frecuencia_elemento(elemento)` que retorne cuántas veces aparece un elemento.
 '''
+#-------- ENTENDER EL PROBLEMA --------
+#----Entrada: elementos que pueden repetirse.
+#----Proceso: contar cada elemento dentro de un diccionario.
+#----Salida: elemento mas frecuente y su cantidad.
+
+#-------- BOSQUEJO A MANO --------
+# "sol" -> contador 1.
+# "luna" -> contador 1.
+# "sol" -> contador 2.
+
+#-------- DESCUBRIR EL PATRON --------
+# El diccionario guarda cada elemento como clave y su cantidad como valor.
+
+#-------- ESCRIBIR EL CODIGO --------
 class ContadorFrecuencia():
     def __init__(self):
         self.lista_elementos={}
@@ -397,6 +610,12 @@ class ContadorFrecuencia():
                 return cantidad
         return 0
 
+
+#-------- PRUEBA DE ESCRITORIO --------
+# Linea                         | Resultado
+# ----------------------------- | ----------------------
+# agregar_elemento("sol")       | sol: 1
+# frecuencia_elemento("sol")    | devuelve su cantidad
 cf=ContadorFrecuencia()
 
 cf.agregar_elemento("mercurio")
@@ -418,6 +637,19 @@ Clase SelectorRango que:
 (2) tenga método elementos_en_multiples_rangos(*rangos) que reciba múltiples tuplas (inicio,fin) y retorne una lista combinada 
 sin duplicados usando un conjunto.
 '''
+#-------- ENTENDER EL PROBLEMA --------
+#----Entrada: inicio y fin de uno o varios rangos.
+#----Proceso: crear numeros de los rangos y quitar repetidos.
+#----Salida: tupla o lista de numeros.
+
+#-------- BOSQUEJO A MANO --------
+# inicio = 1, fin = 3.
+# resultado: (1, 2, 3).
+
+#-------- DESCUBRIR EL PATRON --------
+# range() genera los numeros y un conjunto elimina los repetidos.
+
+#-------- ESCRIBIR EL CODIGO --------
 class SelectorRango():
     def crear_rango(self, inicio, fin):
         return tuple(range(inicio, fin+1))
@@ -430,6 +662,12 @@ class SelectorRango():
         return list(conjunto)
     
 
+
+#-------- PRUEBA DE ESCRITORIO --------
+# Linea                         | Resultado
+# ----------------------------- | ----------------------
+# crear_rango(1, 3)             | (1, 2, 3)
+# rangos (1,3) y (2,4)          | [1, 2, 3, 4]
 sr=SelectorRango()
 
 print(sr.crear_rango(1, 10))
@@ -443,6 +681,20 @@ Clase CombinadorListas que:
 (1) tenga método intercalar(lista1, lista2) que retorne una lista alternando elementos de ambas; 
 (2) tenga método intercalar_multiples(*listas) que reutilice para varias listas.
 '''
+#-------- ENTENDER EL PROBLEMA --------
+#----Entrada: dos o mas listas.
+#----Proceso: alternar los elementos de cada lista.
+#----Salida: una lista combinada.
+
+#-------- BOSQUEJO A MANO --------
+# lista1: [1, 3]
+# lista2: [2, 4]
+# resultado: [1, 2, 3, 4].
+
+#-------- DESCUBRIR EL PATRON --------
+# Se usa el mismo indice para tomar un elemento de cada lista.
+
+#-------- ESCRIBIR EL CODIGO --------
 class CombinadorListas():
     def intercalar(self, lista1, lista2):
         resultado=[]
@@ -474,6 +726,12 @@ class CombinadorListas():
                     resultados.append(lista[i])
         return resultados
     
+
+#-------- PRUEBA DE ESCRITORIO --------
+# Linea                         | Resultado
+# ----------------------------- | ----------------------
+# intercalar([1,3], [2,4])      | [1, 2, 3, 4]
+# intercalar_multiples(...)     | combina todas las listas
 cl=CombinadorListas()
 
 print(cl.intercalar([1,3,5,7,9], [2,4,6,8,10]))
@@ -488,6 +746,19 @@ Clase RegistroNotas que:
 (2) tenga método estudiantes_aprobados(nota_minima) que retorne lista de estudiantes; 
 (3) tenga método mejor_estudiante() que retorne nombre y nota del que tiene mayor calificación.
 '''
+#-------- ENTENDER EL PROBLEMA --------
+#----Entrada: estudiante y nota.
+#----Proceso: guardar notas, buscar aprobados y la nota mayor.
+#----Salida: lista de aprobados y mejor estudiante.
+
+#-------- BOSQUEJO A MANO --------
+# Ana = 8 -> aprueba con minimo 7.
+# Luis = 5 -> no aprueba con minimo 7.
+
+#-------- DESCUBRIR EL PATRON --------
+# Un diccionario relaciona el estudiante con su nota.
+
+#-------- ESCRIBIR EL CODIGO --------
 class RegistroNotas():
     def __init__(self):
         self.dic_notas={}
@@ -514,6 +785,12 @@ class RegistroNotas():
                 nombre_estudiante=estudiante
         return nombre_estudiante
     
+
+#-------- PRUEBA DE ESCRITORIO --------
+# Linea                         | Resultado
+# ----------------------------- | ----------------------
+# registrar("Ana", 8)          | guarda la nota de Ana
+# estudiantes_aprobados(7)      | lista de aprobados
 rn= RegistroNotas()
 
 rn.registrar("soria", 6)
@@ -533,6 +810,20 @@ Clase DivisorFinder que:
 (2) tenga método es_perfecto(numero) que retorne True si la suma de sus divisores (excepto él mismo) es igual a él; 
 (3) tenga método encontrar_multiples_divisores(*numeros) que retorne un diccionario {número: tupla_divisores}.
 '''
+#-------- ENTENDER EL PROBLEMA --------
+#----Entrada: uno o varios numeros.
+#----Proceso: encontrar divisores y verificar si un numero es perfecto.
+#----Salida: tuplas o diccionario de divisores.
+
+#-------- BOSQUEJO A MANO --------
+# numero: 6
+# divisores: 1, 2, 3, 6.
+# 1 + 2 + 3 = 6, por eso es perfecto.
+
+#-------- DESCUBRIR EL PATRON --------
+# Un numero es divisor cuando el residuo de la division es cero.
+
+#-------- ESCRIBIR EL CODIGO --------
 class DivisorFinder():
     def encontrar_divisores(self, numero):
         divisores=[]
@@ -552,6 +843,12 @@ class DivisorFinder():
             resultados[num]=self.encontrar_divisores(num)
         return resultados
     
+
+#-------- PRUEBA DE ESCRITORIO --------
+# Linea                         | Resultado
+# ----------------------------- | ----------------------
+# encontrar_divisores(6)        | (1, 2, 3, 6)
+# es_perfecto(6)                | True
 df=DivisorFinder()
 print(df.encontrar_divisores(10))
 print(df.es_perfecto(6))
@@ -567,6 +864,19 @@ Clase CodificadorCesar que:
 (2) tenga método codificar_palabra(palabra, desplazamiento) que reutilice para toda la palabra; 
 (3) tenga un diccionario como atributo para historial de codificaciones.
 '''
+#-------- ENTENDER EL PROBLEMA --------
+#----Entrada: letra o palabra y desplazamiento.
+#----Proceso: mover cada letra dentro del alfabeto.
+#----Salida: texto codificado e historial.
+
+#-------- BOSQUEJO A MANO --------
+# letra: "a", desplazamiento: 3.
+# nueva letra: "d".
+
+#-------- DESCUBRIR EL PATRON --------
+# El operador % permite volver al inicio despues de la letra z.
+
+#-------- ESCRIBIR EL CODIGO --------
 class CodificadorCesar:
 
     def __init__(self):
@@ -593,6 +903,12 @@ class CodificadorCesar:
 
         return palabra_codificada
 
+
+#-------- PRUEBA DE ESCRITORIO --------
+# Linea                         | Resultado
+# ----------------------------- | ----------------------
+# codificar_letra("a", 3)      | "d"
+# codificar_letra("z", 1)      | "a"
 codificador = CodificadorCesar()
 
 print("--- PRUEBA 1: Letras individuales ---")
@@ -619,6 +935,20 @@ Clase AgrupadorEdades que:
 (2) tenga método agrupar_por_categoria(*edades) que retorne un diccionario con {categoría: [edades]}; 
 (3) tenga método edad_promedio_categoria(categoria).
 '''
+#-------- ENTENDER EL PROBLEMA --------
+#----Entrada: varias edades.
+#----Proceso: clasificar cada edad y agruparla por categoria.
+#----Salida: diccionario de categorias y promedios.
+
+#-------- BOSQUEJO A MANO --------
+# 5 -> nino.
+# 14 -> adolescente.
+# 20 -> adulto.
+
+#-------- DESCUBRIR EL PATRON --------
+# Las condiciones if determinan la categoria de cada edad.
+
+#-------- ESCRIBIR EL CODIGO --------
 class AgrupadorEdades():
     def __init__(self):
         self.categoria={}
@@ -650,6 +980,12 @@ class AgrupadorEdades():
             return sum(lista_edades)/len(lista_edades)
         return f"No hay datos registrados para la categoría '{categoria}'"
 
+
+#-------- PRUEBA DE ESCRITORIO --------
+# Linea                         | Resultado
+# ----------------------------- | ----------------------
+# clasificar_edad(5)            | "nino"
+# agrupar_por_categoria(5,14,20)| diccionario de categorias
 ae=AgrupadorEdades()
 
 print( ae.agrupar_por_categoria(19))
@@ -665,6 +1001,19 @@ Clase CalculadorDistancia que:
 (2) tenga método punto_mas_cercano(referencia, *puntos) que retorne el punto más cercano a referencia; 
 (3) tenga un atributo lista para guardar todas las distancias calculadas.
 '''
+#-------- ENTENDER EL PROBLEMA --------
+#----Entrada: dos puntos o varios puntos.
+#----Proceso: calcular distancias y comparar cual es menor.
+#----Salida: distancia y punto mas cercano.
+
+#-------- BOSQUEJO A MANO --------
+# p1 = (0, 0), p2 = (3, 4).
+# distancia: raiz de 9 + 16 = 5.
+
+#-------- DESCUBRIR EL PATRON --------
+# Se aplica la formula de distancia euclidiana.
+
+#-------- ESCRIBIR EL CODIGO --------
 class CalculadorDistancia:
     def __init__(self):
         self.lista_distancias = []
@@ -696,6 +1045,12 @@ class CalculadorDistancia:
         return punto_cercano
 
 
+
+#-------- PRUEBA DE ESCRITORIO --------
+# Linea                         | Resultado
+# ----------------------------- | ----------------------
+# distancia_euclidiana((0,0),(3,4)) | 5
+# punto_mas_cercano((0,0),...)  | punto con menor distancia
 cd = CalculadorDistancia()
 
 print(
@@ -717,6 +1072,19 @@ Clase Inventario que:
 (2) tenga método restar_stock(producto, cantidad) que disminuya y retorne True si hay suficiente; 
 (3) tenga método productos_bajo_stock(minimo) que retorne una lista de productos con cantidad < minimo.
 '''
+#-------- ENTENDER EL PROBLEMA --------
+#----Entrada: producto, cantidad y minimo.
+#----Proceso: aumentar o restar stock y revisar existencias bajas.
+#----Salida: confirmacion y lista de productos bajos.
+
+#-------- BOSQUEJO A MANO --------
+# pan = 10.
+# restar 3 -> pan queda con 7.
+
+#-------- DESCUBRIR EL PATRON --------
+# Un diccionario guarda el producto junto a su cantidad.
+
+#-------- ESCRIBIR EL CODIGO --------
 class Inventario():
     def __init__(self):
         self.dic_productos={}
@@ -745,10 +1113,82 @@ class Inventario():
                 lista_bajos.append(producto)
         return lista_bajos
     
+
+#-------- PRUEBA DE ESCRITORIO --------
+# Linea                         | Resultado
+# ----------------------------- | ----------------------
+# agregar_stock("pan", 10)     | pan: 10
+# restar_stock("pan", 3)       | True y pan queda en 7
 inv= Inventario()
 
 inv.agregar_stock("aceite", 10)
 inv.agregar_stock("pan", 50)
-
 print(inv.restar_stock("pan", 20))
 print(inv.productos_bajo_stock(11))
+
+''''
+======================================
+20: Analizador de patrones en textos
+======================================
+Clase AnalizadorPatrones que: 
+(1) tenga método encontrar_palabras(texto, patron) que busque palabras que inicien con el patrón y retorne una lista; 
+(2) tenga método agrupar_por_longitud(texto) que retorne un diccionario {longitud: [palabras]}; 
+(3) tenga método palabras_unicas() usando un conjunto.
+'''
+#-------- ENTENDER EL PROBLEMA --------
+#----Entrada: un texto y, cuando sea necesario, un patron.
+#----Proceso: buscar palabras, agruparlas por longitud y quitar repetidas.
+#----Salida: listas, diccionario o conjunto de palabras.
+
+#-------- BOSQUEJO A MANO --------
+# texto: "casa carro sol".
+# patron: "ca".
+# palabras encontradas: ["casa", "carro"].
+
+#-------- DESCUBRIR EL PATRON --------
+# Se separa el texto en palabras y un conjunto permite obtener las unicas.
+
+#-------- ESCRIBIR EL CODIGO --------
+class AnalizadorPatrones:
+    def encontrar_palabras(self, texto, patron):
+        palabras=texto.split()
+        lista_palabras=[]
+        for palabra in palabras:
+            if palabra.startswith(patron):
+                lista_palabras.append(palabra)
+        return lista_palabras
+
+    def agrupar_por_longitud(self, texto):
+        lista_palabras = texto.split()
+        dic_longitudes = {}
+
+        for palabra in lista_palabras:
+            largo = len(palabra)
+            if largo in dic_longitudes:
+                dic_longitudes[largo].append(palabra)
+            else:
+                dic_longitudes[largo] = [palabra]
+        return dic_longitudes
+    
+    def palabras_unicas(self, texto):
+        lista_palabras = texto.split()
+        conjunto_unicos = set()
+        for palabra in lista_palabras:
+            conjunto_unicos.add(palabra)
+        return conjunto_unicos
+    
+
+#-------- PRUEBA DE ESCRITORIO --------
+# Linea                         | Resultado
+# ----------------------------- | ----------------------
+# encontrar_palabras(texto,"ca")| ["casa", "carro"]
+# palabras_unicas(texto)        | conjunto sin repetidas
+analizador = AnalizadorPatrones()
+texto_ejemplo = "el perro de pedro juega con otro perro en el parque"
+
+print("--- PRUEBA 1: Encontrar palabras que inician con 'pe' ---")
+print(analizador.encontrar_palabras(texto_ejemplo, "pe"))
+print("\n--- PRUEBA 2: Agrupar palabras por longitud ---")
+print(analizador.agrupar_por_longitud("hola sol luna"))
+print("\n--- PRUEBA 3: Palabras únicas ---")
+print(analizador.palabras_unicas(texto_ejemplo))
