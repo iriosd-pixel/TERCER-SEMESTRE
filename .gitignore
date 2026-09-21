@@ -2,6 +2,9 @@
 __pycache__/
 *.py[cod]
 
+# Configuración del entorno de PyCharm
+.idea/
+
 # Material de práctica local
 practica_1_docente/
 prueba.py
