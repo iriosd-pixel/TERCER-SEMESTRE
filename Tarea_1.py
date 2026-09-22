@@ -356,20 +356,14 @@ Clase InversorSecuencia que:
 class InversorSecuencia:
     def invertir_lista(self, lista):
         lista_invertida = []
-
         for indice in lista:
             lista_invertida= [indice]+lista_invertida
-
         return lista_invertida
 
     def invertir_multiples(self, *listas):
         resultados = {}
-
         for lista in listas:
-            llave=tuple(lista)
-            valor=self.invertir_lista(lista)
-            resultados[llave]=valor
-
+            resultados[tuple(lista)]=self.invertir_lista(lista)
         return resultados
 
 #-------- PRUEBA DE ESCRITORIO --------
@@ -425,7 +419,7 @@ class ReversorPalabras:
             resultados.append(self.invertir_palabra(palabra))
         return resultados
 
-#-------- PRUEBA DE ESCRITORIO --------
+#---------------- PRUEBA DE ESCRITORIO -----------------
 # Linea                         | Resultado
 # ----------------------------- | ----------------------
 # invertir_palabra("hola")      | "aloh"
@@ -513,7 +507,7 @@ Clase ClasificadorNumeros que:
 #-------- ESCRIBIR EL CODIGO --------
 class ClasificadorNumeros:
     def __init__(self):
-        self.numeros_positivos_negativos={'positivos':[], 'negativos':[]}
+        self.numeros_positivos_negativos={'positivos':[], 'negativos':[], 'par':[], 'impar':[]}
 
     def es_positivo(self, numero):
         if numero>=0:
@@ -524,6 +518,10 @@ class ClasificadorNumeros:
     def separar(self, *numeros):
         self.numeros_positivos_negativos={'positivos':[], 'negativos':[]}
         for numero in numeros:
+            if numero %2==0:
+                self.numeros_positivos_negativos['par'].append(numero)
+            else:
+                self.numeros_positivos_negativos['impar'].append(numero)
             if self.es_positivo(numero):
                 self.numeros_positivos_negativos['positivos'].append(numero)
             else:
