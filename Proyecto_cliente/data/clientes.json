@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "nombre": "Ana",
+    "apellido": "García",
+    "email": "ana@ejemplo.com",
+    "telefono": "999000",
+    "ciudad": "Bilbao",
+    "direccion": "Calle A"
+  },
+  {
+    "id": 3,
+    "nombre": "Marta",
+    "apellido": "López",
+    "email": "marta@ejemplo.com",
+    "telefono": "555333",
+    "ciudad": "Sevilla",
+    "direccion": "Calle C"
+  }
+]
