@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "nombre": "ismael",
+    "apellido": "rios",
+    "email": "ismael@gmail.com",
+    "carnet": "45",
+    "notas": {},
+    "materias": []
+  },
+  {
+    "id": 2,
+    "nombre": "carlos",
+    "apellido": "viteri",
+    "email": "viteri@gmail.com",
+    "carnet": "145",
+    "notas": {
+      "Matenaticas": [
+        19.0
+      ]
+    },
+    "materias": [
+      "Matenaticas"
+    ]
+  }
+]
