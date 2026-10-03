@@ -12,6 +12,8 @@ que hace que el usuario pueda interactuar con la lógica del sistema.
 from models import CAMPOS_CLIENTE
 
 # Importamos funciones de ayuda para mostrar mensajes con formato visual.
+# Cuando se hace algo como: imprimir_exito("ok"), la función recibe ese texto
+# como argumento y luego con return o print lo muestra en pantalla.
 from shared.herramientas import (
     imprimir_titulo,
     imprimir_exito,
@@ -43,6 +45,7 @@ def pausa():
     Esta función sirve para que el usuario tenga tiempo de leer cada pantalla
     y no se sienta que la aplicación se mueve demasiado rápido.
     """
+    # input() espera a que el usuario pulse Enter antes de continuar la ejecución.
     input("\nPresione Enter para continuar...")
 
 
@@ -58,6 +61,7 @@ def mostrar_tabla(clientes):
     for cliente in clientes:
         # Cada fila representa un cliente y se presenta con espacios para alinear
         # los datos y que la tabla se vea ordenada.
+        # Aquí se llama a `obtener_nombre_completo()`, que devuelve un texto con nombre y apellido.
         print(
             f"{cliente.id:<5}{cliente.obtener_nombre_completo():<25}"
             f"{cliente.email:<28}{cliente.ciudad:<15}{cliente.telefono:<12}"
@@ -85,6 +89,10 @@ def opcion_crear():
         # email, etc. Lo guardamos en un diccionario para construir luego el cliente.
         datos[campo] = input(f"{campo.capitalize()}: ")
 
+    # Aquí se ejecuta la función crear_cliente(datos).
+    # Esa función devuelve dos valores: (True/False, mensaje).
+    # La variable exito guarda la parte booleana; mensaje guarda el texto.
+    # `crear_cliente(datos)` devuelve dos valores: True/False y el mensaje.
     exito, mensaje = crear_cliente(datos)
     if exito:
         imprimir_exito(mensaje)
@@ -144,12 +152,15 @@ def opcion_ver_por_id():
         imprimir_error("El id debe ser un número entero")
         return pausa()
 
+    # Esta llamada ejecuta obtener_por_id(id_cliente).
+    # La función devuelve un objeto Cliente o None si no existe.
+    # `obtener_por_id()` devuelve un objeto Cliente o None si no existe.
     cliente = obtener_por_id(id_cliente)
     if not cliente:
         imprimir_error(f"No existe un cliente con id {id_cliente}")
     else:
-        # Se recorre el diccionario del cliente para sacar cada atributo y mostrarlo
-        # con su clave. Por ejemplo: nombre, email, ciudad, direccion, etc.
+        # Recorremos el diccionario del cliente para mostrar campo por campo.
+        # `a_diccionario()` devuelve un diccionario y `.items()` lo recorre clave-valor.
         for clave, valor in cliente.a_diccionario().items():
             print(f"  {clave.capitalize():<12}: {valor}")
 
@@ -173,6 +184,7 @@ def opcion_actualizar():
         imprimir_error("El id debe ser un número entero")
         return pausa()
 
+    # obtener_por_id() devuelve un objeto Cliente cuando encuentra el usuario.
     cliente = obtener_por_id(id_cliente)
     if not cliente:
         imprimir_error(f"No existe un cliente con id {id_cliente}")
@@ -191,6 +203,9 @@ def opcion_actualizar():
         if nuevo:
             cambios[campo] = nuevo
 
+    # actualizar_cliente() devuelve (True/False, texto)
+    # Es un ejemplo claro de return con dos resultados a la vez.
+    # `actualizar_cliente()` devuelve dos valores: estado y mensaje de resultado.
     exito, mensaje = actualizar_cliente(id_cliente, cambios)
     if exito:
         imprimir_exito(mensaje)
@@ -217,6 +232,7 @@ def opcion_eliminar():
         imprimir_error("El id debe ser un número entero")
         return pausa()
 
+    # Este llamado devuelve el cliente asociado al id.
     cliente = obtener_por_id(id_cliente)
     if not cliente:
         imprimir_error(f"No existe un cliente con id {id_cliente}")
@@ -225,6 +241,7 @@ def opcion_eliminar():
     imprimir_info(f"Se eliminará: {cliente}")
 
     if confirmar("¿Confirma la eliminación?"):
+        # `eliminar_cliente` también devuelve dos cosas: True/False y un texto.
         exito, mensaje = eliminar_cliente(id_cliente)
         if exito:
             imprimir_exito(mensaje)

@@ -7,6 +7,16 @@ mostrar mensajes bonitos, limpiar la pantalla y comprobar entradas del usuario.
 
 import os
 
+# *args no se usa aquí, pero es útil saberlo:
+# significa "argumentos extra". Si una función recibe *args, Python guarda todos
+# los valores adicionales en una tupla. Ejemplo:
+# def sumar(*args):
+#     return sum(args)
+#
+# El return es muy importante porque permite que una función "devuelva" un valor
+# al punto del programa que la llamó. Por ejemplo: return True, "ok" hace que la
+# llamada reciba esos dos valores para decidir qué mostrar al usuario.
+
 # Los códigos ANSI permiten cambiar el color del texto en la terminal.
 # Cada clave del diccionario representa un color y su valor es el código que la
 # consola interpreta para pintar el texto.
@@ -32,12 +42,16 @@ def limpiar_pantalla():
     En sistemas Unix se usa 'clear'; en Windows se usa 'cls'. El código detecta
     el sistema operativo y elige el comando correcto.
     """
+    # Esta línea ejecuta el comando del sistema: "clear" en Linux/Mac o "cls" en Windows.
+    # Es decir, limpia la pantalla antes de mostrar el siguiente menú.
     os.system("clear" if os.name == "posix" else "cls")
 
 
 def imprimir_color(texto, color):
     """Imprime un mensaje con un color determinado usando códigos ANSI."""
+    # Busca el código de color en el diccionario; si no existe, usa BLANCO por defecto.
     codigo = COLORES.get(color, COLORES["BLANCO"])
+    # Imprime el texto con color y luego RESET para volver al color normal.
     print(f"{codigo}{texto}{COLORES['RESET']}")
 
 
@@ -101,3 +115,4 @@ def es_email_valido(texto):
 
     usuario, dominio = texto.split("@")
     return len(usuario) > 0 and "." in dominio and not dominio.endswith(".")
+
