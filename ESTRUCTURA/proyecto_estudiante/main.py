@@ -1,19 +1,11 @@
-"""Archivo principal del proyecto.
+"""Vista del sistema de estudiantes.
 
-Este archivo es el punto de entrada de la aplicación. Aquí se arma el menú
-principal, se capturan las opciones del usuario y se llaman a las funciones
-que ya están definidas en el resto de archivos. Es la parte del programa
-que hace que el usuario pueda interactuar con la lógica del sistema.
+Muestra el menú, solicita datos y presenta los resultados.
+Las operaciones y validaciones del negocio están en views.py.
 """
 
-# Importamos los campos del cliente desde el modelo para reutilizar su estructura.
-# Eso hace que si cambiamos el orden o los nombres de los datos del cliente,
-# el menú de creación también se adapte automáticamente.
-from models import CAMPOS_CLIENTE
+from models import CAMPOS_ESTUDIANTE
 
-# Importamos funciones de ayuda para mostrar mensajes con formato visual.
-# Cuando se hace algo como: imprimir_exito("ok"), la función recibe ese texto
-# como argumento y luego con return o print lo muestra en pantalla.
 from shared.herramientas import (
     imprimir_titulo,
     imprimir_exito,
@@ -22,191 +14,178 @@ from shared.herramientas import (
     confirmar,
 )
 
-# Importamos las operaciones reales del sistema: crear, leer, buscar,
-# editar, eliminar y generar estadísticas.
 from views import (
-    crear_cliente,
+    crear_estudiante,
     obtener_todos,
     obtener_por_id,
-    buscar_clientes,
-    actualizar_cliente,
-    eliminar_cliente,
-    estadisticas,
+    buscar_estudiantes,
+    actualizar_estudiante,
+    eliminar_estudiante,
+    agregar_nota,
+    materias_ofertadas,
+    estudiantes_en_comun,
 )
 
 
-# ---------------------------------------------------------------------
-# Bloque de utilidades para la interfaz visual del programa
-# ---------------------------------------------------------------------
+# -------------------- UTILIDADES --------------------
 
 def pausa():
-    """Detiene la ejecución unos segundos hasta que el usuario presione Enter.
-
-    Esta función sirve para que el usuario tenga tiempo de leer cada pantalla
-    y no se sienta que la aplicación se mueve demasiado rápido.
-    """
-    # input() espera a que el usuario pulse Enter antes de continuar la ejecución.
+    """Espera hasta que el usuario presione Enter."""
     input("\nPresione Enter para continuar...")
 
 
-def mostrar_tabla(clientes):
-    """Muestra una tabla con los clientes en formato legible para consola.
+def mostrar_tabla(estudiantes):
+    """Muestra los estudiantes en columnas."""
+    print(
+        f"{'ID':<5}"
+        f"{'NOMBRE':<30}"
+        f"{'CARNET':<18}"
+        f"{'EMAIL':<30}"
+    )
+    print("-" * 83)
 
-    Se usa en las opciones de listar clientes y buscar clientes para imprimir
-    todos los registros en columnas ordenadas.
-    """
-    print(f"{'ID':<5}{'NOMBRE':<25}{'EMAIL':<28}{'CIUDAD':<15}{'TELÉFONO':<12}")
-    print("-" * 85)
-
-    for cliente in clientes:
-        # Cada fila representa un cliente y se presenta con espacios para alinear
-        # los datos y que la tabla se vea ordenada.
-        # Aquí se llama a `obtener_nombre_completo()`, que devuelve un texto con nombre y apellido.
+    for estudiante in estudiantes:
         print(
-            f"{cliente.id:<5}{cliente.obtener_nombre_completo():<25}"
-            f"{cliente.email:<28}{cliente.ciudad:<15}{cliente.telefono:<12}"
+            f"{estudiante.id:<5}"
+            f"{estudiante.obtener_nombre_completo():<30}"
+            f"{estudiante.carnet:<18}"
+            f"{estudiante.email:<30}"
         )
 
-    print("-" * 85)
-    imprimir_info(f"Total: {len(clientes)} cliente(s)")
+    print("-" * 83)
+    imprimir_info(f"Total: {len(estudiantes)} estudiante(s)")
 
 
-# ---------------------------------------------------------------------
-# Opción 1: crear un nuevo cliente
-# ---------------------------------------------------------------------
+# -------------------- CREAR --------------------
+
 def opcion_crear():
-    """Recoge los datos del usuario y los envía a la lógica de creación.
+    """Solicita los datos de un nuevo estudiante."""
+    imprimir_titulo("CREAR NUEVO ESTUDIANTE")
 
-    El formulario se crea dinámicamente recorriendo CAMPOS_CLIENTE, así que
-    si cambias el modelo de datos, este bloque sigue funcionando sin modificar
-    la estructura del menú.
-    """
-    imprimir_titulo("CREAR NUEVO CLIENTE")
-
+    # DICCIONARIO: guarda cada campo con su valor.
     datos = {}
-    for campo in CAMPOS_CLIENTE:
-        # Se pide cada valor con el nombre del campo. Ejemplo: nombre, apellido,
-        # email, etc. Lo guardamos en un diccionario para construir luego el cliente.
+
+    # Recorre la TUPLA de campos definida en models.py.
+    for campo in CAMPOS_ESTUDIANTE:
         datos[campo] = input(f"{campo.capitalize()}: ")
 
-    # Aquí se ejecuta la función crear_cliente(datos).
-    # Esa función devuelve dos valores: (True/False, mensaje).
-    # La variable exito guarda la parte booleana; mensaje guarda el texto.
-    # `crear_cliente(datos)` devuelve dos valores: True/False y el mensaje.
-    exito, mensaje = crear_cliente(datos)
+    exito, mensaje = crear_estudiante(datos)
+
     if exito:
         imprimir_exito(mensaje)
     else:
         imprimir_error(mensaje)
+
     pausa()
 
 
-# ---------------------------------------------------------------------
-# Opción 2: mostrar todos los clientes
-# ---------------------------------------------------------------------
+# -------------------- VER TODOS --------------------
+
 def opcion_ver_todos():
-    """Solicita la lista completa de clientes y la imprime en pantalla."""
-    imprimir_titulo("LISTA DE CLIENTES")
-    clientes = obtener_todos()
+    """Solicita y muestra la lista de estudiantes."""
+    imprimir_titulo("LISTA DE ESTUDIANTES")
 
-    if not clientes:
-        imprimir_info("Todavía no hay clientes. Use la opción 1 para crear el primero.")
+    estudiantes = obtener_todos()
+
+    if not estudiantes:
+        imprimir_info(
+            "Todavía no hay estudiantes. "
+            "Use la opción 1 para crear el primero."
+        )
     else:
-        mostrar_tabla(clientes)
+        mostrar_tabla(estudiantes)
 
     pausa()
 
 
-# ---------------------------------------------------------------------
-# Opción 3: buscar clientes por un texto
-# ---------------------------------------------------------------------
-def opcion_buscar():
-    """Busca clientes por nombre, email, teléfono o ciudad.
+# -------------------- BUSCAR --------------------
 
-    El término puede ser parcial. Por ejemplo, si escribes "madrid" mostrará
-    todos los clientes que tengan esa ciudad en su registro.
-    """
-    imprimir_titulo("BUSCAR CLIENTE")
-    termino = input("Nombre, email, teléfono o ciudad: ")
-    encontrados = buscar_clientes(termino)
+def opcion_buscar():
+    """Solicita un texto para buscar estudiantes."""
+    imprimir_titulo("BUSCAR ESTUDIANTE")
+
+    termino = input("Nombre, apellido, email o carnet: ")
+    encontrados = buscar_estudiantes(termino)
 
     if not encontrados:
-        imprimir_info(f"Ningún cliente coincide con '{termino}'.")
+        imprimir_info(
+            f"Ningún estudiante coincide con '{termino}'."
+        )
     else:
         mostrar_tabla(encontrados)
 
     pausa()
 
 
-# ---------------------------------------------------------------------
-# Opción 4: mostrar un cliente por su id
-# ---------------------------------------------------------------------
+# -------------------- VER POR ID --------------------
+
 def opcion_ver_por_id():
-    """Busca un cliente concreto usando su identificador único."""
-    imprimir_titulo("VER CLIENTE POR ID")
+    """Muestra los datos de un estudiante por su id."""
+    imprimir_titulo("VER ESTUDIANTE POR ID")
 
     try:
-        # El id es un número entero, así que se convierte con int().
-        id_cliente = int(input("Id del cliente: "))
+        id_estudiante = int(input("Id del estudiante: "))
     except ValueError:
         imprimir_error("El id debe ser un número entero")
-        return pausa()
+        pausa()
+        return
 
-    # Esta llamada ejecuta obtener_por_id(id_cliente).
-    # La función devuelve un objeto Cliente o None si no existe.
-    # `obtener_por_id()` devuelve un objeto Cliente o None si no existe.
-    cliente = obtener_por_id(id_cliente)
-    if not cliente:
-        imprimir_error(f"No existe un cliente con id {id_cliente}")
+    estudiante = obtener_por_id(id_estudiante)
+
+    if estudiante is None:
+        imprimir_error(
+            f"No existe un estudiante con id {id_estudiante}"
+        )
     else:
-        # Recorremos el diccionario del cliente para mostrar campo por campo.
-        # `a_diccionario()` devuelve un diccionario y `.items()` lo recorre clave-valor.
-        for clave, valor in cliente.a_diccionario().items():
+        for clave, valor in estudiante.a_diccionario().items():
             print(f"  {clave.capitalize():<12}: {valor}")
 
     pausa()
 
 
-# ---------------------------------------------------------------------
-# Opción 5: actualizar datos de un cliente existente
-# ---------------------------------------------------------------------
-def opcion_actualizar():
-    """Permite editar la información de un cliente que ya existe.
+# -------------------- ACTUALIZAR --------------------
 
-    El usuario escribe solo los campos que quiere cambiar y deja en blanco los
-    que no desea tocar. Esto evita perder información por accident.
-    """
-    imprimir_titulo("ACTUALIZAR CLIENTE")
+def opcion_actualizar():
+    """Solicita cambios en los datos de un estudiante."""
+    imprimir_titulo("ACTUALIZAR ESTUDIANTE")
 
     try:
-        id_cliente = int(input("Id del cliente: "))
+        id_estudiante = int(input("Id del estudiante: "))
     except ValueError:
         imprimir_error("El id debe ser un número entero")
-        return pausa()
+        pausa()
+        return
 
-    # obtener_por_id() devuelve un objeto Cliente cuando encuentra el usuario.
-    cliente = obtener_por_id(id_cliente)
-    if not cliente:
-        imprimir_error(f"No existe un cliente con id {id_cliente}")
-        return pausa()
+    estudiante = obtener_por_id(id_estudiante)
 
-    imprimir_info(f"Editando a {cliente.obtener_nombre_completo()}")
+    if estudiante is None:
+        imprimir_error(
+            f"No existe un estudiante con id {id_estudiante}"
+        )
+        pausa()
+        return
+
+    imprimir_info(
+        f"Editando a {estudiante.obtener_nombre_completo()}"
+    )
     print("Deje en blanco el campo que no quiera cambiar.\n")
 
+    # Incluye únicamente los campos que el usuario modifica.
     cambios = {}
-    for campo in CAMPOS_CLIENTE:
-        # Leemos el valor actual para mostrárselo al usuario como referencia.
-        actual = getattr(cliente, campo)
-        nuevo = input(f"{campo.capitalize()} [{actual}]: ").strip()
 
-        # Solo guardamos el campo si han escrito algo nuevo.
+    for campo in CAMPOS_ESTUDIANTE:
+        actual = getattr(estudiante, campo)
+        nuevo = input(
+            f"{campo.capitalize()} [{actual}]: "
+        ).strip()
+
         if nuevo:
             cambios[campo] = nuevo
 
-    # actualizar_cliente() devuelve (True/False, texto)
-    # Es un ejemplo claro de return con dos resultados a la vez.
-    # `actualizar_cliente()` devuelve dos valores: estado y mensaje de resultado.
-    exito, mensaje = actualizar_cliente(id_cliente, cambios)
+    exito, mensaje = actualizar_estudiante(
+        id_estudiante, cambios
+    )
+
     if exito:
         imprimir_exito(mensaje)
     else:
@@ -215,34 +194,36 @@ def opcion_actualizar():
     pausa()
 
 
-# ---------------------------------------------------------------------
-# Opción 6: eliminar un cliente
-# ---------------------------------------------------------------------
-def opcion_eliminar():
-    """Elimina una persona del sistema después de pedir confirmación.
+# -------------------- ELIMINAR --------------------
 
-    Es importante confirmar porque una eliminación es irreversible en esta
-    práctica y el usuario debe aceptar la acción de forma explícita.
-    """
-    imprimir_titulo("ELIMINAR CLIENTE")
+def opcion_eliminar():
+    """Pide confirmación y solicita eliminar un estudiante."""
+    imprimir_titulo("ELIMINAR ESTUDIANTE")
 
     try:
-        id_cliente = int(input("Id del cliente: "))
+        id_estudiante = int(input("Id del estudiante: "))
     except ValueError:
         imprimir_error("El id debe ser un número entero")
-        return pausa()
+        pausa()
+        return
 
-    # Este llamado devuelve el cliente asociado al id.
-    cliente = obtener_por_id(id_cliente)
-    if not cliente:
-        imprimir_error(f"No existe un cliente con id {id_cliente}")
-        return pausa()
+    estudiante = obtener_por_id(id_estudiante)
 
-    imprimir_info(f"Se eliminará: {cliente}")
+    if estudiante is None:
+        imprimir_error(
+            f"No existe un estudiante con id {id_estudiante}"
+        )
+        pausa()
+        return
+
+    imprimir_info(
+        f"Se eliminará: {estudiante.obtener_nombre_completo()} "
+        f"({estudiante.carnet})"
+    )
 
     if confirmar("¿Confirma la eliminación?"):
-        # `eliminar_cliente` también devuelve dos cosas: True/False y un texto.
-        exito, mensaje = eliminar_cliente(id_cliente)
+        exito, mensaje = eliminar_estudiante(id_estudiante)
+
         if exito:
             imprimir_exito(mensaje)
         else:
@@ -253,66 +234,152 @@ def opcion_eliminar():
     pausa()
 
 
-# ---------------------------------------------------------------------
-# Opción 7: visualizar estadísticas del sistema
-# ---------------------------------------------------------------------
-def opcion_estadisticas():
-    """Muestra un resumen del estado actual de los datos almacenados."""
-    imprimir_titulo("ESTADÍSTICAS")
-    datos = estadisticas()
+# -------------------- AGREGAR NOTA --------------------
 
-    print(f"  Clientes registrados : {datos['total']}")
-    print(f"  Ciudades distintas   : {len(datos['ciudades'])} -> {', '.join(datos['ciudades'])}")
-    print(f"  Dominios de email    : {', '.join(datos['dominios'])}")
-    print(f"  Sin teléfono         : {len(datos['sin_telefono'])}")
+def opcion_agregar_nota():
+    """Solicita el estudiante, la materia y la nota."""
+    imprimir_titulo("AGREGAR NOTA")
+
+    try:
+        id_estudiante = int(input("Id del estudiante: "))
+    except ValueError:
+        imprimir_error("El id debe ser un número entero")
+        pausa()
+        return
+
+    materia = input("Materia: ")
+    nota = input("Nota entre 0 y 20: ")
+
+    # El controlador convierte y valida la nota,
+    # comprueba el id y guarda los cambios.
+    exito, mensaje = agregar_nota(
+        id_estudiante, materia, nota
+    )
+
+    if exito:
+        imprimir_exito(mensaje)
+    else:
+        imprimir_error(mensaje)
+
     pausa()
 
 
-# ---------------------------------------------------------------------
-# Acción de salida del menú
-# ---------------------------------------------------------------------
+# -------------------- VER PROMEDIO --------------------
+
+def opcion_ver_promedio():
+    """Muestra el promedio calculado por el modelo."""
+    imprimir_titulo("VER PROMEDIO")
+
+    try:
+        id_estudiante = int(input("Id del estudiante: "))
+    except ValueError:
+        imprimir_error("El id debe ser un número entero")
+        pausa()
+        return
+
+    estudiante = obtener_por_id(id_estudiante)
+
+    if estudiante is None:
+        imprimir_error(
+            f"No existe un estudiante con id {id_estudiante}"
+        )
+    else:
+        print(
+            f"Estudiante: {estudiante.obtener_nombre_completo()}"
+        )
+        print(f"Carnet: {estudiante.carnet}")
+        print(f"Promedio: {estudiante.obtener_promedio():.2f}")
+
+    pausa()
+
+
+# -------------------- MATERIAS EN COMÚN --------------------
+
+def opcion_materias_en_comun():
+    """Solicita dos estudiantes y muestra sus materias comunes."""
+    imprimir_titulo("MATERIAS EN COMÚN")
+
+    try:
+        id_a = int(input("Id del primer estudiante: "))
+        id_b = int(input("Id del segundo estudiante: "))
+    except ValueError:
+        imprimir_error("Los ids deben ser números enteros")
+        pausa()
+        return
+
+    # El controlador devuelve:
+    # (True, conjunto de materias) o (False, mensaje de error).
+    exito, resultado = estudiantes_en_comun(id_a, id_b)
+
+    if not exito:
+        imprimir_error(resultado)
+    elif not resultado:
+        imprimir_info("Los estudiantes no comparten materias.")
+    else:
+        print("Materias que comparten:")
+
+        for materia in sorted(resultado):
+            print(f"  - {materia}")
+
+    pausa()
+
+
+# -------------------- MATERIAS OFERTADAS --------------------
+
+def opcion_materias_ofertadas():
+    """Muestra todas las materias registradas, sin repetir."""
+    imprimir_titulo("MATERIAS OFERTADAS")
+
+    materias = materias_ofertadas()
+
+    if not materias:
+        imprimir_info("Todavía no hay materias registradas.")
+    else:
+        for materia in sorted(materias):
+            print(f"  - {materia}")
+
+        imprimir_info(f"Total: {len(materias)} materia(s)")
+
+    pausa()
+
+
+# -------------------- SALIR --------------------
+
 def salir():
-    """Finaliza el ciclo principal de la aplicación."""
-    imprimir_info("¡Hasta luego! 👋")
+    """Devuelve la señal para terminar el menú."""
+    imprimir_info("¡Hasta luego!")
     return "salir"
 
 
-# El diccionario relacona cada tecla del menú con su texto y su función.
-# De esta manera, cuando el usuario escribe "1", se ejecuta opcion_crear();
-# cuando escribe "2", se ejecuta opcion_ver_todos(), y así sucesivamente.
+# DICCIONARIO:
+# cada tecla se relaciona con una TUPLA de texto y función.
 OPCIONES = {
-    "1": ("Crear cliente", opcion_crear),
+    "1": ("Crear estudiante", opcion_crear),
     "2": ("Ver todos", opcion_ver_todos),
     "3": ("Buscar", opcion_buscar),
     "4": ("Ver por id", opcion_ver_por_id),
     "5": ("Actualizar", opcion_actualizar),
     "6": ("Eliminar", opcion_eliminar),
-    "7": ("Estadísticas", opcion_estadisticas),
+    "7": ("Agregar nota", opcion_agregar_nota),
+    "8": ("Ver promedio", opcion_ver_promedio),
+    "9": ("Materias en común", opcion_materias_en_comun),
+    "10": ("Materias ofertadas", opcion_materias_ofertadas),
     "0": ("Salir", salir),
 }
 
 
 def mostrar_menu():
-    """Imprime la pantalla de inicio con todas las opciones disponibles.
+    """Muestra las opciones disponibles."""
+    imprimir_titulo("SISTEMA DE GESTIÓN DE ESTUDIANTES")
 
-    Esta función se llama repetidamente dentro del bucle principal, por eso
-    el programa siempre vuelve a mostrar el menú después de cada acción.
-    """
-    imprimir_titulo("SISTEMA DE GESTIÓN DE CLIENTES")
     for tecla, (texto, _funcion) in OPCIONES.items():
         print(f"  {tecla}. {texto}")
+
     print()
 
 
 def main():
-    """Bucle principal del programa.
-
-    Aquí se repite el proceso:
-    1. mostrar el menú,
-    2. leer la opción del usuario,
-    3. ejecutar la acción,
-    4. volver a empezar hasta que el usuario salga.
-    """
+    """Repite el menú hasta que el usuario elija salir."""
     while True:
         mostrar_menu()
         tecla = input("Seleccione una opción: ").strip()
@@ -323,12 +390,11 @@ def main():
             continue
 
         _texto, funcion = OPCIONES[tecla]
+
         if funcion() == "salir":
             break
 
 
-# Este bloque se ejecuta solo cuando el archivo se abre directamente con Python.
-# Si el archivo se importa desde otro archivo, no se ejecuta automáticamente.
 if __name__ == "__main__":
     try:
         main()
