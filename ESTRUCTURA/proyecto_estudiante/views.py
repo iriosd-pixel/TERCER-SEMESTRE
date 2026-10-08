@@ -4,13 +4,18 @@ Valida datos y realiza las operaciones sobre el archivo JSON.
 Devuelve resultados para que main.py los muestre.
 """
 
+from pathlib import Path
+
 from models import Estudiante, CAMPOS_ESTUDIANTE
 from shared.json_manager import GestorJSON
 from shared.herramientas import es_email_valido
 
 
-# Archivo donde se almacenan los estudiantes.
-gestor = GestorJSON("data/estudiantes.json")
+# Guarda los estudiantes junto al proyecto, sin depender del directorio
+# desde el que se inicia Python (por ejemplo, la raíz abierta en VS Code).
+gestor = GestorJSON(
+    Path(__file__).resolve().parent / "data" / "estudiantes.json"
+)
 
 # TUPLAS: definen campos fijos de configuración.
 CAMPOS_OBLIGATORIOS = ("nombre", "apellido", "email", "carnet")
