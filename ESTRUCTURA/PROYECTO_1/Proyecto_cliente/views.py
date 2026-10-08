@@ -7,6 +7,7 @@
 # Importa la clase Cliente (el Modelo) y la tupla con los nombres de sus campos.
 from models import Cliente, CAMPOS_CLIENTE
 
+from pathlib import Path
 
 
 # Importa la clase que lee y guarda la lista de clientes en el archivo JSON.
@@ -18,7 +19,9 @@ from shared.herramientas import es_email_valido
 # Crea UN solo gestor para todo el módulo, apuntando al archivo de clientes.
 # Al crearse, si la carpeta "data" no existe, GestorJSON la crea.
 # Todas las funciones de abajo usan esta misma variable global 'gestor'.
-gestor = GestorJSON("data/clientes.json")
+gestor = GestorJSON(
+    Path(__file__).resolve().parent / "data" / "clientes.json"
+)
 
 # TUPLAS de configuración: fijas, nadie las modifica en tiempo de ejecución
 # Campos que el usuario DEBE llenar para poder crear un cliente.
