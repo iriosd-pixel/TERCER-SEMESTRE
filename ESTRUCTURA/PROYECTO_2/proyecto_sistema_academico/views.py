@@ -236,51 +236,68 @@ class EstudianteController(CrudBase):
 
 
 # =====================================================================
-# CONTROLADOR DE PRODUCTOS
+# CONTROLADOR DE MATERIA
 # =====================================================================
 class MateriasController(CrudBase):
 
-    def __init__(self, archivo="data/productos.json"):
+    def __init__(self, archivo="data/materias.json"):
         self.gestor = GestorJSON(archivo)
 
         self.lista = []
         for datos in self.gestor.leer():
-            self.lista.append(Producto.desde_diccionario(datos))
+            self.lista.append(Materia.desde_diccionario(datos))
 
     def guardar(self):
         datos = []
-        for producto in self.lista:
-            datos.append(producto.a_diccionario())
+        for materia in self.lista:
+            datos.append(materia.a_diccionario())
         self.gestor.guardar(datos)
 
     def validar(self, datos, id_actual=None):
         if id_actual is None:
-            for campo in ("nombre", "precio"):
+            for campo in ("nombre", "codigo"):
                 if str(datos.get(campo, "")).strip() == "":
                     return f"El campo {campo} es obligatorio"
 
-        # es_precio_valido es el método ESTÁTICO de Producto
-        if "precio" in datos and not Producto.es_precio_valido(datos["precio"]):
-            return f"Precio inválido: '{datos['precio']}' (debe ser un número mayor a 0)"
+        if "codigo" in datos:
+            codigo = str(datos["codigo"]).strip().upper()
 
-        stock = str(datos.get("stock", "")).strip()
-        if stock != "" and not stock.isdigit():
-            return "El stock debe ser un número entero positivo"
+            # CONJUNTO: permite revisar rápidamente si otra materia usa ese código.
+            codigos_usados = set()
+            for materia in self.lista:
+                if materia.id != id_actual:
+                    codigos_usados.add(str(materia.codigo).strip().upper())
 
-        if "nombre" in datos:
-            nombre = str(datos["nombre"]).strip().title()
-            for otro in self.lista:
-                if otro.nombre == nombre and otro.id != id_actual:
-                    return f"Ya existe un producto llamado {nombre}"
+            if codigo in codigos_usados:
+                return "Ese código ya está registrado"
+
+        if id_actual is None or "creditos" in datos:
+            try:
+                creditos = int(datos.get("creditos", 0))
+            except (TypeError, ValueError):
+                return "Los créditos deben ser un número entero"
+
+            if not 1 <= creditos <= 10:
+                return "Los créditos deben estar entre 1 y 10"
+
+        if id_actual is None or "cupos" in datos:
+            try:
+                cupos = int(datos.get("cupos", 0))
+            except (TypeError, ValueError):
+                return "Los cupos deben ser un número entero"
+
+            if not 0 <= cupos <= Materia.CUPOS_MAXIMOS:
+                return f"Los cupos deben estar entre 0 y {Materia.CUPOS_MAXIMOS}"
+
         return None
 
     def leer(self):
         return self.lista
 
-    def obtener(self, id_producto):
-        for producto in self.lista:
-            if producto.id == id_producto:
-                return producto
+    def obtener(self, id_materia):
+        for materia in self.lista:
+            if materia.id == id_materia:
+                return materia
         return None
 
     def buscar(self, texto):
@@ -289,9 +306,9 @@ class MateriasController(CrudBase):
         if texto == "":
             return encontrados
 
-        for producto in self.lista:
-            if texto in producto.nombre.lower():
-                encontrados.append(producto)
+        for materia in self.lista:
+            if texto in materia.nombre.lower():
+                encontrados.append(materia)
         return encontrados
 
     def siguiente(self):
