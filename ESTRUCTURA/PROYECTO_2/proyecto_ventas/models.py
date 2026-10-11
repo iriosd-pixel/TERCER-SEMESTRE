@@ -163,5 +163,5 @@ class Venta(ModeloBase):
 
     def etiqueta(self):
         return (f"{self.fecha} · cliente {self.cliente_id} · "
-                f"{self.cantidad} x producto {self.producto_id} "
+                f"{self.cantidad} y {self.precio_unitario} x producto {self.producto_id} "
                 f"= ${self.calcular_total():.2f}")
