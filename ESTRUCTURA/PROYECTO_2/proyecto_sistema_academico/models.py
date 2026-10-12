@@ -14,7 +14,7 @@ class ModeloBase:
     @classmethod
     def desde_diccionario(cls, datos):
         """Diccionario -> objeto. Escrito UNA vez y usado por los tres modelos.
-        cls es la clase que llamó: Cliente, Producto o Venta."""
+        cls es la clase que llamó: """
         datos = dict(datos)                 # copia, para no tocar el original
         id_registro = datos.pop("id")       # saco el id
         return cls(id_registro, **datos)    # el resto son los campos del modelo
