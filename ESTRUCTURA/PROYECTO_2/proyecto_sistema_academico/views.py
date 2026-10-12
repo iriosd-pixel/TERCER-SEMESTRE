@@ -151,7 +151,7 @@ def crear_estudiante(datos):
     
     estudiante=Estudiante(
         siguiente_id(gestor_estudiantes),
-        str(datos["Nombre"]).strip().title(),
+        str(datos["nombre"]).strip().title(),
         str(datos["apellido"]).strip().title(),
         str(datos["email"]).strip().lower(),
         str(datos["carnet"]).strip().upper(),
@@ -510,6 +510,7 @@ def certificado(id_matricula):
     )
 
 def matriculas_por_estudiante():
+# DICCIONARIO DE LISTAS: agrupa las matrículas de cada estudiante.
     agrupadas={}
     
     for matricula in obtener_matriculas():
@@ -531,3 +532,27 @@ def promedio_de_estudiante(id_estudiante):
         suma += matricula.nota
 
     return round(suma / len(matriculas), 2)
+
+def resumen_academico():
+    estudiantes = obtener_estudiantes()
+    matriculas = obtener_matriculas()
+
+    # CONJUNTO: reúne las carreras sin repetirlas.
+    carreras = set()
+
+    for estudiante in estudiantes:
+        if estudiante.carrera:
+            carreras.add(estudiante.carrera)
+
+    aprobadas = 0
+
+    for matricula in matriculas:
+        if matricula.esta_aprobada():
+            aprobadas += 1
+
+    return {
+        "estudiantes": len(estudiantes),
+        "carreras": sorted(carreras),
+        "materias_sin_cupo": materias_sin_cupo(),
+        "matriculas_aprobadas": aprobadas
+    }
