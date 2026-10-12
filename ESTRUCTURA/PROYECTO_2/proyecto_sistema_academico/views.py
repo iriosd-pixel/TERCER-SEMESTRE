@@ -212,13 +212,18 @@ def actualizar_estudiante(id_estudiante, cambios):
     return True, f"Estudiante {estudiante.id} actualizado"    
 
 def eliminar_estudiante(id_estudiante):
-    estudiante=obtener_estudiante(id_estudiante)
-    
+    estudiante = obtener_estudiante(id_estudiante)
+
     if estudiante is None:
         return False, "NO existe el estudiante"
-    
+
+    for matricula in obtener_matriculas():
+        if matricula.estudiante_id == estudiante.id:
+            return False, "El estudiante tiene matrículas; retíralas primero"
+
     if not eliminar(gestor_estudiantes, estudiante.id):
         return False, "no se pudo eliminar el estudiante"
+
     return True, f"Estudiante {estudiante.id} eliminado"
 
 
@@ -299,6 +304,7 @@ def obtener_materia(id_materia):
     return obtener_por_id(gestor_materias, Materia, id_materia)
 
 def buscar_materias(termino):
+# TUPLA: define los campos fijos para buscar materias.    
     campos=("nombre", "codigo")
     
     return buscar( gestor_materias, Materia, termino, campos)
@@ -345,6 +351,10 @@ def eliminar_materia(id_materia):
 
     if materia is None:
         return False, "No existe la materia"
+
+    for matricula in obtener_matriculas():
+        if matricula.materia_id == materia.id:
+            return False, "La materia tiene matrículas; retíralas primero"
 
     if not eliminar(gestor_materias, materia.id):
         return False, "No se pudo eliminar la materia"
