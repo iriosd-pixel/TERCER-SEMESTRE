@@ -66,6 +66,7 @@ def crear_estudiante():
 
     exito, mensaje = views.crear_estudiante(datos)
     mostrar_resultado(exito, mensaje)
+    pausa()
 
 def pausa():
     input("\nPresiona Enter para continuar...")
