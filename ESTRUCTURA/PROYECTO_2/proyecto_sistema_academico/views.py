@@ -512,7 +512,7 @@ def certificado(id_matricula):
         f"CERTIFICADO DE MATRÍCULA #{matricula.id}\n"
         f"Estudiante: {estudiante.nombre_completo()}\n"
         f"Carnet: {estudiante.carnet}\n"
-        f"Materia: {materia.nombre} ({materia.codigo})\n"
+        f"Materia: {materia.nombre} ({materia.codigo}) · {materia.creditos} créditos\n"
         f"Periodo: {matricula.periodo}\n"
         f"Fecha: {matricula.fecha}\n"
         f"Nota: {matricula.nota:.1f}\n"
