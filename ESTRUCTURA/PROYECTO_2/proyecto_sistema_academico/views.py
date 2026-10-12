@@ -151,6 +151,7 @@ def crear_estudiante(datos):
     
     estudiante=Estudiante(
         siguiente_id(gestor_estudiantes),
+        str(datos["Nombre"]).strip().title(),
         str(datos["apellido"]).strip().title(),
         str(datos["email"]).strip().lower(),
         str(datos["carnet"]).strip().upper(),
@@ -204,11 +205,11 @@ def actualizar_estudiante(id_estudiante, cambios):
 
             setattr(estudiante, campo, valor)
 
-            if not reemplazar(gestor_estudiantes, estudiante):
-                return False, "No se pudo actualizar el estudiante"
+    if not reemplazar(gestor_estudiantes, estudiante):
+        return False, "No se pudo actualizar el estudiante"
 
-            # TUPLA: devuelve el resultado y un mensaje de confirmación.
-            return True, f"Estudiante {estudiante.id} actualizado"    
+        # TUPLA: devuelve el resultado y un mensaje de confirmación.
+    return True, f"Estudiante {estudiante.id} actualizado"    
 
 def eliminar_estudiante(id_estudiante):
     estudiante=obtener_estudiante(id_estudiante)
@@ -297,7 +298,7 @@ def obtener_materias():
 def obtener_materia(id_materia):
     return obtener_por_id(gestor_materias, Materia, id_materia)
 
-def buscar_materia(termino):
+def buscar_materias(termino):
     campos=("nombre", "codigo")
     
     return buscar( gestor_materias, Materia, termino, campos)
@@ -351,7 +352,7 @@ def eliminar_materia(id_materia):
     # TUPLA: devuelve el resultado y un mensaje de confirmación.
     return True, f"Materia {materia.id} eliminada"
 
-def materias_sin_cupos():
+def materias_sin_cupo():
     sin_cupo=[]
     
     for materia in obtener_materias():
@@ -511,7 +512,7 @@ def certificado(id_matricula):
 def matriculas_por_estudiante():
     agrupadas={}
     
-    for matricula in obtener_matricula():
+    for matricula in obtener_matriculas():
         lista= agrupadas.setdefault(matricula.estudiante_id, [])
         lista.append(matricula)
         
