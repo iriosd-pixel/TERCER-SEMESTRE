@@ -4,6 +4,13 @@ from models import Estudiante, Materia, Matricula
 from shared.json_manager import GestorJSON
 from shared.herramientas import es_email_valido
 
+import os
+
+CARPETA_DATA = os.path.join(
+    os.path.dirname(os.path.abspath(__file__)),
+    "data"
+)
+
 
 # =====================================================================
 # CLASE BASE ABSTRACTA
@@ -44,7 +51,10 @@ class CrudBase(ABC):
 # =====================================================================
 class EstudianteController(CrudBase):
 
-    def __init__(self, archivo="data/estudiantes.json"):
+    def __init__(
+        self,
+        archivo=os.path.join(CARPETA_DATA, "estudiantes.json")
+    ):
         self.gestor = GestorJSON(archivo)
         self.lista = []
 
@@ -249,7 +259,10 @@ class EstudianteController(CrudBase):
 # =====================================================================
 class MateriaController(CrudBase):
 
-    def __init__(self, archivo="data/materias.json"):
+    def __init__(
+        self,
+        archivo=os.path.join(CARPETA_DATA, "materias.json")
+    ):
         self.gestor = GestorJSON(archivo)
         self.lista = []
 
@@ -449,7 +462,7 @@ class MatriculaController(CrudBase):
         self,
         estudiantes,
         materias,
-        archivo="data/matriculas.json"
+        archivo=os.path.join(CARPETA_DATA, "matriculas.json")
     ):
         # Recibe los mismos controladores que utiliza main.py.
         self.estudiantes = estudiantes
