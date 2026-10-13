@@ -70,25 +70,31 @@ def crear_docente():
         "email": input("Email: "),
         "especialidad": input("Especialidad: "),
     }
-    mostrar_resultado(*docentes.crear(datos))
+    exito, mensaje = docentes.crear(datos)
+    mostrar_resultado(exito, mensaje)
     pausa()
 
 
 def listar_docentes():
     imprimir_titulo("LISTA DE DOCENTES")
-    mostrar_lista(docentes.leer())
+    lista = docentes.leer()
+    mostrar_lista(lista)
     pausa()
 
 
 def buscar_docentes():
     imprimir_titulo("BUSCAR DOCENTES")
-    mostrar_lista(docentes.buscar(input("Texto a buscar: ")))
+    termino = input("Texto a buscar: ")
+    encontrados = docentes.buscar(termino)
+    mostrar_lista(encontrados)
     pausa()
 
 
 def ver_docente():
     imprimir_titulo("VER DOCENTE")
-    mostrar_detalle(docentes.obtener(pedir_entero("ID del docente: ")))
+    id_docente = pedir_entero("ID del docente: ")
+    docente = docentes.obtener(id_docente)
+    mostrar_detalle(docente)
     pausa()
 
 
@@ -103,7 +109,8 @@ def actualizar_docente():
         cambios = pedir_cambios(
             docente, ("nombre", "apellido", "email", "especialidad")
         )
-        mostrar_resultado(*docentes.actualizar(id_docente, cambios))
+        exito, mensaje = docentes.actualizar(id_docente, cambios)
+        mostrar_resultado(exito, mensaje)
 
     pausa()
 
@@ -119,7 +126,8 @@ def eliminar_docente():
         mostrar_detalle(docente)
 
         if confirmar("¿Deseas eliminar este docente?"):
-            mostrar_resultado(*docentes.eliminar(id_docente))
+            exito, mensaje = docentes.eliminar(id_docente)
+            mostrar_resultado(exito, mensaje)
         else:
             imprimir_info("Eliminación cancelada")
 

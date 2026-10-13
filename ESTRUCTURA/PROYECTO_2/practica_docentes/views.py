@@ -72,6 +72,7 @@ class DocenteController(CrudBase):
             if not es_email_valido(email):
                 return f"Email inválido: '{email}'"
 
+            # CONJUNTO: guarda emails normalizados para evitar duplicados.
             emails_usados = set()
 
             for docente in self.lista:
@@ -87,6 +88,15 @@ class DocenteController(CrudBase):
         return self.lista
 
     def obtener(self, id_registro):
+        # CONJUNTO: reúne los IDs registrados para comprobar la pertenencia.
+        ids = set()
+
+        for docente in self.lista:
+            ids.add(docente.id)
+
+        if id_registro not in ids:
+            return None
+
         for docente in self.lista:
             if docente.id == id_registro:
                 return docente
@@ -101,6 +111,7 @@ class DocenteController(CrudBase):
             return encontrados
 
         for docente in self.lista:
+            # TUPLA: reúne los campos que se revisan en la búsqueda.
             campos = (
                 docente.nombre,
                 docente.apellido,
@@ -143,6 +154,7 @@ class DocenteController(CrudBase):
             self.lista.remove(docente)
             return False, "No se pudo guardar el docente"
 
+        # TUPLA: devuelve el éxito y el mensaje del resultado.
         return True, f"Docente creado: {docente.etiqueta()}"
 
     def actualizar(self, id_registro, datos):
@@ -154,6 +166,7 @@ class DocenteController(CrudBase):
         if not datos:
             return False, "No se indicó ningún cambio"
 
+        # CONJUNTO: identifica campos que no se pueden modificar.
         permitidos = {"nombre", "apellido", "email", "especialidad"}
         desconocidos = set(datos) - permitidos
 
@@ -184,6 +197,7 @@ class DocenteController(CrudBase):
 
             return False, "No se pudo actualizar el docente"
 
+        # TUPLA: devuelve el éxito y el mensaje del resultado.
         return True, f"Docente {docente.id} actualizado"
 
     def eliminar(self, id_registro):
@@ -199,4 +213,15 @@ class DocenteController(CrudBase):
             self.lista.insert(posicion, docente)
             return False, "No se pudo eliminar el docente"
 
+        # TUPLA: devuelve el éxito y el mensaje del resultado.
         return True, f"Docente {docente.id} eliminado"
+
+    def especialidades(self):
+        # CONJUNTO: conserva cada especialidad una sola vez.
+        especialidades = set()
+
+        for docente in self.lista:
+            if docente.especialidad:
+                especialidades.add(docente.especialidad)
+
+        return sorted(especialidades)
