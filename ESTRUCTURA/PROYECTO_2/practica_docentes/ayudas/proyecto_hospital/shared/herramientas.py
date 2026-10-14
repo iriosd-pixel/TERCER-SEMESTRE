@@ -1,1 +1,3 @@
-def confirmar(mensaje): return input(f"{mensaje} [s/N]: ").strip().lower() == "s"
+def confirmar(mensaje):
+    respuesta = input(f"{mensaje} [s/N]: ").strip().lower()
+    return respuesta == "s"

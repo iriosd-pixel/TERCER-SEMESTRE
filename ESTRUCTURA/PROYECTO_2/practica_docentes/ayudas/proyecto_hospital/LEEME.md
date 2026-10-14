@@ -1,7 +1,21 @@
 # Proyecto didáctico de hospital
 
-Ejecute `python main.py` desde esta carpeta. El programa crea los JSON en `data/` al guardar cada tipo de registro.
+Ejecute `python main.py` desde esta carpeta. Los datos JSON se guardan en su subcarpeta `data/`. Paciente y Medico heredan de Persona; Cita guarda sus IDs relacionados, fecha y hora.
 
-Estudie `models.py` y después `shared/json_manager.py`, `views.py` y `main.py`. Paciente y Medico heredan sus datos comunes de Persona. Cita recibe los controladores de pacientes y médicos, verifica ambos IDs y evita conflictos de médico o paciente para igual fecha y hora. La fecha debe ser ISO `AAAA-MM-DD` y la hora `HH:MM` válida. Las comprobaciones excluyen la cita que se actualiza.
+Cada controlador concreto hereda directamente de `CrudBase` e implementa explícitamente las siete operaciones. `models.py` contiene los objetos; `views.py` valida relaciones, fechas, horas y duplicados; `main.py` presenta funciones de pantalla y submenús con el patrón de ventas.
 
-Supuestos: una cita ocupa exactamente un horario de minuto; no se modelan duración, zonas horarias, disponibilidad laboral ni cancelación lógica. No se elimina un paciente o médico que tenga citas; primero elimine las citas asociadas. Cada guardado fallido revierte la lista/objeto en memoria. Para ensayar datos temporales, pase una ruta temporal a cada constructor del controlador y no use la carpeta `data`.
+## Construcción y conexiones
+
+`CitaController` recibe obligatoriamente las instancias de pacientes y médicos. Para que sus eliminaciones protejan las citas, conecte sus referencias inversas:
+
+```python
+pacientes = PacienteController()
+medicos = MedicoController()
+citas = CitaController(pacientes, medicos)
+pacientes.conectar_citas(citas)
+medicos.conectar_citas(citas)
+```
+
+Si se intenta eliminar un paciente o médico antes de conectar CitaController, la operación devuelve un error explicativo; no ignora la relación ni produce `AttributeError`. Tampoco se permite eliminar una persona que tenga citas. Elimine primero las citas asociadas.
+
+La fecha se normaliza a `AAAA-MM-DD`. La hora se convierte a formato canónico: `09:00` y `09:00:00` se guardan y comparan como `09:00`. Las reglas impiden que un paciente o médico tenga dos citas en el mismo horario y excluyen la cita actual al actualizar. Para probar, suministre una ruta temporal a cada constructor y no use los JSON habituales.
