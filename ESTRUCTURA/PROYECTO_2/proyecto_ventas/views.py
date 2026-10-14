@@ -4,6 +4,12 @@ from models import Cliente, Producto, Venta
 from shared.json_manager import GestorJSON
 from shared.herramientas import es_email_valido
 
+import os
+
+CARPETA_DATA = os.path.join(
+    os.path.dirname(os.path.abspath(__file__)),
+    "data"
+)
 
 # =====================================================================
 # CLASE BASE (ABSTRACTA)
@@ -45,12 +51,16 @@ class CrudBase(ABC):
 # CONTROLADOR DE CLIENTES
 # =====================================================================
 class ClienteController(CrudBase):
-
-    def __init__(self, archivo="data/clientes.json"):
+    
+    def __init__(
+        self,
+        archivo=os.path.join(CARPETA_DATA, "clientes.json")
+    ):
         self.gestor = GestorJSON(archivo)
-
         # Leemos el JSON y convertimos cada diccionario en un objeto Cliente
+
         self.lista = []
+
         for datos in self.gestor.leer():
             self.lista.append(Cliente.desde_diccionario(datos))
 
@@ -119,11 +129,11 @@ class ClienteController(CrudBase):
             return False, error
 
         cliente = Cliente(self.siguiente(),
-                          str(datos["nombre"]).strip().title(),
-                          str(datos["apellido"]).strip().title(),
-                          str(datos["email"]).strip().lower(),
-                          str(datos.get("telefono", "")).strip(),
-                          str(datos.get("ciudad", "")).strip().title())
+                        str(datos["nombre"]).strip().title(),
+                        str(datos["apellido"]).strip().title(),
+                        str(datos["email"]).strip().lower(),
+                        str(datos.get("telefono", "")).strip(),
+                        str(datos.get("ciudad", "")).strip().title())
         self.lista.append(cliente)
         self.guardar()
         return True, f"Cliente creado: {cliente.etiqueta()}"
@@ -177,10 +187,13 @@ class ClienteController(CrudBase):
 # =====================================================================
 class ProductoController(CrudBase):
 
-    def __init__(self, archivo="data/productos.json"):
+    def __init__(
+        self,
+        archivo=os.path.join(CARPETA_DATA, "productos.json")
+    ):
         self.gestor = GestorJSON(archivo)
-
         self.lista = []
+
         for datos in self.gestor.leer():
             self.lista.append(Producto.desde_diccionario(datos))
 
@@ -301,14 +314,19 @@ class ProductoController(CrudBase):
 # =====================================================================
 class VentaController(CrudBase):
 
-    def __init__(self, clientes, productos, archivo="data/ventas.json"):
-        # La venta USA a los otros dos controladores.
-        # Hay que pasarle los MISMOS que usa main.py.
+    def __init__(
+        self,
+        clientes,
+        productos,
+        archivo=os.path.join(CARPETA_DATA, "ventas.json")
+    ):
+        # Recibe los mismos controladores que utiliza main.py.
         self.clientes = clientes
         self.productos = productos
         self.gestor = GestorJSON(archivo)
 
         self.lista = []
+
         for datos in self.gestor.leer():
             self.lista.append(Venta.desde_diccionario(datos))
 
@@ -375,10 +393,10 @@ class VentaController(CrudBase):
 
         producto = self.productos.obtener(int(datos["producto_id"]))
         venta = Venta(self.siguiente(),
-                      int(datos["cliente_id"]),
-                      producto.id,
-                      int(datos["cantidad"]),
-                      producto.precio)          # foto del precio del momento
+                    int(datos["cliente_id"]),
+                    producto.id,
+                    int(datos["cantidad"]),
+                    producto.precio)          # foto del precio del momento
 
         producto.descontar_stock(venta.cantidad)
         self.productos.guardar()                # guarda el stock nuevo en productos.json
