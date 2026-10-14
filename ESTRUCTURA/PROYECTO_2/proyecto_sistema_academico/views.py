@@ -57,6 +57,7 @@ class EstudianteController(CrudBase):
     ):
         self.gestor = GestorJSON(archivo)
         self.lista = []
+        self.matriculas = []
 
         for datos in self.gestor.leer():
             self.lista.append(Estudiante.desde_diccionario(datos))
@@ -234,6 +235,10 @@ class EstudianteController(CrudBase):
         if estudiante is None:
             return False, "No existe el estudiante"
 
+        for matricula in self.matriculas:
+            if matricula.estudiante_id == estudiante.id:
+                return False, "No se puede eliminar: el estudiante tiene matrículas"
+
         posicion = self.lista.index(estudiante)
         self.lista.remove(estudiante)
 
@@ -265,6 +270,7 @@ class MateriaController(CrudBase):
     ):
         self.gestor = GestorJSON(archivo)
         self.lista = []
+        self.matriculas = []
 
         for datos in self.gestor.leer():
             self.lista.append(Materia.desde_diccionario(datos))
@@ -434,6 +440,10 @@ class MateriaController(CrudBase):
         if materia is None:
             return False, "No existe la materia"
 
+        for matricula in self.matriculas:
+            if matricula.materia_id == materia.id:
+                return False, "No se puede eliminar: la materia tiene matrículas"
+
         posicion = self.lista.index(materia)
         self.lista.remove(materia)
 
@@ -472,6 +482,9 @@ class MatriculaController(CrudBase):
 
         for datos in self.gestor.leer():
             self.lista.append(Matricula.desde_diccionario(datos))
+
+        self.estudiantes.matriculas = self.lista
+        self.materias.matriculas = self.lista
 
     def guardar(self):
         datos = []
@@ -727,3 +740,17 @@ class MatriculaController(CrudBase):
             suma += matricula.nota
 
         return round(suma / len(matriculas), 2)
+
+    def resumen_academico(self):
+        aprobadas = 0
+
+        for matricula in self.lista:
+            if matricula.esta_aprobada():
+                aprobadas += 1
+
+        return {
+            "estudiantes": len(self.estudiantes.leer()),
+            "carreras": self.estudiantes.carreras(),
+            "materias_sin_cupo": self.materias.materias_sin_cupo(),
+            "matriculas_aprobadas": aprobadas
+        }

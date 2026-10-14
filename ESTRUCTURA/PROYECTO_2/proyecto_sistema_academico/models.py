@@ -78,7 +78,6 @@ class Estudiante(Persona):
         # Sobrescribe y EXTIENDE la del padre
         return f"{super().etiqueta()} ·{self.carnet} · {self.carrera}"
 
-
 # =====================================================================
 # ÚNICA CLASE CON ATRIBUTOS Y MÉTODOS ESTÁTICOS
 # =====================================================================
@@ -132,8 +131,7 @@ class Materia(ModeloBase):
 class Matricula(ModeloBase):
     """Matricula simple: id registro, materia_id, periodo, nota y fecha."""
 
-    def __init__(self, id_registro, estudiante_id, materia_id, periodo,
-                 nota, fecha=""):
+    def __init__(self, id_registro, estudiante_id, materia_id, periodo, nota, fecha=""):
         super().__init__(id_registro)
         self.estudiante_id = int(estudiante_id)
         self.materia_id = int(materia_id)
