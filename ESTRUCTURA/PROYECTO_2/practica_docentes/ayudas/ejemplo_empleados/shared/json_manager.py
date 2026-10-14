@@ -11,7 +11,9 @@ class GestorJSON:
         try:
             with open(self.ruta, "r", encoding="utf-8") as archivo:
                 datos = json.load(archivo)
-            return datos if isinstance(datos, list) else []
+            if isinstance(datos, list):
+                return datos
+            return []
         except FileNotFoundError:
             return []
         except (json.JSONDecodeError, OSError):

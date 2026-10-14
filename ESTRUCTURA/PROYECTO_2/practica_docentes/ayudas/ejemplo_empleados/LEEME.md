@@ -1,7 +1,9 @@
 # Ejemplo independiente de empleados
 
-Ejecute `python main.py` desde esta carpeta. Los datos persisten en `data/empleados.json`, creado al guardar el primer registro. Para probar sin tocar datos del ejercicio, instancie `EmpleadoController(archivo=ruta_temporal)`.
+Abra una terminal en esta carpeta y ejecute `python main.py`. El JSON persistente está en `data/empleados.json`; `GestorJSON` crea el directorio si hace falta.
 
-`Empleado(Persona)` hereda `id`, nombre, apellido y email. Su constructor envía a `super()` los cuatro datos de Persona y guarda `cargo`; `a_diccionario()` extiende el diccionario padre. La clase base convierte el JSON al modelo con `desde_diccionario()`: las claves `nombre`, `apellido`, `email` y `cargo` deben coincidir con los parámetros del constructor.
+Orden de estudio: `models.py`, `shared/json_manager.py`, `views.py` y `main.py`. `Empleado(Persona)` hereda ID, nombre, apellido y email; `super()` inicializa los campos comunes. `a_diccionario()` extiende el diccionario de Persona y `etiqueta()` personaliza el texto usado por el `__str__()` heredado. `desde_diccionario()` se hereda de `ModeloBase`; las claves del JSON coinciden con los parámetros del constructor.
 
-`views.py` hereda `CrudBase`, implementa sus siete operaciones y devuelve `(exito, mensaje)` para cambios. Al añadir empleados a ventas o al sistema académico se reutilizan sus `ModeloBase`, `Persona`, `CrudBase`, gestor y utilidades; se agrega el modelo/controlador y menú propios, se instancia desde `main.py` y se configura el archivo de datos. Se importan esas bases del proyecto y no se copian.
+`EmpleadoController` hereda directamente de `CrudBase` e implementa `leer`, `obtener`, `buscar`, `siguiente`, `crear`, `actualizar` y `eliminar`. Los métodos `guardar` y `validar` son auxiliares. Las pantallas de `main.py` piden valores, forman `datos`/`cambios` y muestran la tupla `(exito, mensaje)` que devuelven las operaciones de escritura.
+
+Para probar con otro JSON, cree `EmpleadoController(archivo=ruta_temporal)`. Al incorporar empleados a ventas o al sistema académico, importe y reutilice el `ModeloBase`, `Persona`, `CrudBase`, gestor y utilidades existentes del proyecto destino; añada la clase concreta, su controlador, menú y archivo propio sin duplicar las bases.

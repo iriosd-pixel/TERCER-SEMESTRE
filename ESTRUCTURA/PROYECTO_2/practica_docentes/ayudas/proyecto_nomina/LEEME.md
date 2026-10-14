@@ -1,9 +1,21 @@
 # Proyecto didáctico de nómina
 
-Desde esta carpeta ejecute `python main.py`. Cada CRUD almacena sus datos en su propio JSON dentro de `data/`; los archivos se crean cuando se realiza el primer guardado.
+Desde esta carpeta, ejecute `python main.py`. Los JSON se guardan en `data/` junto al código. El cálculo es didáctico: sueldo base + bonificación - descuento; no incluye impuestos ni legislación laboral. Los importes deben ser finitos, estar entre 0 y 1 000 000 000 y producir un neto no negativo. El periodo es texto no vacío y solo se permite una nómina por empleado y periodo.
 
-Orden sugerido: `models.py` (base, Persona, Empleado y sus diccionarios), `shared/json_manager.py`, `views.py` (CRUD y validaciones) y `main.py` (menús). Los empleados tienen `departamento_id`; Nómina recibe el controlador de empleados para verificar cada vínculo. Los departamentos se protegen de eliminación mientras tengan empleados, y los empleados mientras tengan nóminas. Primero elimine las nóminas y reasigne o elimine los empleados para retirar un departamento.
+Lea `models.py`, después `shared/json_manager.py`, `views.py` y `main.py`. Cada clase concreta (`DepartamentoController`, `EmpleadoController`, `NominaController`) hereda **directamente** de `CrudBase` e implementa los siete métodos CRUD. No hay clase intermedia ni fábrica genérica de modelos. Los modelos heredan `desde_diccionario()` y agregan campos a `a_diccionario()` mediante `super()`.
 
-El neto didáctico es sueldo base + bonificación - descuento. Todos los importes son finitos, entre 0 y 1 000 000 000 y el neto no puede ser negativo. Se supone un periodo como texto no vacío; se impide más de un registro por pareja empleado/periodo. No se modelan impuestos ni legislación laboral. Actualizar admite solo campos enviados y valida el resultado combinado; el ID y relaciones no se pueden borrar en cascada. Si falla el guardado se restaura la lista o el objeto en memoria.
+## Conectar los controladores
 
-Para pruebas aisladas, cree los controladores con rutas temporales distintas y arranque cada proceso con el directorio del ejemplo en `PYTHONPATH`/directorio actual; el JSON de datos real no hace falta modificarlo.
+`EmpleadoController` requiere el controlador de departamentos; `NominaController` requiere el de empleados. Para proteger las relaciones al borrar, conecte también las referencias inversas antes de utilizar el menú:
+
+```python
+departamentos = DepartamentoController()
+empleados = EmpleadoController(departamentos)
+nominas = NominaController(empleados)
+departamentos.conectar_empleados(empleados)
+empleados.conectar_nominas(nominas)
+```
+
+Si falta la referencia inversa, eliminar departamento o empleado devuelve un mensaje que exige conectar el controlador; no omite la validación ni lanza `AttributeError`. Un departamento asignado a empleados no se elimina, y un empleado con nóminas tampoco. Elimine primero las nóminas y luego los empleados para poder retirar el departamento. Las actualizaciones validan el resultado completo y restauran valores anteriores si falla el guardado.
+
+Los nombres de departamento se normalizan al crear y actualizar, se colapsan espacios y se comparan sin distinguir mayúsculas. Para probar sin modificar JSON del ejemplo, pase rutas temporales a los constructores de los tres controladores.
