@@ -138,8 +138,7 @@ class Producto(ModeloBase):
 class Venta(ModeloBase):
     """Venta simple: un cliente, un producto, una cantidad."""
 
-    def __init__(self, id_registro, cliente_id, producto_id, cantidad,
-                 precio_unitario, fecha=""):
+    def __init__(self, id_registro, cliente_id, producto_id, cantidad, precio_unitario, fecha=""):
         super().__init__(id_registro)
         self.cliente_id = int(cliente_id)
         self.producto_id = int(producto_id)

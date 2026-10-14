@@ -393,90 +393,97 @@ def mostrar_resumen():
 
 
 # =====================================================================
-# MENÚ REUTILIZABLE
+# MENÚS: DICCIONARIOS tecla -> (texto, función)
 # =====================================================================
+MENU_ESTUDIANTES = {
+    "1": ("Crear estudiante", crear_estudiante),
+    "2": ("Ver todos", listar_estudiantes),
+    "3": ("Buscar", buscar_estudiante),
+    "4": ("Ver por ID", ver_estudiante),
+    "5": ("Actualizar", actualizar_estudiante),
+    "6": ("Eliminar", eliminar_estudiante),
+    "0": ("Volver", None),
+}
+
+MENU_MATERIAS = {
+    "1": ("Crear materia", crear_materia),
+    "2": ("Ver todas", listar_materias),
+    "3": ("Buscar", buscar_materia),
+    "4": ("Ver por ID", ver_materia),
+    "5": ("Actualizar", actualizar_materia),
+    "6": ("Eliminar", eliminar_materia),
+    "7": ("Materias sin cupo", mostrar_materias_sin_cupo),
+    "0": ("Volver", None),
+}
+
+MENU_MATRICULAS = {
+    "1": ("Crear matrícula", crear_matricula),
+    "2": ("Ver todas", listar_matriculas),
+    "3": ("Registrar nota", registrar_nota),
+    "4": ("Ver certificado", ver_certificado),
+    "5": ("Retirar matrícula", retirar_matricula),
+    "6": (
+        "Matrículas por estudiante",
+        mostrar_matriculas_por_estudiante
+    ),
+    "7": ("Promedio del estudiante", mostrar_promedio),
+    "0": ("Volver", None),
+}
+
+
 def ejecutar_menu(titulo, opciones):
+    """Un solo bucle para los tres submenús."""
     while True:
         imprimir_titulo(titulo)
 
-        for numero, datos in opciones.items():
-            descripcion, accion = datos
-            print(f"{numero}. {descripcion}")
+        for tecla, (texto, _funcion) in opciones.items():
+            print(f"  {tecla}. {texto}")
 
-        print("0. Salir / volver")
-        opcion = input("\nElige una opción: ").strip()
+        print()
+        tecla = input("Opción: ").strip()
 
-        if opcion == "0":
-            return
+        if tecla not in opciones:
+            imprimir_error("Opción no válida")
+            pausa()
+            continue
 
-        if opcion in opciones:
-            descripcion, accion = opciones[opcion]
-            accion()
+        _texto, funcion = opciones[tecla]
+
+        if funcion is None:
+            break
+
+        funcion()
+
+
+def main():
+    while True:
+        imprimir_titulo("SISTEMA ACADÉMICO")
+        print("  1. Estudiantes")
+        print("  2. Materias")
+        print("  3. Matrículas")
+        print("  4. Resumen")
+        print("  0. Salir\n")
+
+        tecla = input("Opción: ").strip()
+
+        if tecla == "1":
+            ejecutar_menu("ESTUDIANTES", MENU_ESTUDIANTES)
+        elif tecla == "2":
+            ejecutar_menu("MATERIAS", MENU_MATERIAS)
+        elif tecla == "3":
+            ejecutar_menu("MATRÍCULAS", MENU_MATRICULAS)
+        elif tecla == "4":
+            mostrar_resumen()
+        elif tecla == "0":
+            imprimir_info("¡Hasta luego! 👋")
+            break
         else:
-            imprimir_error("Opción inválida")
+            imprimir_error("Opción no válida")
             pausa()
 
 
-# =====================================================================
-# SUBMENÚS
-# =====================================================================
-def menu_estudiantes():
-    opciones = {
-        "1": ("Crear estudiante", crear_estudiante),
-        "2": ("Listar estudiantes", listar_estudiantes),
-        "3": ("Buscar estudiantes", buscar_estudiante),
-        "4": ("Ver estudiante por ID", ver_estudiante),
-        "5": ("Actualizar estudiante", actualizar_estudiante),
-        "6": ("Eliminar estudiante", eliminar_estudiante)
-    }
-
-    ejecutar_menu("ESTUDIANTES", opciones)
-
-
-def menu_materias():
-    opciones = {
-        "1": ("Crear materia", crear_materia),
-        "2": ("Listar materias", listar_materias),
-        "3": ("Buscar materias", buscar_materia),
-        "4": ("Ver materia por ID", ver_materia),
-        "5": ("Actualizar materia", actualizar_materia),
-        "6": ("Eliminar materia", eliminar_materia),
-        "7": ("Materias sin cupo", mostrar_materias_sin_cupo)
-    }
-
-    ejecutar_menu("MATERIAS", opciones)
-
-
-def menu_matriculas():
-    opciones = {
-        "1": ("Crear matrícula", crear_matricula),
-        "2": ("Listar matrículas", listar_matriculas),
-        "3": ("Registrar nota", registrar_nota),
-        "4": ("Ver certificado", ver_certificado),
-        "5": ("Retirar matrícula", retirar_matricula),
-        "6": (
-            "Matrículas por estudiante",
-            mostrar_matriculas_por_estudiante
-        ),
-        "7": ("Promedio del estudiante", mostrar_promedio)
-    }
-
-    ejecutar_menu("MATRÍCULAS", opciones)
-
-
-# =====================================================================
-# MENÚ PRINCIPAL
-# =====================================================================
-def main():
-    opciones = {
-        "1": ("Estudiantes", menu_estudiantes),
-        "2": ("Materias", menu_materias),
-        "3": ("Matrículas", menu_matriculas),
-        "4": ("Resumen académico", mostrar_resumen)
-    }
-
-    ejecutar_menu("SISTEMA ACADÉMICO", opciones)
-
-
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("\nPrograma interrumpido por el usuario.")
