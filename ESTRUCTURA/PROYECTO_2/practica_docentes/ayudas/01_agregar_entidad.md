@@ -69,12 +69,19 @@ from views import EmpleadoController
 empleados = EmpleadoController("data/empleados.json")
 
 def crear_empleado():
-    datos = {"nombre": input("Nombre: "), "apellido": input("Apellido: "),
-             "email": input("Email: "), "cargo": input("Cargo: ")}
+    datos = {
+        "nombre": input("Nombre: "),
+        "apellido": input("Apellido: "),
+        "email": input("Email: "),
+        "cargo": input("Cargo: "),
+    }
     exito, mensaje = empleados.crear(datos)
-    print(mensaje)
+    mostrar_resultado(exito, mensaje)
 
-MENU = {"1": ("Crear empleado", crear_empleado), "0": ("Volver", None)}
+MENU = {
+    "1": ("Crear empleado", crear_empleado),
+    "0": ("Volver", None),
+}
 ```
 
 `main.py` importa e instancia una sola vez el controlador. La pantalla obtiene texto del usuario, forma un diccionario y muestra la tupla `(exito, mensaje)`. Añada funciones de listar, buscar, ver, actualizar y eliminar y conéctelas a las opciones del menú, como los menús de ventas.
