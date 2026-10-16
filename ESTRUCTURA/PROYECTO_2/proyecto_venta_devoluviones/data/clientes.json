@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "nombre": "Ismael",
+    "apellido": "Rios",
+    "email": "iriosd@gmail.com",
+    "telefono": "0649",
+    "ciudad": "Milagro"
+  },
+  {
+    "id": 2,
+    "nombre": "Linda",
+    "apellido": "Duarte",
+    "email": "ld@gmail.com",
+    "telefono": "05625",
+    "ciudad": "Mialhro"
+  }
+]
