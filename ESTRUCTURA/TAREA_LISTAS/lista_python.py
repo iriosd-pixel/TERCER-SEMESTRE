@@ -34,10 +34,13 @@ class ListaPasajerosPython:
     # 1. AÑADIR  ✅ YA RESUELTO
     # -----------------------------------------------------------------
     def añadir(self, pasajero):
-        """Añade al final con append()."""
+        """Añade al final sin permitir cédulas repetidas."""
+        if self.buscar(pasajero.cedula) != -1:
+            print("Ya existe un pasajero con esa cédula.")
+            return False
+
         self.pasajeros.append(pasajero)
         return True
-        # 🔧 MEJORA cuando termines buscar(): no añadir cédulas repetidas.
 
     # -----------------------------------------------------------------
     # 2. LISTAR  ✅ YA RESUELTO
@@ -243,3 +246,16 @@ class ListaPasajerosPython:
         PRUEBA   : ['DIANA', 'ANA', 'LUIS', 'BETO', 'ELENA']
         """
         return [p.nombre.upper() for p in self.pasajeros]
+
+    def filtrar_por_destino(self, destino):
+        return [
+            p for p in self.pasajeros
+            if p.destino == destino
+        ]
+
+
+    def mayores_de_edad(self):
+        return [
+            p for p in self.pasajeros
+            if p.es_mayor_de_edad()
+        ]
