@@ -43,16 +43,18 @@ class ListaPasajerosManual:
     # 1. AÑADIR  ✅ YA RESUELTO (úsalo como modelo)
     # -----------------------------------------------------------------
     def añadir(self, pasajero):
-        """Pone el pasajero en el primer cajón libre (al final)."""
+        """Añade al final sin permitir cédulas repetidas."""
+        if self.buscar(pasajero.cedula) != -1:
+            print("Ya existe un pasajero con esa cédula.")
+            return False
+
         if self.cantidad == self.capacidad:
             print("⚠ La lista está llena")
             return False
-        # El primer cajón libre SIEMPRE es datos[cantidad]
+
         self.datos[self.cantidad] = pasajero
         self.cantidad = self.cantidad + 1
         return True
-        # 🔧 MEJORA cuando termines buscar(): antes de añadir, verifica
-        #    que la cédula no exista:  if self.buscar(pasajero.cedula) != -1
 
     # -----------------------------------------------------------------
     # 2. LISTAR  ✅ YA RESUELTO (úsalo como modelo)
