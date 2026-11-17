@@ -1,0 +1,38 @@
+<style>
+  /* :root = la raíz. Aquí definimos VARIABLES de color (empiezan con --) */
+  :root { --azul: #2563EB; --noche: #0B1F3A; }
+
+  /* body = toda la página: tipo de letra, color de fondo y relleno */
+  body { font-family: sans-serif; background: #EEF2F7; padding: 20px; }
+
+  .pase {                          /* .pase = los elementos con class="pase" */
+    display: flex;                 /* sus hijos (cuerpo y talón) se ponen LADO A LADO */
+    max-width: 420px;              /* ancho máximo */
+    background: white;
+    border-radius: 14px;           /* esquinas redondeadas */
+    overflow: hidden;              /* lo que sobresalga de las esquinas no se ve */
+    box-shadow: 0 10px 25px rgba(0,0,0,.15);   /* sombra: x  y  difuminado  color */
+  }
+  .cuerpo { flex: 1; padding: 16px; }          /* flex: 1 = ocupa todo el espacio que sobra */
+  .cuerpo small { color: var(--azul); font-weight: bold; }   /* usamos la variable con var() */
+  .cuerpo h2 { margin: 6px 0; }                /* margen: 6px arriba/abajo, 0 a los lados */
+  .talon {
+    width: 100px;
+    background: linear-gradient(160deg, var(--noche), var(--azul));   /* degradado de color */
+    color: white;
+    display: grid;                 /* grid + place-content: center = centra el contenido */
+    place-content: center;
+    text-align: center;
+  }
+  .talon b { font-size: 30px; }    /* el número de asiento, grande */
+</style>
+
+<!-- El HTML usa las clases que definimos arriba -->
+<div class="pase">
+  <div class="cuerpo">
+    <small>✈ AEROLISTA · PASE DE ABORDAR</small>
+    <h2>Ana Torres</h2>
+    <p>GYE → UIO · Vuelo AL-204</p>
+  </div>
+  <div class="talon"><small>ASIENTO</small><b>7D</b></div>
+</div>

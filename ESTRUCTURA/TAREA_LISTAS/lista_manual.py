@@ -101,8 +101,6 @@ class ListaPasajerosManual:
                 -> [Diana, Xavi, Ana, Luis]
         """
         
-    def insertar(self, posicion, pasajero):
-        """Inserta un valor y desplaza a la derecha los que estaban después."""
         # Comprobamos primero que haya espacio para el nuevo valor.
         if self.cantidad >= self.capacidad:
             print("La lista está llena")
