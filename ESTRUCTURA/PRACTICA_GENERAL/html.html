@@ -1,0 +1,77 @@
+<!DOCTYPE html>                  <!-- 1. Le dice al navegador: esto es HTML5 -->
+<html lang="es">                 <!-- 2. Raíz de todo. lang = idioma de la página -->
+<head>                           <!-- 3. Configuración: NO se ve en la página -->
+  <meta charset="UTF-8">         <!--    Permite tildes y ñ -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <!-- Se adapta al celular -->
+  <title>Aerolínea</title>       <!--    Texto de la pestaña del navegador -->
+  <link rel="stylesheet" href="css.css">  <!-- Conecta un archivo CSS externo -->
+</head>
+<body>                           <!-- 4. Todo lo VISIBLE va aquí -->
+  <h1 id="titulo">Hola mundo</h1>
+  <h2 id="Pregunta"> Que hay?</h2>
+
+  <div class="nodo cabeza">Ana (tiene 2 clases)</div>
+  <div class="nodo">Luis</div>
+  <div class="nodo color ">Marta (sin clase: sin estilo)</div>
+
+
+  <div class="nodo cabeza">
+  Ana: tengo nodo y cabeza en el mismo elemento
+</div>
+
+<div class="nodo">
+  Luis: solo tengo nodo
+  <span class="cabeza">Este texto sí está dentro de nodo</span>
+</div>
+
+<div class="cabeza">
+  Marta: solo tengo cabeza
+</div>
+
+  <h3>Práctica de selectores por atributo</h3>
+  <p>El borde morado identifica el campo de texto; el naranja, el numérico.</p>
+  <input type="text" placeholder="Texto">
+  <input type="number" placeholder="Número">
+  <p data-estado="ocupado">Este párrafo tiene data-estado="ocupado" y fondo celeste.</p>
+
+  <h3>Estados interactivos</h3>
+  <p>Pasa el mouse sobre el botón, mantenlo presionado y luego selecciona el campo.</p>
+  <button type="button">Pasa el mouse</button>
+  <input type="text" placeholder="Haz clic aquí">
+
+  <h3>Selectores de posición en una lista</h3>
+  <ul>
+    <li>Ana (primera)</li>
+    <li>Luis</li>
+    <li>Marta (tercera)</li>
+    <li>Pedro (último)</li>
+  </ul>
+
+  <h3>Flexbox: repartir el espacio</h3>
+  <div class="fila-flex">
+    <div class="flex-a">A (flex: 1)</div>
+    <div class="flex-b">B (flex: 2)</div>
+    <div class="sin-flex">C (sin flex)</div>
+  </div>
+
+  <h3>CSS Grid: cuadrícula de 3 columnas</h3>
+  <div class="cuadricula">
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+    <div>5</div>
+    <div>6</div>
+    <div>7</div>
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+    <div>5</div>
+    <div>6</div>
+    <div>7</div>
+  </div>
+
+  <script src="js.js"></script>
+</body>
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Práctica de selectores CSS</title>
+
+  <style>
+    /* Selector por ID: solo el elemento con id="titulo" */
+    #titulo {
+      color: blue;
+    }
+
+    #Pregunta {
+      color: bisque;
+      background-color: #333;
+      padding: 6px;
+    }
+
+    /* Selector por clase: cualquier elemento con class="nodo" */
+    .nodo {
+      border: 2px solid purple;
+      padding: 8px;
+      margin: 6px 0;
+    }
+
+    .cabeza {
+      background: #E8F0FE;
+    }
+
+    .color {
+      color: rgb(64, 180, 0);
+    }
+
+    /* Sin espacio: el mismo elemento debe tener las dos clases */
+    .nodo.cabeza {
+      background-color: lightblue;
+    }
+
+    /* Con espacio: .cabeza debe estar dentro de .nodo */
+    .nodo .cabeza {
+      color: red;
+      font-weight: bold;
+    }
+
+    /* Con coma: se aplica a los elementos de cualquiera de las dos clases */
+    .nodo, .cabeza {
+      font-family: Arial, sans-serif;
+    }
+
+    /* Selector por atributo: input cuyo type es text */
+    input[type="text"] {
+      border: 2px solid #A173E8;
+    }
+
+    /* Selector por atributo: input cuyo type es number */
+    input[type="number"] {
+      border: 2px solid #E65100;
+    }
+
+    /* Selecciona elementos con data-estado="ocupado" */
+    [data-estado="ocupado"] {
+      background: #BCE6E6;
+      padding: 6px;
+    }
+
+    /* Estado normal del botón */
+    button {
+      background: #7B3FE4;
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      cursor: pointer;
+    }
+
+    /* El mouse está encima del botón */
+    button:hover {
+      background: #78a534;
+    }
+
+    /* El botón está presionado */
+    button:active {
+      transform: scale(0.95);
+    }
+
+    /* El campo de texto está seleccionado */
+    input:focus {
+      outline: 3px solid #59A9E8;
+    }
+
+    /* Selecciona el primer elemento de la lista */
+    ul li:first-child {
+      color: #A173E8;
+      font-weight: bold;
+    }
+
+    /* Selecciona el último elemento de la lista */
+    ul li:last-child {
+      color: #E65100;
+      font-weight: bold;
+    }
+
+    /* Selecciona los elementos pares: 2, 4, 6... */
+    ul li:nth-child(even) {
+      background: #F3F3F3;
+    }
+
+    /* Selecciona el tercer elemento */
+    ul li:nth-child(3) {
+      text-decoration: underline;
+    }
+
+    /* Flexbox: los elementos hijos se acomodan en una fila */
+    .fila-flex {
+      display: flex;
+      gap: 6px;
+      border: 1px solid #ba1313;
+      padding: 6px;
+    }
+
+    /* Ocupa una parte del espacio libre */
+    .flex-a {
+      flex: 1;
+      background: #E8F0FE;
+      padding: 20px;
+    }
+
+    /* Ocupa dos partes del espacio libre */
+    .flex-b {
+      flex: 2;
+      background: #E8F0FE;
+      padding: 30px;
+    }
+
+    /* No crece: ocupa solo el espacio que necesita su contenido */
+    .sin-flex {
+      background: #FCE8D5;
+      padding: 12px;
+    }
+
+    /* CSS Grid: prepara el contenedor para organizar elementos en filas y columnas */
+    .cuadricula {
+      display: grid;
+
+      /* Crea 3 columnas iguales; 1fr es una fracción del espacio disponible */
+      grid-template-columns: repeat(3, 1fr);
+
+      /* Crea 2 filas: la primera mide 40px y la segunda 70px */
+      grid-template-rows: 40px 70px;
+
+      /* Deja 8px de separación entre filas y columnas */
+      gap: 8px;
+
+      /* Da color y borde al contenedor para distinguirlo */
+      background: #E8F0FE;
+      border: 2px solid #7B3FE4;
+      padding: 8px;
+    }
+
+    /* Estilo compartido por cada celda de la cuadrícula */
+    .cuadricula > div {
+      background: #7B3FE4;
+      color: white;
+      padding: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h1 id="titulo">Hola mundo: selector por ID</h1>
+  <h2 id="Pregunta">¿Qué hay?: otro selector por ID</h2>
+
+  <h3>1. Elemento con ambas clases (.nodo.cabeza)</h3>
+  <div class="nodo cabeza">Ana tiene nodo y cabeza en el mismo elemento: borde y fondo celeste.</div>
+
+  <h3>2. Elemento con solo una clase (.nodo)</h3>
+  <div class="nodo">Luis solo tiene nodo: tiene borde, pero no el fondo celeste de .nodo.cabeza.</div>
+
+  <h3>3. Una clase dentro de otra (.nodo .cabeza)</h3>
+  <div class="nodo">
+    Luis tiene nodo; <span class="cabeza">este texto tiene cabeza y está dentro de nodo, por eso es rojo.</span>
+  </div>
+
+  <h3>4. Selector con coma (.nodo, .cabeza)</h3>
+  <div class="cabeza">Marta solo tiene cabeza; también usa la fuente Arial por la regla con coma.</div>
+
+  <h3>5. Clase adicional (.color)</h3>
+  <div class="nodo color">Este elemento tiene nodo y color: texto verde y borde morado.</div>
+
+  <h3>6. Selectores por atributo</h3>
+  <p>El borde morado identifica el campo de texto; el naranja, el numérico.</p>
+  <input type="text" placeholder="Texto">
+  <input type="number" placeholder="Número">
+  <p data-estado="ocupado">Este párrafo tiene data-estado="ocupado" y fondo celeste.</p>
+
+  <h3>7. Estados interactivos</h3>
+  <p>Pasa el mouse sobre el botón, mantenlo presionado y luego selecciona el campo.</p>
+  <button type="button">Pasa el mouse</button>
+  <input type="text" placeholder="Haz clic aquí">
+
+  <h3>8. Selectores de posición en una lista</h3>
+  <ul>
+    <li>Ana (primera)</li>
+    <li>Luis</li>
+    <li>Marta (tercera)</li>
+    <li>Pedro (último)</li>
+  </ul>
+
+  <h3>9. Flexbox: repartir el espacio</h3>
+  <div class="fila-flex">
+    <div class="flex-a">A (flex: 1)</div>
+    <div class="flex-b">B (flex: 2)</div>
+    <div class="sin-flex">C (sin flex)</div>
+  </div>
+
+  <h3>10. CSS Grid: cuadrícula de 3 columnas</h3>
+  <div class="cuadricula">
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+    <div>5</div>
+    <div>6</div>
+  </div>
+</body>
+</html>

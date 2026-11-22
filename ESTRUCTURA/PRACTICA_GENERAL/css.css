@@ -1,0 +1,155 @@
+
+.cabeza {
+    background: #E8F0FE;
+}
+
+.color {
+    color: rgb(64, 255, 0);
+}
+
+#Pregunta {
+    color: bisque;
+}
+
+#titulo {
+    color: blue;
+}
+
+
+/* Aplica a todos los elementos con la clase nodo */
+.nodo {
+  border: 2px solid purple;
+  padding: 8px;
+  margin: 6px;
+}
+
+/* Sin espacio: necesita AMBAS clases en el mismo elemento */
+.nodo.cabeza {
+  background-color: lightblue;
+}
+
+/* Con espacio: busca un elemento cabeza DENTRO de un elemento nodo */
+.nodo .cabeza {
+  color: red;
+}
+
+/* Con coma: aplica a nodo Y cabeza */
+.nodo, .cabeza {
+  font-family: Arial, sans-serif;
+}
+
+/* Selector por atributo: el input cuyo type es text */
+input[type="text"] {
+  border: 2px solid #A173E8;
+}
+
+/* Selector por atributo: el input cuyo type es number */
+input[type="number"] {
+  border: 2px solid #E65100;
+}
+
+/* Selecciona cualquier elemento con data-estado="ocupado" */
+[data-estado="ocupado"] {
+  background: #BCE6E6;
+  padding: 6px;
+}
+
+/* Estado normal del botón */
+button {
+  background: #7B3FE4;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  cursor: pointer;
+}
+
+/* El mouse está encima */
+button:hover {
+  background: #2a7bb5;
+}
+
+/* El botón está presionado */
+button:active {
+  transform: scale(0.95);
+}
+
+/* El campo de texto está seleccionado */
+input:focus {
+  outline: 3px solid #59A9E8;
+}
+
+/* Selecciona el primer elemento de la lista */
+ul li:first-child {
+  color: #A173E8;
+  font-weight: bold;
+}
+
+/* Selecciona el último elemento de la lista */
+ul li:last-child {
+  color: #E65100;
+  font-weight: bold;
+}
+
+/* Selecciona los elementos pares: 2, 4, 6... */
+ul li:nth-child(even) {
+  background: #F3F3F3;
+}
+
+/* Selecciona el tercer elemento */
+ul li:nth-child(3) {
+  text-decoration: underline;
+}
+
+/* Flexbox: los elementos hijos se acomodan en una fila */
+.fila-flex {
+  display: flex;
+  gap: 6px;
+  border: 1px solid #888;
+  padding: 6px;
+}
+
+/* Ocupa una parte del espacio libre */
+.flex-a {
+  flex: 1;
+  background: #E8F0FE;
+  padding: 12px;
+}
+
+/* Ocupa dos partes del espacio libre */
+.flex-b {
+  flex: 2;
+  background: #E8F0FE;
+  padding: 12px;
+}
+
+/* No crece: ocupa solo el espacio que necesita su contenido */
+.sin-flex {
+  background: #FCE8D5;
+  padding: 12px;
+}
+
+/* CSS Grid: prepara el contenedor para organizar elementos en filas y columnas */
+.cuadricula {
+  display: grid;
+
+  /* Crea 3 columnas iguales; 1fr significa una fracción del espacio disponible */
+  grid-template-columns: repeat(3, 10fr);
+
+  /* Crea 2 filas: la primera mide 40px y la segunda 70px */
+  grid-template-rows: 40px 70px;
+
+  /* Deja 8px de separación entre filas y columnas */
+  gap: 8px;
+
+  /* Da color y borde al contenedor para distinguirlo */
+  background: #E8F0FE;
+  border: 2px solid #7B3FE4;
+  padding: 8px;
+}
+
+/* Estilo compartido por cada celda de la cuadrícula */
+.cuadricula > div {
+  background: #7B3FE4;
+  color: white;
+  padding: 8px;
+}
