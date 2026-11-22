@@ -8,3 +8,6 @@ __pycache__/
 # Material de práctica local
 practica_1_docente/
 prueba.py
+
+# Carpeta local de modelamiento
+modelamiento/

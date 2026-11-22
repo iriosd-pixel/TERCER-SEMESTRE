@@ -1,0 +1,145 @@
+/* ================================================================
+   AeroLista ✈ · estilos.css
+   Cada paso del proyecto agrega una sección nueva AL FINAL.
+   ================================================================ */
+
+/* ---------- PASO 6 · VARIABLES: los colores de toda la app ----------
+   :root es la raíz de la página. Las variables empiezan con --
+   y se usan así:  color: var(--azul);                                */
+:root {
+  --noche: #0B1F3A;        /* azul muy oscuro: encabezado */
+  --noche-2: #13305A;
+  --azul: #2563EB;         /* azul de los botones principales */
+  --azul-claro: #DBEAFE;
+  --fondo: #EEF2F7;        /* gris azulado del fondo */
+  --tarjeta: #FFFFFF;      /* blanco de las tarjetas */
+  --texto: #0F172A;        /* texto principal */
+  --texto-2: #64748B;      /* texto secundario (gris) */
+  --borde: #E2E8F0;
+
+  /* el SEMÁFORO de los asientos: color normal y color oscuro (respaldo) */
+  --verde: #22C55E;   --verde-osc: #15803D;   /* libre */
+  --ambar: #F59E0B;   --ambar-osc: #B45309;   /* seleccionado */
+  --rojo: #EF4444;    --rojo-osc: #B91C1C;    /* reservado */
+  --celeste: #3B82F6;                         /* encontrado en una búsqueda */
+
+  --morado: #7C3AED;       /* clase Ejecutiva */
+  --sombra: 0 1px 2px rgba(15, 23, 42, .06), 0 4px 16px rgba(15, 23, 42, .06);
+  --radio: 14px;           /* redondeo de las tarjetas */
+}
+
+/* ---------- BASE: reglas para toda la página ---------- */
+* {                          /* * = TODOS los elementos */
+  box-sizing: border-box;    /* el ancho incluye relleno y borde (más fácil de calcular) */
+  margin: 0;                 /* quitamos los márgenes que el navegador pone solo */
+  padding: 0;
+}
+body {
+  font-family: Inter, system-ui, sans-serif;   /* tipo de letra (y respaldos) */
+  background: var(--fondo);
+  color: var(--texto);
+  font-size: 15px;
+  line-height: 1.5;                            /* espacio entre líneas */
+}
+button, input { font: inherit; }               /* botones y campos usan la misma letra */
+code { font-family: "Fira Code", monospace; }
+[hidden] { display: none !important; }         /* lo que tenga el atributo hidden no se ve */
+
+/* Los marcadores 📌 de los próximos pasos: una caja punteada */
+.pronto {
+  border: 2px dashed #CBD5E1;
+  border-radius: 12px;
+  padding: 14px 18px;
+  margin: 10px 0;
+  color: var(--texto-2);
+  font-size: 14px;
+  background: rgba(255, 255, 255, .6);
+}
+
+/* ---------- ENCABEZADO ---------- */
+.barra {
+  display: flex;                    /* sus hijos se ponen en FILA */
+  align-items: center;              /* centrados verticalmente */
+  justify-content: space-between;   /* uno a la izquierda, uno al centro, uno a la derecha */
+  gap: 24px;                        /* espacio entre ellos */
+  flex-wrap: wrap;                  /* si no caben, bajan a otra línea */
+  padding: 14px 28px;
+  background: linear-gradient(100deg, var(--noche), var(--noche-2));   /* degradado */
+  color: #fff;
+}
+.marca { display: flex; align-items: center; gap: 12px; }
+.marca-logo {
+  display: grid; place-items: center;          /* centra el avioncito */
+  width: 42px; height: 42px;
+  border-radius: 12px;                         /* esquinas redondas */
+  background: linear-gradient(135deg, #38BDF8, var(--azul));
+  font-size: 22px;
+  transform: rotate(-45deg);                   /* gira el ✈ para que "despegue" */
+}
+.marca b { display: block; font-size: 20px; }
+.marca small { color: #93C5FD; font-size: 12px; }
+.ruta { display: flex; align-items: center; gap: 14px; }
+.ruta-punto { text-align: center; }
+.ruta-punto b { display: block; font-size: 24px; letter-spacing: .04em; }
+.ruta-punto small { color: #93C5FD; font-size: 12px; }
+.ruta-linea { position: relative; width: 120px; border-top: 2px dashed #60A5FA; }   /* la línea punteada */
+.ruta-linea span {                             /* el avioncito encima de la línea */
+  position: absolute; left: 50%; top: -14px;
+  transform: translateX(-50%);
+}
+.vuelo-datos { display: flex; gap: 10px; flex-wrap: wrap; font-size: 13px; }
+.vuelo-datos span { background: rgba(255, 255, 255, .1); padding: 5px 12px; border-radius: 99px; }
+
+/* ---------- DISTRIBUCIÓN: avión a la izquierda, panel a la derecha ----------
+   display: grid divide el espacio en COLUMNAS:
+   la primera ocupa lo que sobre (1fr) y la segunda mide 420 px fijos.    */
+.contenedor {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 420px;
+  gap: 24px;
+  max-width: 1380px;          /* en pantallas enormes no se estira más */
+  margin: 24px auto;          /* auto a los lados = centrado */
+  padding: 0 24px;
+  align-items: start;
+}
+.zona-avion {                 /* la tarjeta blanca del avión */
+  background: var(--tarjeta);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  padding: 20px;
+  min-width: 0;
+}
+.pie { text-align: center; color: var(--texto-2); font-size: 12px; padding: 10px 0 30px; }
+
+/* En pantallas angostas (celulares/tablets) todo va en UNA columna */
+@media (max-width: 1080px) {
+  .contenedor { grid-template-columns: 1fr; }
+}
+
+/* ---------- PASO 10 · MENSAJES FLOTANTES (toasts) ---------- */
+.toasts {
+  position: fixed;                 /* fijo en la pantalla, aunque hagas scroll */
+  right: 20px;                     /* pegado a la derecha... */
+  bottom: 20px;                    /* ...y abajo */
+  display: grid;                   /* los mensajes se apilan uno debajo del otro */
+  gap: 10px;
+  z-index: 60;                     /* por encima de todo lo demás */
+  width: min(380px, calc(100vw - 40px));   /* 380 px, o menos si la pantalla es angosta */
+}
+.toast {
+  display: flex; gap: 10px; align-items: flex-start;
+  background: #fff;
+  border-left: 5px solid var(--verde);     /* franja de color a la izquierda */
+  border-radius: 12px;
+  padding: 12px 14px;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, .18);
+  font-size: 14px;
+  animation: entrar .3s ease-out;          /* aparece deslizándose (ver @keyframes abajo) */
+}
+.toast-aviso, .toast-pendiente { border-color: var(--ambar); }   /* ⚠ y 🚧 en ámbar */
+.toast-error, .toast-codigo { border-color: var(--rojo); }       /* ❌ y 💥 en rojo */
+.toast-codigo { background: #FEF2F2; }
+.toast.saliendo { opacity: 0; transform: translateX(30px); transition: .4s; }   /* se va hacia la derecha */
+
+/* @keyframes define una ANIMACIÓN: aquí, "aparecer subiendo un poquito" */
+@keyframes entrar { from { opacity: 0; transform: translateY(6px); } }
