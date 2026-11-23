@@ -28,14 +28,19 @@ function escapar(texto) {
   return div.innerHTML;                  // devuelve el texto ya "escapado" (&lt;b&gt;...)
 }
 
+
 // Dice la clase de un asiento: "1A" → "Ejecutiva", "7D" → "Económica".
 function claseDeAsiento(asiento) {
   const fila = parseInt(asiento);        // parseInt("12A") lee el número del inicio → 12
   return fila <= estado.vuelo.filas_ejecutiva ? "Ejecutiva" : "Económica";
   //     condición ? valor si es verdad : valor si es mentira   (operador ternario)
 }
+//recibe u asiento lo convierte a entero , al aplicarle el parse int, la fifla es para 
+//comprobar 
 
 // Busca el botón de un asiento por su código: botonDeAsiento("7D")
 function botonDeAsiento(asiento) {
   return document.querySelector(`.asiento[data-asiento="${asiento}"]`);
 }
+//con sleector me voy a ese asiento, se coloca ahi el asiento que se ingreso
+//
