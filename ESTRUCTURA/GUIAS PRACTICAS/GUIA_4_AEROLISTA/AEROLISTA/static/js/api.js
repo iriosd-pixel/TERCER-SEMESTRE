@@ -43,3 +43,18 @@ const API = {};
 
 // GET /api/vuelo → los datos del avión (filas, letras...)
 API.vuelo = () => pedir("/api/vuelo");
+
+// ---- 🆕 Paso 29: las funciones de verdad (reemplazan a las de datos-demo.js) ----
+// encodeURIComponent protege los textos para que viajen bien en la dirección (tildes, espacios...)
+API.resumen       = ()              => pedir("/api/resumen");                          // longitud, esta_vacia
+API.listar        = (clase = "")    => pedir("/api/reservas" + (clase ? "?clase=" + encodeURIComponent(clase) : ""));
+API.buscarNumero  = (numero)        => pedir("/api/reservas/" + numero);               // buscar
+API.buscarAsiento = (asiento)       => pedir("/api/asientos/" + encodeURIComponent(asiento));   // buscar_por_asiento
+API.buscarCedula  = (cedula)        => pedir("/api/cedulas/" + encodeURIComponent(cedula));     // buscar_por_cedula
+API.reservar      = (datos)         => pedir("/api/reservas", "POST", datos);          // ingresar ✅
+API.modificar     = (numero, datos) => pedir("/api/reservas/" + numero, "PUT", datos); // modificar
+API.eliminar      = (numero)        => pedir("/api/reservas/" + numero, "DELETE");     // eliminar
+API.restaurar     = ()              => pedir("/api/restaurar", "POST");
+
+// ---- 🆕 Paso 30: el panel de progreso (le damos 20 s porque corre 9 pruebas) ----
+API.progreso = () => pedir("/api/progreso", "GET", null, 20);

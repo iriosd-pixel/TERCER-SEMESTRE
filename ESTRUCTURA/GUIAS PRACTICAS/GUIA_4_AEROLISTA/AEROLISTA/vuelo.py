@@ -52,7 +52,7 @@ def clase_de_asiento(asiento):
     fila, letra = separar_asiento(asiento)
     if fila <= VUELO["filas_ejecutiva"]:
         return "Ejecutiva"
-    return "EconÃ³mica"
+    return "Económica"
 
 
 def asiento_existe(asiento):
