@@ -148,21 +148,23 @@ class ListaPasajeros:
         Retorna el Pasajero eliminado, o None si no existía."""
         if self.head is None:
             return None
-        if self.head.data.numero == numero:
-            pasajero=self.head.data
-            self.head=self.head.next
-            self.cantidad-=1
+        actual = self.head
+        if actual.data.numero == numero:
+            pasajero = actual.data
+            self.head = actual.next
+            self.cantidad -= 1
             return pasajero
         
-        anterior=self.head
-        while anterior.next is not None and anterior.next.data.numero!= numero:
-            anterior= anterior.next
-        if anterior.next is None:
+        anterior = actual
+        actual = actual.next
+        while actual is not None and actual.data.numero != numero:
+            anterior = actual
+            actual = actual.next
+        if actual is None:
             return None
-        quitado= anterior.next
-        anterior.next=quitado.next
-        self.cantidad-=1
-        return quitado.data
+        anterior.next = actual.next
+        self.cantidad -= 1
+        return actual.data
         
     def filtrar_por_clase(self, clase):
         """Retorna una list con los pasajeros de esa clase ("Ejecutiva" o
