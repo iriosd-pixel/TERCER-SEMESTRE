@@ -177,4 +177,57 @@ class ListaPasajeros:
                 resultado.append(pasajero)
             actual=actual.next
         return resultado
+
+    # ==========================================================
+    # RETOS OPCIONALES · iremos implementándolos uno por uno
+    # ==========================================================
+
+    def contar_menores(self):
+        """Cuenta los pasajeros menores de 18 años.
+        Pasos:
+        1. Crea un contador que empiece en 0.
+        2. Coloca actual en self.head para comenzar por el primer nodo.
+        3. Mientras actual no sea None, revisa actual.data.edad.
+        4. Si la edad es menor que 18, aumenta el contador en 1.
+        5. Avanza actual a actual.next en cada vuelta del while.
+        6. Cuando termine el recorrido, retorna el contador."""
+        pass
+
+    def pasajeros_de_fila(self, fila):
+        """Retorna una lista con los pasajeros de la fila indicada, en orden.
+        Pasos:
+        1. Crea una lista vacía llamada resultado.
+        2. Coloca actual en self.head.
+        3. Mientras actual no sea None, guarda el pasajero de actual.data.
+        4. Obtén la fila del asiento: el número está antes de la última letra
+           (por ejemplo, "10B" tiene fila 10); conviértelo a int.
+        5. Si esa fila es igual al argumento fila, agrega el pasajero a resultado.
+        6. Avanza actual a actual.next en cada vuelta del while.
+        7. Al terminar el recorrido, retorna resultado."""
+        pass
+
+    def mayor(self):
+        """Retorna el pasajero de mayor edad o None si la lista está vacía.
+        Pasos:
+        1. Si self.head es None, retorna None.
+        2. Guarda como mayor provisional al pasajero de la cabeza: self.head.data.
+        3. Empieza actual en el siguiente nodo de la cabeza.
+        4. Mientras actual no sea None, compara su edad con la del mayor provisional.
+        5. Si actual.data tiene más edad, actualiza el mayor provisional.
+        6. Avanza actual a actual.next en cada vuelta del while.
+        7. Al terminar, retorna el pasajero mayor provisional."""
+        pass
+
+    def invertir(self):
+        """Invierte los enlaces next y actualiza self.head.
+        Pasos:
+        1. Crea anterior = None y actual = self.head.
+        2. Mientras actual no sea None, guarda primero el siguiente nodo
+           en una variable temporal; lo necesitarás antes de cambiar el enlace.
+        3. Haz que actual.next apunte a anterior (así inviertes esa flecha).
+        4. Avanza anterior a actual y actual al siguiente que guardaste.
+        5. Al terminar, asigna anterior a self.head: ahora es la nueva cabeza.
+        6. No cambies self.cantidad. Este método altera el orden; pruébalo al final.
+        Pista: si la lista está vacía, el recorrido no entra y head queda en None."""
+        pass
         
