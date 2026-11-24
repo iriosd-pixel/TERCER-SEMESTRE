@@ -140,32 +140,35 @@ class ListaPasajeros:
             pasajero.asiento=nuevo_asiento
             return True
         
-        
     def eliminar(self, numero):
-        """Cancela la reserva: desengancha el nodo que tiene ese número.
-        Piensa en los casos: lista vacía · es la cabeza · está en medio o al
-        final · no existe. ¡No olvides restar self.cantidad!
-        Retorna el Pasajero eliminado, o None si no existía."""
+        """Cancela la reserva y retorna el Pasajero eliminado,
+        o None si no existía."""
+
         if self.head is None:
             return None
+
         actual = self.head
+
         if actual.data.numero == numero:
             pasajero = actual.data
             self.head = actual.next
             self.cantidad -= 1
             return pasajero
-        
+
         anterior = actual
         actual = actual.next
+
         while actual is not None and actual.data.numero != numero:
             anterior = actual
             actual = actual.next
+
         if actual is None:
             return None
+
         anterior.next = actual.next
         self.cantidad -= 1
         return actual.data
-        
+
     def filtrar_por_clase(self, clase):
         """Retorna una list con los pasajeros de esa clase ("Ejecutiva" o
         "Económica"), en el mismo orden de la lista.
@@ -184,6 +187,7 @@ class ListaPasajeros:
     # RETOS OPCIONALES · iremos implementándolos uno por uno
     # ==========================================================
 
+
     def contar_menores(self):
         """Cuenta los pasajeros menores de 18 años.
         Pasos:
@@ -192,8 +196,14 @@ class ListaPasajeros:
         3. Mientras actual no sea None, revisa actual.data.edad.
         4. Si la edad es menor que 18, aumenta el contador en 1.
         5. Avanza actual a actual.next en cada vuelta del while.
-        6. Cuando termine el recorrido, retorna el contador."""
-        pass
+        6. Al terminar el recorrido, retorna el contador."""
+        contador=0
+        actual= self.head
+        while actual is not None:
+            if actual.data.edad<18:
+                contador+=1
+            actual=actual.next
+        return contador
 
     def pasajeros_de_fila(self, fila):
         """Retorna una lista con los pasajeros de la fila indicada, en orden.
@@ -201,35 +211,58 @@ class ListaPasajeros:
         1. Crea una lista vacía llamada resultado.
         2. Coloca actual en self.head.
         3. Mientras actual no sea None, guarda el pasajero de actual.data.
-        4. Obtén la fila del asiento: el número está antes de la última letra
-           (por ejemplo, "10B" tiene fila 10); conviértelo a int.
-        5. Si esa fila es igual al argumento fila, agrega el pasajero a resultado.
+        4. Obtén la fila del asiento: el número está antes de la última letra.
+           Por ejemplo, en "10B" la fila es 10; conviértela a int.
+        5. Si la fila del asiento coincide con el argumento fila,
+           agrega el pasajero a resultado.
         6. Avanza actual a actual.next en cada vuelta del while.
         7. Al terminar el recorrido, retorna resultado."""
-        pass
+        resultado=[]
+        actual=self.head
+        while actual is not None:
+            pasajero=actual.data
+            fila_asiento=int(pasajero.asiento[:-1])
+            if fila_asiento== fila:
+                resultado.append(pasajero)
+            actual=actual.next
+        return resultado
 
     def mayor(self):
-        """Retorna el pasajero de mayor edad o None si la lista está vacía.
+        """Retorna el pasajero de mayor edad, o None si la lista está vacía.
         Pasos:
         1. Si self.head es None, retorna None.
-        2. Guarda como mayor provisional al pasajero de la cabeza: self.head.data.
-        3. Empieza actual en el siguiente nodo de la cabeza.
+        2. Guarda self.head.data como el mayor provisional.
+        3. Coloca actual en el siguiente nodo de la cabeza.
         4. Mientras actual no sea None, compara su edad con la del mayor provisional.
-        5. Si actual.data tiene más edad, actualiza el mayor provisional.
+        5. Si actual.data tiene más edad, actualízalo como mayor provisional.
         6. Avanza actual a actual.next en cada vuelta del while.
-        7. Al terminar, retorna el pasajero mayor provisional."""
-        pass
+        7. Al terminar el recorrido, retorna el pasajero mayor provisional."""
+        if self.head is None:
+            return None
+
+        mayor= self.head.data
+        actual=self.head.next
+        while actual is not None:
+            if actual.data.edad >mayor.edad:
+                mayor= actual.data
+            actual= actual.next
+        return mayor
 
     def invertir(self):
         """Invierte los enlaces next y actualiza self.head.
         Pasos:
-        1. Crea anterior = None y actual = self.head.
-        2. Mientras actual no sea None, guarda primero el siguiente nodo
-           en una variable temporal; lo necesitarás antes de cambiar el enlace.
-        3. Haz que actual.next apunte a anterior (así inviertes esa flecha).
+        1. Crea anterior = None y coloca actual en self.head.
+        2. Mientras actual no sea None, guarda actual.next en una variable temporal.
+        3. Haz que actual.next apunte a anterior.
         4. Avanza anterior a actual y actual al siguiente que guardaste.
-        5. Al terminar, asigna anterior a self.head: ahora es la nueva cabeza.
-        6. No cambies self.cantidad. Este método altera el orden; pruébalo al final.
-        Pista: si la lista está vacía, el recorrido no entra y head queda en None."""
-        pass
-        
+        5. Al terminar, asigna anterior a self.head: será la nueva cabeza.
+        6. No cambies self.cantidad. Como altera el orden, prueba este método al final.
+        7. Si la lista está vacía, el ciclo no se ejecuta y head queda en None."""
+        anterior=None
+        actual= self.head
+        while actual is not None:
+            siguiente= actual.next
+            actual.next=anterior
+            anterior=actual
+            actual=siguiente
+        self.head=anterior
