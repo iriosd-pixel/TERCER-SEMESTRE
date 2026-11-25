@@ -1,11 +1,51 @@
-#================================================
-#EJEMPLOS PUESTOS POR LA IA MAS CAMBIOS
-#================================================
+#=======================================================================
+# EJEMPLOS DE EXPLICACIÓN DE LA GUÍA
+# Cada ejemplo se puede ejecutar llamando a su función.
+#=======================================================================
+# Ejemplo de explicación 1
+def ejemplo_explicacion_1():
+    # Python infiere el tipo desde el valor
+    edad = 25              # int
+    precio = 9.99          # float
+    nombre = "Ana"         # str
+    activo = True          # bool
+    notas = [8, 6, 10]     # list
+    persona = {"nombre": "Ana", "edad": 25}   # dict
 
-#================================================
+    # Verificar el tipo
+    print(type(edad))       # <class 'int'>
+    print(type(nombre))     # <class 'str'>
+    print(type(notas))      # <class 'list'>
+
+    # Cambiar el valor cambia el tipo (tipado dinámico)
+    x = 10       # int
+    x = "diez"   # ahora str — Python no protesta
+
+#=======================================================================
+#EJEMPLOS PUESTOS POR LA IA MAS CAMBIOS
+#=======================================================================
+#=======================================================================
+# TALLER — 4 ejercicios paso a paso
 # 1) Leer el precio de un producto sin IVA y mostrar el IVA y el precio final.
 # El IVA en Ecuador es 15%.
-#================================================
+#=======================================================================
+#-------- 1. ENTENDER EL PROBLEMA --------
+# Entrada: precio (input)
+# Proceso: iva = precio × 0.15; total = precio + iva
+# Salida: el IVA y el total
+# Ejemplo de entrada (guía): precio = 80
+# Salida esperada (guía): IVA: $12.00 Total: $92.00
+
+#-------- 2. BOSQUEJO A MANO ------------
+# precio = 80
+# iva   = 80 × 0.15 = 12
+# total = 80 + 12   = 92
+
+#-------- 3. DESCUBRIR EL PATRÓN --------
+# Dos cálculos separados que usan el mismo dato de entrada. El 0.15 es una constante del problema — puedes definirla arriba con IVA = 0.15 para dejarla clara. El formato :.2f muestra exactamente dos decimales, que es lo que se espera para dinero.
+
+#-------- 4. ESCRIBIR EL CÓDIGO ---------
+
 IVA = 0.15                            
 
 precio = float(input("Precio sin IVA: $"))
@@ -14,6 +54,13 @@ total = precio + iva
 
 print(f"IVA:   ${iva:.2f}")
 print(f"Total: ${total:.2f}")
+#-------- 5. PRUEBA DE ESCRITORIO -------
+# precio | iva | total
+# 80 | 12.0 | 92.0
+# 100 | 15.0 | 115.0
+# 37.50 | 5.625 | 43.125
+
+
 #CAMBIO
 #Añadir un descuento del 10% que se aplique antes del IVA.
 # Muestra los tres valores: descuento, IVA, total.
@@ -31,14 +78,41 @@ print(f"Descuento: ${precio_des:.2f}")
 print(f"IVA:       ${iva:.2f}")
 print(f"Total:     ${total:.2f}")
 
-#================================================
+#=======================================================================
 # 2) Leer un número entero y determinar si es par o impar.
-#================================================
+#=======================================================================
+#-------- 1. ENTENDER EL PROBLEMA --------
+# Entrada: num (input)
+# Proceso: verificar si num % 2 == 0
+# Salida: "par" o "impar"
+# Ejemplo de entrada (guía): num = 7
+# Salida esperada (guía): 7 es impar
+
+#-------- 2. BOSQUEJO A MANO ------------
+# num = 7
+#
+# 7 / 2 = 3, sobra 1 → impar
+# 4 / 2 = 2, sobra 0 → par
+# 0 / 2 = 0, sobra 0 → par (el cero es par)
+
+#-------- 3. DESCUBRIR EL PATRÓN --------
+# El residuo con % es la clave. Si al dividir para 2 el residuo es 0, el número es par; si no, impar. El resultado de num % 2 == 0 ya es un bool, así que se puede usar directamente en un if. Aquí usamos el operador ternario para hacerlo en una línea.
+
+#-------- 4. ESCRIBIR EL CÓDIGO ---------
+
 num = int(input("Ingresa un número: "))
 
 resultado = "par" if num % 2 == 0 else "impar"
 
 print(f"{num} es {resultado}")
+#-------- 5. PRUEBA DE ESCRITORIO -------
+# num | num % 2 | resultado
+# 7 | 1 | impar
+# 4 | 0 | par
+# 0 | 0 | par
+# -3 | 1 (en Python 3, positivo) | impar
+
+
 #CAMBIO
 #Modifícalo para que además diga si es múltiplo de 3, de 5, o de ambos.
 num = int(input("Ingresa un número: "))
@@ -57,10 +131,31 @@ else:
 
 print(f"{num} es {resultado}")
 
-#================================================
+#=======================================================================
 # 3) Leer una cantidad total de segundos y mostrarla como hh:mm:ss.
 # Ejemplo: 3725 segundos → 01:02:05.
-#================================================
+#=======================================================================
+#-------- 1. ENTENDER EL PROBLEMA --------
+# Entrada: total (segundos)
+# Proceso: dividir sucesivamente para 3600 y 60 usando // y %
+# Salida: el tiempo formateado
+# Ejemplo de entrada (guía): total = 3725
+# Salida esperada (guía): 01:02:05
+
+#-------- 2. BOSQUEJO A MANO ------------
+# total = 3725 segundos
+#
+# horas    = 3725 // 3600 = 1        sobran 125
+# minutos  = 125  // 60   = 2        sobran 5
+# segundos = 5
+#
+# resultado: 01:02:05
+
+#-------- 3. DESCUBRIR EL PATRÓN --------
+# Este ejercicio muestra la potencia de combinar // y %. La división entera te dice cuántas unidades grandes caben (horas); el residuo, lo que sobra para las unidades más pequeñas. El formato {n:02d} rellena con ceros a la izquierda: 5 se muestra como 05.
+
+#-------- 4. ESCRIBIR EL CÓDIGO ---------
+
 total = int(input("Segundos totales: "))
 
 horas = total // 3600
@@ -69,7 +164,17 @@ minutos = resto // 60
 segundos = resto % 60
 
 print(f"{horas:02d}:{minutos:02d}:{segundos:02d}")
-# CAMBIO
+#-------- 5. PRUEBA DE ESCRITORIO -------
+# Paso | horas | resto | minutos | segundos
+# total=3725 | — | — | — | —
+# horas = 3725//3600 | 1 | — | — | —
+# resto = 3725%3600 | 1 | 125 | — | —
+# minutos = 125//60 | 1 | 125 | 2 | —
+# segundos = 125%60 | 1 | 125 | 2 | 5
+# print | 1 | 125 | 2 | 5 → 01:02:05 ✓
+
+
+#CAMBIO
 #Al revés: leer hh:mm:ss y convertir a segundos totales. Tendrás que usar split(":").
 
 tiempo = input("Ingresa el tiempo (hh:mm:ss): ")
@@ -89,10 +194,30 @@ total_segundos = (horas * 3600) + (minutos * 60) + segundos
 # 5. Mostramos el resultado
 print(f"El total es: {total_segundos} segundos")
 
-#================================================
+#=======================================================================
 # 4) Un cajero solo tiene billetes de $20, $10, $5 y $1. Dado un monto,
 # mostrar cuántos billetes de cada uno se necesitan (usando la mínima cantidad).
-#================================================
+#=======================================================================
+#-------- 1. ENTENDER EL PROBLEMA --------
+# Entrada: monto (entero)
+# Proceso: dividir sucesivamente por 20, 10, 5, 1 con // y %
+# Salida: cantidad de billetes de cada tipo
+# Ejemplo de entrada (guía): monto = 87
+# Salida esperada (guía): $20 × 4 $10 × 0 $5 × 1 $1 × 2
+
+#-------- 2. BOSQUEJO A MANO ------------
+# monto = 87
+#
+# $20: 87 // 20 = 4, sobra 7
+# $10:  7 // 10 = 0, sobra 7
+# $5 :  7 //  5 = 1, sobra 2
+# $1 :  2 //  1 = 2, sobra 0
+
+#-------- 3. DESCUBRIR EL PATRÓN --------
+# Es el mismo patrón que segundos→horas, pero con billetes. La idea general se llama algoritmo greedy (voraz): en cada paso agarras la mayor denominación que quepa. Trabajamos siempre con el resto, no con el monto original.
+
+#-------- 4. ESCRIBIR EL CÓDIGO ---------
+
 monto = int(input("Monto: $"))
 resto = monto
 
@@ -105,6 +230,14 @@ print(f"$20 × {b20}")
 print(f"$10 × {b10}")
 print(f"$5  × {b5}")
 print(f"$1  × {b1}")
+#-------- 5. PRUEBA DE ESCRITORIO -------
+# Paso | resto inicial | billete | resto final
+# $20 | 87 | 4 | 7
+# $10 | 7 | 0 | 7
+# $5 | 7 | 1 | 2
+# $1 | 2 | 2 | 0
+
+
 #CAMBIO
 #Añadir billete de $50 al inicio. Después probar con monedas de
 # $0.25, $0.10, $0.05 y $0.01 (necesitas trabajar con centavos).
@@ -141,11 +274,13 @@ print(f"$0.10 × {m10}")
 print(f"$0.05 × {m5}")
 print(f"$0.01 × {m1}")
 
-#================================================
-#                   TAREA
-#================================================
-#_______1) Lee un número de 3 cifras y muestra la suma de sus dígitos. Ejemplo: 435 → 4+3+5 = 12.
-#--------ENTENDER EL PROBLEMA--------
+#=======================================================================
+# EJERCICIOS PROPUESTOS
+#=======================================================================
+#=======================================================================
+# 1) Lee un número de 3 cifras y muestra la suma de sus dígitos. Ejemplo: 435 → 4+3+5 = 12.
+#=======================================================================
+#-------- 1. ENTENDER EL PROBLEMA --------
 #----Entrada:
 #numero (input)
 #----Proceso:
@@ -161,7 +296,10 @@ print(f"$0.01 × {m1}")
 #----Salida esperada:
 #4 + 3 + 5 = 12
 
-#--------BOSQUEJO A MANO------------
+# Ejemplo de entrada (guía): num = 435
+# Salida esperada (guía): Suma: 12
+
+#-------- 2. BOSQUEJO A MANO ------------
 #numero = 435
 #centenas = 435 // 100 = 4
 #resto = 435 % 100 = 35
@@ -169,10 +307,10 @@ print(f"$0.01 × {m1}")
 #unidades = 35 % 10 = 5
 #suma = 4 + 3 + 5 = 12
 
-#--------DESCUBRIR EL PATRÓN-----------
+#-------- 3. DESCUBRIR EL PATRÓN --------
 #El patrón consiste en separar el número en centenas, decenas y unidades usando división entera y módulo, para después sumar los tres dígitos.
 
-#--------ESCRIBIR EL CÓDIGO-----------
+#-------- 4. ESCRIBIR EL CÓDIGO ---------
 numero=int(input("ingrese numero:"))
 centenas=numero//100
 resto=numero%100
@@ -181,7 +319,7 @@ unidades=resto%10
 suma=centenas+decenas+unidades
 print(suma)
 
-#--------PRUEBA DE ESCRITORIO---------
+#-------- 5. PRUEBA DE ESCRITORIO -------
 
 #Usando numero = 435
 
@@ -195,9 +333,11 @@ print(suma)
 #suma = centenas+decenas+unidades | 435    | 4        | 35    | 3       | 5        | 12   | —        |
 #print(suma)                      | 435    | 4        | 35    | 3       | 5        | 12   | 12       |
 
-#_______2) Lee una cantidad de minutos y muéstrala como «X horas Y minutos». Ejemplo: 135 → «2 horas 15 minutos».
+#=======================================================================
+# 2) Lee una cantidad de minutos y muéstrala como «X horas Y minutos». Ejemplo: 135 → «2 horas 15 minutos».
+#=======================================================================
 
-#--------ENTENDER EL PROBLEMA--------
+#-------- 1. ENTENDER EL PROBLEMA --------
 #----Entrada:
 #valores (input)
 #----Proceso:
@@ -210,33 +350,38 @@ print(suma)
 #----Salida esperada:
 #2 horas 15 minutos
 
-#--------BOSQUEJO A MANO------------
+# Ejemplo de entrada (guía): minutos = 135
+# Salida esperada (guía): 2 horas 15 minutos
+
+#-------- 2. BOSQUEJO A MANO ------------
 #valores = 135
 #horas = 135 // 60 = 2
 #minutos = 135 % 60 = 15
 
-#--------DESCUBRIR EL PATRÓN-----------
+#-------- 3. DESCUBRIR EL PATRÓN --------
 #El patrón consiste en dividir los minutos para 60 para obtener las horas y usar el módulo de 60 para obtener los minutos restantes.
 
-#--------ESCRIBIR EL CÓDIGO-----------
+#-------- 4. ESCRIBIR EL CÓDIGO ---------
 valores= int(input("ingrese el valor:"))
 horas=valores//60
 minutos=valores%60
-print(f"{horas} horas e {minutos} minutos")
+print(f"{horas} horas {minutos} minutos")
 
-#--------PRUEBA DE ESCRITORIO---------
+#-------- 5. PRUEBA DE ESCRITORIO -------
 #Usando valores = 135
 # Línea                | valores | horas | minutos | Pantalla             |
 # -------------------- | ------- | ----- | ------- | -------------------- |
 # input                | 135     | —     | —       | 135                  |
 # horas = valores//60  | 135     | 2     | —       | —                    |
 # minutos = valores%60 | 135     | 2     | 15      | —                    |
-# print                | 135     | 2     | 15      | 2 horas e 15 minutos |
+# print                | 135     | 2     | 15      | 2 horas 15 minutos   |
 
 
-#_______3) Lee peso (kg) y estatura (m) y calcula el IMC. Fórmula: IMC = peso / estatura². Muestra el IMC con 2 decimales.
+#=======================================================================
+# 3) Lee peso (kg) y estatura (m) y calcula el IMC. Fórmula: IMC = peso / estatura². Muestra el IMC con 2 decimales.
+#=======================================================================
 
-#--------ENTENDER EL PROBLEMA--------
+#-------- 1. ENTENDER EL PROBLEMA --------
 #----Entrada:
 #peso (input)
 #estatura (input)
@@ -250,23 +395,26 @@ print(f"{horas} horas e {minutos} minutos")
 #----Salida esperada:
 #IMC = 22.86
 
-#--------BOSQUEJO A MANO------------
+# Ejemplo de entrada (guía): peso = 70, estatura = 1.75
+# Salida esperada (guía): IMC: 22.86
+
+#-------- 2. BOSQUEJO A MANO ------------
 #peso = 70
 #estatura = 1.75
 #Imc = 70 / 1.75²
 #Imc = 70 / 3.0625
 #Imc = 22.86
 
-#--------DESCUBRIR EL PATRÓN-----------
+#-------- 3. DESCUBRIR EL PATRÓN --------
 #El patrón consiste en dividir el peso para la estatura elevada al cuadrado y mostrar el resultado con dos decimales.
 
-#--------ESCRIBIR EL CÓDIGO-----------
+#-------- 4. ESCRIBIR EL CÓDIGO ---------
 peso=float(input("ingrese el peso:"))
 estatura=float(input("ingrese el estatura:"))
 Imc=peso/estatura**2
 print(f"El IMC es {Imc:.2f}")
 
-#--------PRUEBA DE ESCRITORIO---------
+#-------- 5. PRUEBA DE ESCRITORIO -------
 #Usando peso = 70 y estatura = 1.75
 # Línea                  | peso | estatura | Imc   | Pantalla        |
 # ---------------------- | ---- | -------- | ----- | --------------- |
@@ -276,9 +424,11 @@ print(f"El IMC es {Imc:.2f}")
 # print                  | 70   | 1.75     | 22.86 | El IMC es 22.86 |
 
 
-#_______4) Lee un número decimal y una cantidad de decimales, y muéstralo redondeado. Ejemplo: 3.14159 con 2 decimales → 3.14.
+#=======================================================================
+# 4) Lee un número decimal y una cantidad de decimales, y muéstralo redondeado. Ejemplo: 3.14159 con 2 decimales → 3.14.
+#=======================================================================
 
-#--------ENTENDER EL PROBLEMA--------
+#-------- 1. ENTENDER EL PROBLEMA --------
 #----Entrada:
 #numero_decimal (input)
 #cantidad_decimales (input)
@@ -292,22 +442,25 @@ print(f"El IMC es {Imc:.2f}")
 #----Salida esperada:
 #3.14
 
-#--------BOSQUEJO A MANO------------
+# Ejemplo de entrada (guía): num = 3.14159, dec = 2
+# Salida esperada (guía): 3.14
+
+#-------- 2. BOSQUEJO A MANO ------------
 #numero_decimal = 3.14159
 #cantidad_decimales = 2
 #resultado = round(3.14159, 2)
 #resultado = 3.14
 
-#--------DESCUBRIR EL PATRÓN-----------
+#-------- 3. DESCUBRIR EL PATRÓN --------
 #El patrón consiste en utilizar la función round() para redondear el número según la cantidad de decimales indicada.
 
-#--------ESCRIBIR EL CÓDIGO-----------
+#-------- 4. ESCRIBIR EL CÓDIGO ---------
 numero_decimal=float(input("ingrese el numero decimal:"))
 cantidad_decimales=int(input("Ingrese la cantidad de decimales:"))
 resultado=round(numero_decimal, cantidad_decimales)
 print(resultado)
 
-#--------PRUEBA DE ESCRITORIO---------
+#-------- 5. PRUEBA DE ESCRITORIO -------
 #Usando numero_decimal = 3.14159 y cantidad_decimales = 2
 # Línea                                                 | numero_decimal | cantidad_decimales | resultado | Pantalla |
 # ----------------------------------------------------- | -------------- | ------------------ | --------- | -------- |
@@ -317,9 +470,11 @@ print(resultado)
 # print                                                 | 3.14159        | 2                  | 3.14      | 3.14     |
 
 
-#_______5) Un producto vale $12. Si compras 10 o más te dan 15% de descuento, si compras entre 5 y 9 te dan 5%. Calcula el total.
+#=======================================================================
+# 5) Un producto vale $12. Si compras 10 o más te dan 15% de descuento, si compras entre 5 y 9 te dan 5%. Calcula el total.
+#=======================================================================
 
-#--------ENTENDER EL PROBLEMA--------
+#-------- 1. ENTENDER EL PROBLEMA --------
 #----Entrada:
 #cantidad (input)
 #----Proceso:
@@ -336,7 +491,10 @@ print(resultado)
 #Descuento: 15%
 #Total: $102.00
 
-#--------BOSQUEJO A MANO------------
+# Ejemplo de entrada (guía): cantidad = 12
+# Salida esperada (guía): Precio unitario: $12 Descuento: 15% Total: $122.40
+
+#-------- 2. BOSQUEJO A MANO ------------
 #cantidad = 10
 #PRECIO = 12
 #descuento = 15% = 0.15
@@ -344,12 +502,12 @@ print(resultado)
 #total_pagar = 120 - (120 × 0.15)
 #total_pagar = 102
 
-#--------DESCUBRIR EL PATRÓN-----------
+#-------- 3. DESCUBRIR EL PATRÓN --------
 #El patrón consiste en determinar el descuento según la cantidad de productos, calcular el subtotal y restar el descuento para obtener el total.
 
-#--------ESCRIBIR EL CÓDIGO-----------PRECIO=12
-cantidad=int(input("Ingrese la cantidad de productos"))
+#-------- 4. ESCRIBIR EL CÓDIGO ---------
 PRECIO=12
+cantidad=int(input("Ingrese la cantidad de productos"))
 if cantidad>=10:
     descuento=0.15
 elif cantidad>=5 and cantidad<=9:
@@ -358,10 +516,10 @@ else:
     descuento=0
 subtotal_pagar= cantidad*PRECIO
 total_pagar=subtotal_pagar-(subtotal_pagar*descuento)
-print(f"El descuento es: {descuento}")
+print(f"El descuento es: {descuento:.0%}")
 print(f"El total es: {total_pagar:.2f}")
 
-#--------PRUEBA DE ESCRITORIO---------
+#-------- 5. PRUEBA DE ESCRITORIO -------
 #Usando cantidad = 10
 # Línea                                                     | PRECIO | cantidad | descuento | subtotal_pagar | total_pagar | Pantalla              |
 # --------------------------------------------------------- | ------ | -------- | --------- | -------------- | ----------- | --------------------- |
@@ -370,5 +528,5 @@ print(f"El total es: {total_pagar:.2f}")
 # `if cantidad >= 10`                                       | 12     | 10       | 0.15      | —              | —           | —                     |
 # `subtotal_pagar = cantidad*PRECIO`                        | 12     | 10       | 0.15      | 120            | —           | —                     |
 # `total_pagar = subtotal_pagar-(subtotal_pagar*descuento)` | 12     | 10       | 0.15      | 120            | 102         | —                     |
-# `print`                                                   | 12     | 10       | 0.15      | 120            | 102         | El descuento es: 0.15 |
+# `print`                                                   | 12     | 10       | 0.15      | 120            | 102         | El descuento es: 15%  |
 # `print`                                                   | 12     | 10       | 0.15      | 120            | 102         | El total es: 102.00   |

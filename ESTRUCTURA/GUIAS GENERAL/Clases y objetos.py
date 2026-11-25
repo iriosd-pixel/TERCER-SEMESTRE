@@ -1,10 +1,84 @@
-#================================================
-#EJEMPLOS PUESTOS POR LA IA MAS CAMBIOS
-#================================================
+#=======================================================================
+# EJEMPLOS DE EXPLICACIÓN DE LA GUÍA
+# Cada ejemplo se puede ejecutar llamando a su función.
+#=======================================================================
+# Ejemplo de explicación 1
+def ejemplo_explicacion_1():
+    class Pasajero:
+        # El constructor: se llama al crear el objeto
+        def __init__(self, nombre, cedula, edad):
+            self.nombre = nombre          # atributo del objeto
+            self.cedula = cedula
+            self.edad = edad
 
-#================================================
+        # Método: acción que puede realizar el objeto
+        def saludar(self):
+            print(f"Hola, soy {self.nombre}")
+
+        # Método especial __str__: cómo se ve en print()
+        def __str__(self):
+            return f"{self.nombre} ({self.cedula}) - {self.edad} años"
+
+    # Crear objetos (instanciar la clase)
+    p1 = Pasajero("Ana", "0912345678", 28)
+    p2 = Pasajero("Luis", "0987654321", 35)
+
+    # Acceder a atributos
+    print(p1.nombre)              # Ana
+    print(p2.edad)                # 35
+
+    # Llamar métodos
+    p1.saludar()                  # Hola, soy Ana
+
+    # print() usa __str__ automáticamente
+    print(p1)                     # Ana (0912345678) - 28 años
+
+# Ejemplo de explicación 2
+def ejemplo_explicacion_2():
+    class Pasajero:
+        def __init__(self, nombre):
+            self.nombre = nombre    # el self.nombre es el atributo DEL objeto
+
+        def presentarse(self):
+            # aquí self es p1 cuando lo llama p1, es p2 cuando lo llama p2
+            print(f"Soy {self.nombre}")
+
+    p1 = Pasajero("Ana")
+    p2 = Pasajero("Luis")
+
+    p1.presentarse()   # Soy Ana    (self ES p1)
+    p2.presentarse()   # Soy Luis   (self ES p2)
+
+#=======================================================================
+#EJEMPLOS PUESTOS POR LA IA MAS CAMBIOS
+#=======================================================================
+#=======================================================================
+# TALLER — 3 ejercicios paso a paso
 # 1)Crear la clase Pasajero con nombre, cédula y edad. Crear tres instancias y mostrarlas.
-#================================================
+#=======================================================================
+#-------- 1. ENTENDER EL PROBLEMA --------
+# Entrada: los datos de tres pasajeros
+# Proceso: definir la clase, luego instanciar
+# Salida: los tres pasajeros formateados
+# Ejemplo de entrada (guía): Ana/091.../28, Luis/098.../35, Diana/092.../22
+# Salida esperada (guía): Ana (091...) - 28 años Luis (098...) - 35 años Diana (092...) - 22 años
+
+#-------- 2. BOSQUEJO A MANO ------------
+# MOLDE (clase Pasajero):
+#   - nombre, cedula, edad
+#   - __init__ para crearlos
+#   - __str__ para mostrarlos
+#
+# Fábrica:
+#   p1 = Pasajero("Ana", ..., 28)
+#   p2 = Pasajero("Luis", ..., 35)
+#   p3 = Pasajero("Diana", ..., 22)
+
+#-------- 3. DESCUBRIR EL PATRÓN --------
+# Los atributos self.nombre, self.cedula, self.edad pertenecen a cada objeto, no a la clase. Por eso cambian entre p1, p2, p3. El __str__ permite que print(p1) muestre algo útil en vez de <__main__.Pasajero object at 0x7f...>.
+
+#-------- 4. ESCRIBIR EL CÓDIGO ---------
+
 class Pasajero:
     def __init__(self, nombre, cedula, edad):
         self.nombre = nombre
@@ -22,6 +96,13 @@ p3 = Pasajero("Diana", "0923456789", 22)
 print(p1)
 print(p2)
 print(p3)
+#-------- 5. PRUEBA DE ESCRITORIO -------
+# Paso | p1 | p2 | p3
+# p1 = Pasajero(...) | Ana/091/28 | — | —
+# p2 = Pasajero(...) | Ana/091/28 | Luis/098/35 | —
+# p3 = Pasajero(...) | Ana/091/28 | Luis/098/35 | Diana/092/22
+
+
 #CAMBIO
 #Añade un método cumplir_anios() que sume 1 a la edad.
 class Pasajero:
@@ -57,10 +138,29 @@ print(p1)
 print(p2)
 print(p3)
 
-#================================================
+#=======================================================================
 # 2) Crear CuentaBancaria con métodos depositar, retirar, saldo y __str__.
 # El saldo empieza en 0. No se puede retirar más de lo que hay.
-#================================================
+#=======================================================================
+#-------- 1. ENTENDER EL PROBLEMA --------
+# Entrada: movimientos de la cuenta
+# Proceso: métodos que modifican el estado interno
+# Salida: el saldo tras cada operación
+# Ejemplo de entrada (guía): deposito 100, retiro 30, saldo?
+# Salida esperada (guía): Cuenta 001: $70
+
+#-------- 2. BOSQUEJO A MANO ------------
+# cuenta = CuentaBancaria("001")
+# cuenta.depositar(100)   → saldo = 100
+# cuenta.retirar(30)      → saldo = 70
+# cuenta.retirar(200)     → error, no hay suficiente
+# cuenta.saldo()          → 70
+
+#-------- 3. DESCUBRIR EL PATRÓN --------
+# Aquí las acciones son las protagonistas. Cada método modifica el estado interno del objeto. Fíjate en el método retirar: valida antes de restar. Es la ventaja de encapsular en una clase: la lógica de validación vive junto a los datos, no dispersa por el programa.
+
+#-------- 4. ESCRIBIR EL CÓDIGO ---------
+
 class CuentaBancaria:
     def __init__(self, numero):
         self.numero = numero
@@ -93,6 +193,13 @@ c.retirar(30)            # Retiro de $30. Saldo: $70
 c.retirar(200)           # Saldo insuficiente (tiene $70)
 print(c)                 # Cuenta 001: $70
 print(c.saldo())         # 70
+#-------- 5. PRUEBA DE ESCRITORIO -------
+# Acción | _saldo antes | _saldo después
+# depositar(100) | 0 | 100
+# retirar(30) | 100 | 70
+# retirar(200) | 70 | 70 (no cambió)
+
+
 #CAMBIO
 #Añade historial: una lista donde cada operación añade un string tipo '+100', '-30'. 
 # Método ver_historial().
@@ -144,10 +251,29 @@ print(c)
 print(c.saldo())
 print(c.ver_historial())
 
-#================================================
+#=======================================================================
 # 3) Clase Producto con nombre, precio y stock. Métodos: vender(cantidad) 
 # (reduce stock si hay), reabastecer(cantidad), valor_inventario() (precio × stock).
-#================================================
+#=======================================================================
+#-------- 1. ENTENDER EL PROBLEMA --------
+# Entrada: productos y sus operaciones
+# Proceso: encapsular stock y precio
+# Salida: valor del inventario y estado del producto
+# Ejemplo de entrada (guía): vender 3 leches (había 10)
+# Salida esperada (guía): Vendidas 3. Stock: 7
+
+#-------- 2. BOSQUEJO A MANO ------------
+# Producto("Leche", 1.20, 10)
+# vender(3)           → stock=7
+# vender(20)          → error, sin stock suficiente
+# reabastecer(5)      → stock=12
+# valor_inventario()  → 12 * 1.20 = 14.40
+
+#-------- 3. DESCUBRIR EL PATRÓN --------
+# Mismo patrón que CuentaBancaria: validación al vender, actualización interna, método consultor. Nota cómo la clase protege sus propias reglas: nunca se puede vender lo que no hay.
+
+#-------- 4. ESCRIBIR EL CÓDIGO ---------
+
 class Producto:
     def __init__(self, nombre, precio, stock):
         self.nombre = nombre
@@ -180,11 +306,18 @@ leche.vender(3)                  # Vendidas 3
 print(f"Valor: ${leche.valor_inventario():.2f}")  # Valor: $8.40
 leche.vender(20)                 # Sin stock suficiente
 leche.reabastecer(5)             # Nuevo stock: 12
+#-------- 5. PRUEBA DE ESCRITORIO -------
+# Operación | stock | valor_inventario
+# Inicial | 10 | 12.00
+# vender(3) | 7 | 8.40
+# reabastecer(5) | 12 | 14.40
+
+
 #CAMBIO
 #Amplíalo con un método de clase total_inventario(productos) que sume los valores de una lista de productos.
-#================================================
+#=======================================================================
 # 3) Clase Producto con nombre, precio y stock.
-#================================================
+#=======================================================================
 class Producto:
     def __init__(self, nombre, precio, stock):
         self.nombre = nombre
@@ -236,18 +369,20 @@ total = Producto.total_inventario(productos)
 print(f"Valor total del inventario: ${total:.2f}")
 
 
-#================================================
-# ------------------------------------------------------TAREA-------------------------------------------
-#================================================
-
-#================================================
+#=======================================================================
+# EJERCICIOS PROPUESTOS
+#=======================================================================
+#=======================================================================
 # 1) Clase Rectangulo con base y altura. Métodos area(), perimetro() y __str__.
-#================================================
+#=======================================================================
 #-------- 1. ENTENDER EL PROBLEMA --------
 # Entrada: base y altura del rectángulo (5 y 3 en este ejemplo)
 # Proceso: multiplicar base por altura para el área y sumar las medidas
 #          para calcular el perímetro
 # Salida: mostrar el rectángulo, su área y su perímetro
+
+# Ejemplo de entrada (guía): r = Rectangulo(5, 3)
+# Salida esperada (guía): Rectángulo 5×3, área=15, perímetro=16
 
 #-------- 2. BOSQUEJO A MANO ------------
 # base = 5, altura = 3
@@ -286,7 +421,7 @@ print(r.area())
 # print(r)              |    5 |      3 |   15 |        16 | Rectángulo 5×3, área=15, perímetro=16
 # print(r.area())       |    5 |      3 |   15 |        16 | 15
 
-#---------- EJERCICIO SIMILAR: CUADRADO ----------
+# EJERCICIO ADICIONAL — CUADRADO ----------
 #-------- 1. ENTENDER EL PROBLEMA --------
 # Entrada: medida de un lado del cuadrado (4 en este ejemplo)
 # Proceso: multiplicar el lado por sí mismo para obtener el área;
@@ -329,13 +464,16 @@ print(f"Área del cuadrado: {cuadrado.area()}")
 # print(cuadrado)         |    4 |   16 |        16 | Cuadrado de lado 4, área=16, perímetro=16
 # print(cuadrado.area())  |    4 |   16 |        16 | Área del cuadrado: 16
 
-#================================================
+#=======================================================================
 # 2) Clase con radio y métodos area() (π·r²) y circunferencia() (2·π·r). Usa math.pi.
-#================================================
+#=======================================================================
 #-------- 1. ENTENDER EL PROBLEMA --------
 # Entrada: radio del círculo (5 en este ejemplo)
 # Proceso: calcular el área con π * radio² y la circunferencia con 2 * π * radio
 # Salida: mostrar el área y la circunferencia con 2 decimales
+
+# Ejemplo de entrada (guía): c = Circulo(5)
+# Salida esperada (guía): Área: 78.54
 
 #-------- 2. BOSQUEJO A MANO ------------
 # radio = 5
@@ -374,7 +512,7 @@ print(f"Circunferencia: {c.circunferencia():.2f}")
 # print(c)              |     5 | —                       |     78.54 | Círculo r=5, área=78.54
 # print(circunferencia) |     5 | —                       |     31.42 | Circunferencia: 31.42
 
-#---------- EJERCICIO SIMILAR: ESFERA ----------
+# EJERCICIO ADICIONAL — ESFERA ----------
 
 #-------- 1. ENTENDER EL PROBLEMA --------
 # Entrada: radio de una esfera (3 en este ejemplo)
@@ -415,15 +553,17 @@ print(f"Volumen de la esfera: {esfera.volumen():.2f}")
 # print(area_superficie)   |     3 | —                        |    113.10 | Área de la esfera: 113.10
 # print(volumen)           |     3 | —                        |    113.10 | Volumen de la esfera: 113.10
 
-#================================================
-# 3) Clase Estudiante con nombre y una lista de notas. Métodos: agregar_nota(n), 
-# promedio(), aprobado() (True si promedio ≥ 7).
-#================================================
+#=======================================================================
+# 3) Clase Estudiante con nombre y una lista de notas. Métodos: agregar_nota(n), promedio(), aprobado() (True si promedio ≥ 7).
+#=======================================================================
 #-------- 1. ENTENDER EL PROBLEMA --------
 # Entrada: nombre del estudiante y sus notas (8, 6 y 9 en este ejemplo)
 # Proceso: guardar cada nota, sumar las notas y dividir para saber el promedio;
 #          comprobar si el promedio es mayor o igual a 7
 # Salida: mostrar el nombre, las notas, el promedio y si aprobó
+
+# Ejemplo de entrada (guía): Ana: [8, 6, 9]
+# Salida esperada (guía): Promedio: 7.67, Aprobado: True
 
 #-------- 2. BOSQUEJO A MANO ------------
 # notas = [8, 6, 9]
@@ -474,7 +614,7 @@ print(f"Aprobado: {ana.aprobado()}")
 # print(ana)             | [8, 6, 9]   |   23 |     7.67 | True            | Ana: [8, 6, 9] → prom=7.67
 # print(aprobado)        | [8, 6, 9]   |   23 |     7.67 | True            | Aprobado: True
 
-#---------- EJERCICIO SIMILAR: JUGADOR ----------
+# EJERCICIO ADICIONAL — JUGADOR ----------
 #-------- 1. ENTENDER EL PROBLEMA --------
 # Entrada: nombre del jugador y los puntos obtenidos en varios partidos
 #          (12, 8 y 10 en este ejemplo)
@@ -530,15 +670,17 @@ print(f"Alcanzó el objetivo: {jugador.alcanzo_objetivo()}")
 # print(alcanzo_objetivo)    | [12, 8, 10]    |   30 |    10.00 | True         | Alcanzó el objetivo: True
 
 
-#================================================
-# 4) Clase Vehiculo con marca, modelo y km recorridos (inicialmente 0). 
-# Método recorrer(km) que suma al odómetro. Método necesita_mantenimiento() que retorna True cada 10 000 km.
-#================================================
+#=======================================================================
+# 4) Clase Vehiculo con marca, modelo y km recorridos (inicialmente 0). Método recorrer(km) que suma al odómetro y necesita_mantenimiento() que retorna True cada 10 000 km.
+#=======================================================================
 #-------- 1. ENTENDER EL PROBLEMA --------
 # Entrada: marca y modelo; distancia recorrida (15 000 km en este ejemplo)
 # Proceso: sumar la distancia al odómetro y comparar los kilómetros desde
 #          el último mantenimiento con 10 000
 # Salida: mostrar los kilómetros y si necesita mantenimiento
+
+# Ejemplo de entrada (guía): auto.recorrer(15000)
+# Salida esperada (guía): Necesita mantenimiento: True
 
 #-------- 2. BOSQUEJO A MANO ------------
 # El vehículo comienza con 0 km y 0 km desde el último mantenimiento.
@@ -588,7 +730,7 @@ print(f"Necesita mantenimiento: {auto.necesita_mantenimiento()}")
 # hacer_mantenimiento()  |     15000 |                15000 |           0 | No         | Mantenimiento hecho a los 15000 km
 # necesita_mantenimiento |     15000 |                15000 |           0 | No         | Necesita mantenimiento: False
 
-#---------- EJERCICIO SIMILAR: MAQUINA ----------
+# EJERCICIO ADICIONAL — MAQUINA ----------
 #-------- 1. ENTENDER EL PROBLEMA --------
 # Entrada: nombre de la máquina y horas de trabajo (620 horas en este ejemplo)
 # Proceso: acumular las horas y verificar si han pasado 500 horas desde
